@@ -4,7 +4,6 @@
   },
   "dependencies": {
     "chai": "*",
-    "mocha": "*",
-    "ngrok": "^2.2.24"
+    "mocha": "*"
   }
 }

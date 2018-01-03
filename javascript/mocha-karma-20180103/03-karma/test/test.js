@@ -4,12 +4,11 @@
 if (typeof(module) == "object"){
   var chai = require('chai');
   var expect = chai.expect;
-  var App = require('../src/app.js');
+  var App = require('../src/app');
 };
 
-// specs
-describe('Array', function(){
-  describe('#indexOf()', function(){
+describe('Array', function() {
+  describe('#indexOf()', function() {
     it('should be true', function(){
       expect(1).to.eq(1);
     });
