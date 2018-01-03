@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Module>
+    <ModulePrefs title="List Friends Example">
+        <Require feature="opensocial-0.8"/>
+        <Require feature="dynamic-height"/>
+    </ModulePrefs>
+    <Content type="html">
+    <![CDATA[
+        <style type="text/css">
+        #main {
+            background: #DDD;
+        }
+        #sidebar {
+            background: #EEE;
+            width: 160px;
+            float: right;
+        }
+        </style>
+        <script type="text/javascript" src="http://iandeth.dyndns.org/trials/gadgets/sample/apviaapps-sidebar/jquery.js"></script>
+        <script type="text/javascript" src="http://iandeth.dyndns.org/trials/gadgets/sample/apviaapps-sidebar/sample2.js"></script>
+        <div id="content"></div>
+    ]]>
+    </Content>
+</Module>

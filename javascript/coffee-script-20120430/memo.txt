@@ -1,0 +1,22 @@
+## how to execute
+$ coffee -c basics.coffee
+$ node -p basics.js
+## or in short:
+$ coffee -pc basics.coffee | node
+
+## watch file and auto compile
+coffee -cw foo.coffee
+
+## do not wrap code in lex scope (function(){ ... })()
+## --bare option
+coffee -cb foo.coffee
+
+## vim plugin
+# https://github.com/kchmck/vim-coffee-script
+$ unzip -od ~/.vim vim-coffee-script-HASH.zip
+## usage
+vim
+:CoffeeRun
+:CoffeeMake
+:CoffeeCompile vert
+:CoffeeCompile watch vert

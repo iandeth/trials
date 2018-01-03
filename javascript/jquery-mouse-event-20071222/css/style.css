@@ -1,0 +1,55 @@
+body {
+    background: #EEE;
+    text-align: left;
+    font-size: 1.2em;
+    font-family: georgia;
+}
+#cont {
+    background: url(../img/background.gif);
+    height: 2000px;
+}
+#floater {
+    background: #DDD;
+    width: 300px;
+    border: 1px solid #666;
+    position: absolute;
+    top: 0;
+}
+#floater .inner {
+    padding: 10px;
+}
+#layer1 {
+    width: 250px;
+    color: #FFF;
+    background: #AE7A02;
+    position: absolute;
+    top: 300px;
+    left: 220px;
+}
+#layer1 .inner {
+    padding: 10px;
+}
+
+p {
+    margin: 0;
+}
+h2 {
+    font-size: 1em;
+    margin: 0 0 10px 0;
+    font-weight: normal;
+    border-bottom: 1px solid #999;
+}
+table {
+    width: 100%;
+    margin: 0 0 0 10px;
+    line-height: 100%;
+}
+table td {
+    padding: 0 0 10px 0;
+    border: none;
+}
+table td.lbl {
+    width: 60%;
+    font-size: 0.7em;
+    vertical-align: bottom;
+}

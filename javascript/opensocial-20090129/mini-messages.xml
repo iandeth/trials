@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?> 
+<Module>
+    <ModulePrefs title="mini messages"> 
+        <Require feature="minimessage"/>
+    </ModulePrefs> 
+    <Content type="html">
+    <![CDATA[ 
+        <p>hello world.</p>
+        <script type="text/javascript">
+            var msg = new gadgets.MiniMessage();
+            msg.createDismissibleMessage( 'hoge' );
+            msg.createDismissibleMessage( 'あいうえ' );
+            var lm = msg.createStaticMessage( 'loading...' );
+        </script>
+        <p>how are you 今日？</p>
+        <input type="button" onclick="msg.dismissMessage( lm )" value="loading消す"/>
+    ]]>
+    </Content> 
+</Module>

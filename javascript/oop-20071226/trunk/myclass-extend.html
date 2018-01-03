@@ -1,0 +1,65 @@
+<html>
+  <head>
+    <script type="text/javascript" src="lib/JSAN.js"></script>
+    <script type="text/javascript" src="myclass-extend.js"></script>
+  </head>
+  <body>
+    <pre id="test"><script>
+    JSAN.addRepository( "lib", "./lib" );
+    JSAN.use( "Test.More" );
+    plan({ tests: 37 });
+
+    // Animal - basic
+    var ani = new Animal();
+    ok( ani );
+    is( ani.bark(), 'grunt' );
+    is( ani.roar(), 'mooo!' );
+    is( ani.legs, 4 );
+    is( ani.name, 'unknown' );
+    is( ani.roar_voice, 'mooo!' );
+    // Animal - with argument
+    var ani = new Animal({ name:'sally' });
+    ok( ani );
+    is( ani.bark(), 'grunt' );
+    is( ani.roar(), 'mooo!' );
+    is( ani.legs, 4 );
+    is( ani.name, 'sally' );
+
+    // Dog - basic
+    var dog = new Dog();
+    ok( dog );
+    is( dog.bark(), 'bow wow' );
+    is( dog.roar(), 'grrr!' );
+    is( dog.legs, 4 );
+    is( dog.name, 'unknown' );
+    is( dog.roar_voice, 'grrr!' );
+    // Dog - with argument
+    var dog = new Dog({ name:'sally' });
+    ok( dog );
+    is( dog.bark(), 'bow wow' );
+    is( dog.roar(), 'grrr!' );
+    is( dog.legs, 4 );
+    is( dog.name, 'sally' );
+
+    // Chiwawa - basic
+    var chiwa = new Chiwawa();
+    ok( chiwa );
+    is( chiwa.bark(), 'pow pow' );
+    is( chiwa.roar(), 'grrr!' );
+    is( chiwa.tail(), 'flick flick' );
+    is( chiwa.legs, 4 );
+    is( chiwa.name, 'unknown' );
+    is( chiwa.roar_voice, 'grrr!' );
+    is( chiwa.fur, 'puffy' );
+    // Chiwawa - with argument
+    var chiwa = new Chiwawa({ name:'sally' });
+    ok( chiwa );
+    is( chiwa.bark(), 'pow pow' );
+    is( chiwa.roar(), 'grrr!' );
+    is( chiwa.tail(), 'flick flick' );
+    is( chiwa.legs, 4 );
+    is( chiwa.name, 'sally' );
+    is( chiwa.fur, 'puffy' );
+    </script></pre>
+  </body>
+</html>

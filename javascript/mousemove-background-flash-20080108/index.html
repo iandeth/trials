@@ -1,0 +1,140 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>背景FLASH</title>
+<style type="text/css">
+body {
+    font-size: 1.4em;
+    margin: 0;
+}
+#background {
+    background: #EEE;
+    border: 1px solid #DDD;
+    z-index: 1;
+    width: 900px;
+}
+#content {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    z-index: 10;
+    width: 900px;
+}
+#content .inner {
+    margin: 10px 20px;
+}
+#xy {
+    display: none;
+}
+</style>
+<script type="text/javascript" src="js/jquery-1.2.1.js"></script>
+<script type="text/javascript" src="js/jquery.dimensions.js"></script>
+<script type="text/javascript" src="js/jquery.debug.js"></script>
+<script type="text/javascript" src="js/swfobject.js"></script>
+<script type="text/javascript">
+$( function (){
+    $.debug( 1 );
+    // テキストをすべて span タグで囲む
+    $.each( $( 'body *' ), function (){
+        var tgt = $( this );
+        var childs = tgt.contents();
+        tgt.empty();
+        $.each( childs, function (){
+            // text node
+            if( this.nodeType == 3 ){
+                if( this.nodeValue.match( /^\s+$/ ) ){
+                    // ignore white space only texts
+                    return true;
+                }
+                // split words by white spaces
+                var words = this.nodeValue.split( /\s+/ );
+                $.each( words, function ( i, text ){
+                    if( text == '' ){ return true }
+                    $( '<span></span>' )
+                        .addClass( 'hoverme' )
+                        .append( text )
+                        .appendTo( tgt );
+                    tgt.append( ' ' );
+                });
+            // other elements
+            }else{
+                tgt.append( this );
+            }
+        });
+    });
+
+    // Flash埋め込み
+    var so = new SWFObject( "square.swf", "bgswf",
+        "900px", "900px", "8", "" );
+    so.addParam( "allowScriptAccess", "always" );
+    so.addParam( "loop", "false" );
+    so.addParam( "menu", "false" );
+    so.addParam( "name", "rects" );
+    so.addParam( "quality", "high" );
+    so.addParam( "wmode", "opaque" );
+    so.addVariable( "language", "jp" );
+    so.write( "background" );
+
+    // マウス動作イベント
+    $( '.hoverme' ).hover( function (e){
+        var self = $( this );
+        var res = self.offset();
+        var h = self.height();
+        var w = self.width();
+        $( '#xy' ).html( res.left + ', ' + res.top
+            + ' - ' + w + ' x ' + h );
+        if (document.all){ // Internet Explorer
+            window[ 'bgswf' ].moveto( res.left, res.top, w, h );
+        }else{
+            document[ 'bgswf' ].moveto( res.left, res.top, w, h );
+        }
+    }, function (){} );
+});
+</script>
+</head>
+<body>
+<div id="content">
+<div class="inner">
+    <p id="xy">?,?</p>
+    <h3><a
+    href="http://radar.oreilly.com/archives/2007/12/bad_math_ebooks_kindle.html"
+    target="_self" class="title">Bad Math Among eBook Enthusiasts</a></h3>
+
+    <p>The Amazon Kindle has excited a lot of comment from
+    people who have long wanted portable electronic access to books.  Amazon has
+    put together a lot of the pieces that makes this holy grail seem reachable,
+    even if not yet truly achieved.  But in reading the commentary of some of the
+    enthusiastic boosters of eBooks, I'm struck by just how much wishful thinking
+    they display.  For example, in <a
+    href="http://www.teleread.org/blog/2007/11/19/inside-the-heads-of-prospective-e-book-buyers-a-q-a-with-marie-campbell-of-marketintellnow/#comment-643307">an
+    interview on Teleread</a> with Marie Campbell of MarketIntellNow, Marie
+    reports on a poll of 5000 "random" (actually self-selected) web surfers, and
+    concludes:  "Lower e-book prices, not gizmos like the Amazon Kindle, will be
+    the big spur for book sales."
+    </p><p>
+    I agree with Marie's fundamental assertion that handheld devices are nice to
+    have, not need to have -- the real breakthrough is just making electronic
+    copies available at a fair price.  Eventually, those electronic copies will
+    find their way to whatever devices we are currently using, whether it's a PC
+    or a handheld or some other future device.
+    Our <a href="http://safari.oreilly.com">Safari Books Online</a> joint venture
+    with Pearson, which delivers subscription access to thousands of computer and
+    business books (admittedly an early adopter audience with a need for
+    professional content), generates more revenue than is normally reported for
+    the entire downloadable ebook business.  For my company, O'Reilly Media,
+    Safari is now our third largest reseller, behind only Amazon and Barnes &amp;
+    Noble.  This didn't take a handheld device (though handheld devices will
+    certainly enlarge the market.)  It just required making the content available
+    with a business model and price that people were willing to pay.
+    </p><p>
+    But Marie's poll goes on to conclude that "over half of people surveyed
+    expected e-book prices to be $5 or less and 1 out of every 5 expected the
+    price to be $2.50 or less."  She says:
+    </p>
+</div>
+</div>
+<div id="background"></div>
+</body>
+</html>

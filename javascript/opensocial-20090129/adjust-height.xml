@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8" ?> 
+<Module>
+    <ModulePrefs title="Dynamic Height" 
+        height="100"> 
+        <Require feature="dynamic-height"/>
+    </ModulePrefs>
+    <Content type="html">
+    <![CDATA[
+        <script type="text/javascript">
+            // This example lets users add items to a grocery list and then clear the list.
+            // When items are added or cleared, the gadget resizes itself.
+            var mylist = "";
+            var flag = 0;
+
+            // Function that is invoked whenever user clicks the Add button to add an
+            // item to the list.
+            function addToList (form) {
+                var input = _trim(form.inputbox.value);
+                if (input == "") {
+                    return;
+                }
+                // Make alternating lines green/white, depending on value of flag variable.
+                if(flag == 0){
+                    mylist += "<div style='padding-left: 5px;background-color: #E6FFE6; font-family:Arial, Helvetica;'>" +input + "</div>";
+                    flag = 1;
+                } else {
+                    mylist += "<div style='padding-left: 5px;font-family:Arial, Helvetica;'>" +input + "</div>";
+                    flag = 0;
+                }
+                // Call setContent to output HTML to div and resize gadget
+                setContent(mylist);
+            }
+
+            // Clear the list
+            function clearList(form) {
+                // Call setContent to remove all items from the list and resize the gadget
+                setContent("");
+            }
+
+            // Outputs content to the div and resizes the gadget
+            function setContent(html) {
+                document.getElementById('content_div').innerHTML = html;
+
+                // Tells gadget to resize itself
+                gadgets.window.adjustHeight();
+            }
+        </script>
+        <FORM NAME="myform" ACTION="" METHOD="GET"><BR>
+        <INPUT TYPE="text" NAME="inputbox" VALUE="">
+        <INPUT TYPE="button" NAME="button" Value="Add" onClick="addToList(this.form)">
+        <INPUT TYPE="button" NAME="button2" Value="Clear" onClick="clearList(this.form)">
+        </FORM>
+        <div id="content_div"></div>
+    ]]>
+    </Content>
+</Module>

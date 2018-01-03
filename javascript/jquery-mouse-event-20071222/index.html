@@ -1,0 +1,116 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>jQuery Event Object Demo</title>
+<link rel="stylesheet" href="css/yui.reset-fonts-grids-base.css" type="text/css" />
+<link rel="stylesheet" href="css/style.css" type="text/css" />
+<script type="text/javascript" src="js/jquery.min.js"></script>
+<script type="text/javascript" src="js/jquery.dimensions.min.js"></script>
+<script type="text/javascript" src="js/jquery.debug.js"></script>
+<script type="text/javascript">
+$.debug( 1 );
+$(function (){
+    var w = $( window );
+    var d = $( document );
+    var f = { // ナビ
+        elm:   $( '#floater' ),
+        cnt:   $( '#floater .inner' ),
+        width: $( '#floater' ).outerWidth(),
+        w_st:  $( '#w_st' ),
+        w_ht:  $( '#w_ht' ),
+        w_wd:  $( '#w_wd' ),
+        d_ht:  $( '#d_ht' ),
+        d_wd:  $( '#d_wd' ),
+        e_cx:  $( '#e_cx' ),
+        e_px:  $( '#e_px' ),
+        e_lx:  $( '#e_lx' )
+    };
+    // ナビ - スクロールしても常に画面右上端にフロート
+    var handler = function (e){
+        var w_st = w.scrollTop();
+        var w_wd  = w.width();
+        f.elm.css( 'left', w_wd - f.width );
+        f.elm.css( 'top', w_st );
+        // jquery.dimensions 情報表示
+        f.w_st.html( w_st || '0' );
+        f.w_ht.html( w.height() || '0' );
+        f.w_wd.html( w_wd || '0' );
+        f.d_ht.html( d.height() || 0 );
+        f.d_wd.html( d.width() || 0 );
+    };
+    w.scroll( handler ); // 画面スクロール時 event
+    w.resize( handler ); // 画面リサイズ時 event
+    w.resize();          // 起動時にとりあえず1回実行
+
+    // マウス - 位置情報表示
+    // 注: $( window ).mousemove だと IE6.0 で動かない
+    d.mousemove( function (e){
+        f.e_cx.html( '(' + e.clientX + ', ' + e.clientY + ')' );
+        f.e_px.html( '(' + e.pageX + ', ' + e.pageY + ')' );
+    });
+    // DIVエレメントに対してのマウス座標
+    $( '#layer1' ).mousemove( function (e){
+        // e.layerX e.layerY は IE6.0 で動かないのでNG
+        var off = $( this ).offset();
+        var x = e.clientX - off.left + w.scrollLeft();
+        var y = e.clientY - off.top + w.scrollTop();
+        f.e_lx.html( '(' + x + ', ' + y + ')' );
+    });
+});
+</script>
+</head>
+<body>
+<div id="cont">
+    <div id="layer1">
+        <div class="inner">
+        <h2>#layer1</h2>
+        <table>
+            <tr>
+            <td class="lbl">div &lt;&gt; mouse</td>
+            <td id="e_lx"></td>
+            </tr>
+        </table>
+        </div>
+    </div>
+</div>
+<div id="floater">
+    <div class="inner">
+    <h2>mouse event object</h2>
+    <table style="margin-bottom: 20px">
+        <tr>
+        <td class="lbl">e.clientX, e.clientY</td>
+        <td id="e_cx"></td>
+        </tr>
+        <tr>
+        <td class="lbl">e.pageX, e.pageY</td>
+        <td id="e_px"></td>
+        </tr>
+    </table>
+    <h2>jquery.dimensions</h2>
+    <table>
+        <tr>
+        <td class="lbl">$( window ).scrollTop()</td>
+        <td id="w_st"></td>
+        </tr>
+        <tr>
+        <td class="lbl">$( window ).height()</td>
+        <td id="w_ht"></td>
+        </tr>
+        <tr>
+        <td class="lbl">$( window ).width()</td>
+        <td id="w_wd"></td>
+        </tr>
+        <tr>
+        <td class="lbl">$( document ).height()</td>
+        <td id="d_ht"></td>
+        </tr>
+        <tr>
+        <td class="lbl">$( document ).width()</td>
+        <td id="d_wd"></td>
+        </tr>
+    </table>
+    </div>
+</div>
+</body>
+</html>

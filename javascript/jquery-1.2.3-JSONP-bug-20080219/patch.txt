@@ -1,0 +1,10 @@
+2559c2559
+< 		var jsonp, jsre = /=\?(&|$)/g, status, data;
+---
+> 		var jsonp, jsre = /=(\?|%3F)(&|$)/g, status, data;
+2585,2586c2585,2586
+< 				s.data = (s.data + "").replace(jsre, "=" + jsonp + "$1");
+< 			s.url = s.url.replace(jsre, "=" + jsonp + "$1");
+---
+> 				s.data = (s.data + "").replace(jsre, "=" + jsonp + "$2");
+> 			s.url = s.url.replace(jsre, "=" + jsonp + "$2");

@@ -1,0 +1,16 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
+    <title><%= current_page.data.title || "The Middleman" %></title>
+    <%= stylesheet_link_tag "normalize", "all" %>
+    <script src="./javascripts/all.js?qux=2&buz=3&qux=4" async type="text/javascript"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js?foo=1&bar=2"></script>
+    <%# javascript_include_tag  "all" %>
+  </head>
+  
+  <body class="<%= page_classes %>">
+    <%= yield %>
+  </body>
+</html>

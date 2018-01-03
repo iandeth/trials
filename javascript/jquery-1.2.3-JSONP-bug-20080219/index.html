@@ -1,0 +1,38 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
+    "http://www.w3.org/TR/html4/strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<script type="text/javascript" src="jquery-1.2.3.js"></script>
+<!--//
+// bug fixed version
+<script type="text/javascript" src="jquery-1.2.3.patched.js"></script>
+//-->
+<script type="text/javascript">
+var url = "http://webservice.recruit.co.jp/hotpepper/gourmet/v1/"
+    + "?large_area=Z011&format=jsonp&key=7b18731dfad050ca";
+$( function(){
+    $( '#jsonp_ok' ).click( function (){
+        $.getJSON( url + '&callback=?', function ( json ){
+            alert( 'JSONP callback OK' );
+        });
+    });
+    $( '#jsonp_ng' ).click( function (){
+        $.getJSON( url, { 'callback': '?' }, function ( json ){
+            alert( 'JSONP callback OK' );
+        });
+    });
+});
+</script>
+</head>
+<body>
+<p>
+$.getJSON( 'http://xxx/?callback=?', function (){} )<br />
+<input type="submit" id="jsonp_ok" value="get"/>
+</p>
+<p>
+$.getJSON( 'http://xxx/', { callback: '?' }, function (){} )<br />
+<input type="submit" id="jsonp_ng" value="get"/>
+</p>
+</body>
+</html>

@@ -1,0 +1,39 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>04 api with jsonp</title>
+<script type="text/javascript" src="js/jquery-1.2.3.js"></script>
+<script type="text/javascript">
+$(function (){
+$( 'input[type=button]' ).click( function (){
+
+    $.getJSON(
+        'http://webservice.recruit.co.jp/hotpepper/gourmet/v1/?callback=?',
+        {
+            key     : '7b18731dfad050ca',
+            format  : 'jsonp',
+            keyword : $('input[name=keyword]').val()
+        },
+        function ( json ){
+            var tgt = $( '#result' );
+            tgt.empty();
+            $.each( json.results.shop, function (i,d){
+                tgt.append( d.name + '<br/>' );
+            });
+        }
+    );
+
+});
+});
+</script>
+</head>
+<body>
+<h1>api with jsonp</h1>
+<input type="text" name="keyword" value="居酒屋"/>
+<input type="button" value="request"/>
+
+    <h2 id="result"></h2>
+
+</body>
+</html>

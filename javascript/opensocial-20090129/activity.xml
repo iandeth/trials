@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?> 
+<Module>
+    <ModulePrefs title="activity" >
+        <Require feature="opensocial-0.8"/>
+    </ModulePrefs> 
+    <Content type="html">
+    <![CDATA[ 
+        <INPUT TYPE="button" value="send activity" onclick="startActivity()"/>
+        <div id="content"></div>
+        <script type="text/javascript">
+            var div = document.getElementById( 'content' );
+            function postActivity( text ) {  
+                var p = {};  
+                p[ opensocial.Activity.Field.TITLE ] = text;
+                var act = opensocial.newActivity( p ); 
+                opensocial.requestCreateActivity( act, opensocial.CreateActivityPriority.HIGH, callback );
+                div.innerHTML = "Activity title is: " + act.getField( opensocial.Activity.Field.TITLE );
+            };
+            function callback( res ) {
+                if( res.hadError() ) {
+                    div.innerHTML = res.getErrorMessage();
+                }else{
+                    div.innerHTML = "Activity successfully created.";
+                }
+            };
+            function startActivity() {
+                postActivity( "This is a サンプルアクティビティです, created at " + new Date().toString() );
+            };
+        </script>
+    ]]> 
+    </Content>
+</Module>

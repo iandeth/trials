@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?> 
+<Module>
+    <ModulePrefs title="RWS API request JSONP"> 
+        <Require feature="minimessage"/>
+    </ModulePrefs>
+    <Content type="html">
+    <![CDATA[ 
+        <div id="content-div"></div>
+        <script type="text/javascript" src="http://jqueryjs.googlecode.com/files/jquery-1.3.min.js"></script>
+        <script type="text/javascript">
+            var msg = new gadgets.MiniMessage();
+            var msg_loading = undefined;
+            var view = document.getElementById( 'content-div' );
+            function request (){    
+                view.innerHTML = '';
+                msg_loading = msg.createStaticMessage( 'Loading...' );
+                var url = "http://webservice.recruit.co.jp/ab-road/tour/v1/?key=7b18731dfad050ca&area=EUR&format=jsonp&callback=?";  
+                $.getJSON( url, callback );
+            };
+            function callback ( obj ){  
+                obj = obj.results;
+                if( obj.error ){
+                    view.innerHTML = obj.error[0].message;
+                    return;
+                }
+                var html = '<ol>';
+                for( var i=0; i<obj.tour.length; i++ ){
+                    var t = obj.tour[ i ];
+                    html += '<li>' + t.title.substr( 0, 30 ) + '</li>';
+                }
+                html += '</ol>';
+                view.innerHTML = html;
+                msg.dismissMessage( msg_loading );
+            };
+        </script>
+        <div style="margin-top:10px">
+            <input type="button" value="make JSONP API request" onclick="request()"/>
+        </div>
+    ]]>
+    </Content> 
+</Module>

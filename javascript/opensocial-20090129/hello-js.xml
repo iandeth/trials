@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" ?> 
+<Module>
+    <ModulePrefs title="hello world javascipt example" /> 
+    <Content type="html">
+        <![CDATA[ 
+        <script type="text/javascript">
+            document.write( 'hello world!' );
+        </script>
+        ]]>
+    </Content> 
+</Module>

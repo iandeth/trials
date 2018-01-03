@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" ?> 
+<Module>
+    <ModulePrefs height="100" title="switching views">
+        <Require feature="views" /> 
+    </ModulePrefs>
+    <Content type="html" view="home,profile,default">
+    <![CDATA[ 
+        <script type="text/javascript">
+            function goToView(dest) {
+                var supported_views = gadgets.views.getSupportedViews();
+                gadgets.views.requestNavigateTo(supported_views[dest]);
+            };
+            document.write( gadgets.views.getCurrentView().getName() + '<br>' );
+            var params = gadgets.views.getParams(); // passed from canvas view
+            if( params.q ){
+                document.write( 'got "' + params.q + '" from canvas view<br>' );
+            }
+        </script>
+        <a href="javascript:goToView('canvas')" >Go to canvas view</a>
+    ]]> 
+    </Content>
+    <Content type="html" view="canvas">
+    <![CDATA[ 
+        <script type="text/javascript">
+            function goToView(dest) {
+                var view = new gadgets.views.View( dest );
+                gadgets.views.requestNavigateTo( view, { q:'hoge' } );
+            };
+            document.write( gadgets.views.getCurrentView().getName() + '<br>' );
+        </script>
+        <a href="javascript:goToView('profile')" >Go to profile view</a>
+    ]]> 
+    </Content>
+</Module>

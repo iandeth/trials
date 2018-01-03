@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8" ?> 
+<Module>
+    <ModulePrefs title="Tabs Demo" height="140" scrolling="true" > 
+        <Require feature="tabs" /> 
+    </ModulePrefs>
+    <Content type="html">
+    <![CDATA[ 
+        <script type="text/javascript">
+            // Initialize tabs, designate the tab named "Two" as
+            // the tab selected by default.
+            var tabs = new gadgets.TabSet( __MODULE_ID__, "Two");
+            tabs.alignTabs("left");
+            function init() {
+                // Technique #1: Capture the tab's ID when you create it, and use the ID 
+                // to add content to the tab's corresponding <div>.        
+                var one_Id = tabs.addTab('<div style="color: red; font-weight: bold; background-color:#ccf;">Cool Tab</div>');       
+                document.getElementById(one_Id).innerHTML = "Content for tab One.";
+
+                // Technique #2: Create the tab and define a corresponding <div> in the
+                // HTML portion of the gadget. Add static content to the <div>.      
+                tabs.addTab("Two", {
+                    contentContainer: document.getElementById("two_id")
+                });
+
+                // Technique #3: Create the tab and define a corresponding <div> in the
+                // HTML portion of the gadget. Add static content to the <div>.
+                // Use a callback function to add dynamic content to the static content.
+                tabs.addTab("Three", {
+                    contentContainer: document.getElementById("three_id"),
+                    callback: callback
+                });
+
+                // Technique #4: Create the tab with a tooltip message. If specified <div>
+                // doesn't exist, tabs library creates one.   
+                // Invoke callback function.        
+                tabs.addTab("Four", {            
+                    contentContainer: document.getElementById("four_id"),
+                    callback: callback,            
+                    tooltip: "I'm special"          
+                });
+            }
+
+            // Callback that provides content to tabs Three and Four
+            function callback(tabId) {
+                var p = document.createElement("p");
+                // Get selected tab
+                var selectedTab = tabs.getSelectedTab();
+                p.innerHTML = "This is dynamic content generated in callback for tab " + selectedTab.getName();
+                document.getElementById(tabId).appendChild(p);
+            }
+
+            // Call init function to initialize and display tabs.
+            gadgets.util.registerOnLoadHandler(init);
+        </script>
+
+        <div id="two_id" style="display:none">Content for tab Two.</div>
+        <div id="three_id" style="display:none">This is static content for tab Three.</div>
+    ]]>
+    </Content>
+</Module>

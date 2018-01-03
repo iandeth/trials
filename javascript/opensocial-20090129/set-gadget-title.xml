@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Module>
+    <ModulePrefs title="set title example">
+        <Require feature="settitle"/>
+    </ModulePrefs>
+    <Content type="html">
+    <![CDATA[
+        <script type="text/javascript">
+            function changeTitle(form) {
+                var newTitle = form.inputbox.value;
+                gadgets.window.setTitle(newTitle);   
+            }
+        </script>
+        <FORM NAME="myform" ACTION="" METHOD="GET">Change the Gadget Title: <BR><BR>
+            <INPUT TYPE="text" NAME="inputbox" VALUE=""><BR><BR>
+            <INPUT TYPE="button" NAME="button" VALUE="Change Title" onClick="changeTitle(this.form)">
+        </FORM>
+        <div id="content_div"></div>
+    ]]>
+    </Content>
+</Module>

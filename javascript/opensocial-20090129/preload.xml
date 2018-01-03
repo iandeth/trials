@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" ?> 
+<Module>
+    <ModulePrefs title="preload javascript code"> 
+        <Preload href="http://jqueryjs.googlecode.com/files/jquery-1.3.min.js" />
+    </ModulePrefs> 
+    <Content type="html" view="home">
+    <![CDATA[ 
+        <script type="text/javascript">
+            document.write( "jQuery " + $().jquery + " loaded successfully." );
+        </script>
+    ]]>
+    </Content> 
+    <Content type="html" view="profile">
+    <![CDATA[ 
+        <script type="text/javascript">
+            document.write( "jQuery " + $().jquery + " loaded successfully." );
+        </script>
+    ]]>
+    </Content> 
+    <Content type="html" view="canvas">
+    <![CDATA[ 
+        <script type="text/javascript">
+            document.write( "jQuery " + jQuery + " loaded successfully." );
+        </script>
+    ]]>
+    </Content> 
+    <Content type="html">
+    <![CDATA[ 
+        <script type="text/javascript">
+            document.write( "jQuery " + $().jquery + " loaded successfully." );
+        </script>
+    ]]>
+    </Content> 
+</Module>

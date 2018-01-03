@@ -1,0 +1,22 @@
+<html>
+  <head>
+    <script type="text/javascript" src="lib/JSAN.js"></script>
+    <script type="text/javascript" src="lib/jquery.js"></script>
+    <script type="text/javascript" src="myclass.js"></script>
+  </head>
+  <body>
+    <input id="my-text" value="fuga" /><br />
+    <pre id="test"><script>
+    JSAN.addRepository( "lib", "./lib" );
+    JSAN.use( "Test.More" );
+    plan({ tests: 3 });
+
+    var p = new MyClass();
+    ok( p );
+    is( p.get_prop1(), 'foo' );
+
+    // check to see if we can test on dom element
+    is( p.elm.val(), 'fuga' );
+    </script></pre>
+  </body>
+</html>

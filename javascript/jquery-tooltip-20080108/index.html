@@ -1,0 +1,62 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
+    "http://www.w3.org/TR/html4/strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>jquery.tooltip sample</title>
+<script type="text/javascript" src="js/jquery-1.2.1.js"></script>
+<script type="text/javascript" src="js/jquery.dimensions.js"></script>
+<script type="text/javascript" src="js/jquery.tooltip.js"></script>
+<script type="text/javascript">
+$( function(){
+    // default settings
+    $.Tooltip.defaults = $.extend( $.Tooltip.defaults, {
+        delay      : 1,
+        showURL    : false,
+        showBody   : " - ",
+        // left       : -100,
+        track      : true
+    });
+
+    // initialize
+    $( '#list1 a' ).Tooltip();
+
+    // with different css
+    $( '#list2 span' ).Tooltip({
+        extraClass: 'darktip'
+    });
+});
+</script>
+<style type="text/css">
+#tooltip {
+    position: absolute;
+    width: 12em;
+    border: 1px solid #666;
+    background: #999;
+    color: #FFF;
+    padding: 10px;
+    opacity: 0.9;
+}
+#tooltip h3, #tooltip div {
+    text-align: left;
+    font-size: 1em;
+    font-weight: normal;
+    margin: 0;
+}
+#tooltip.darktip {
+    background: #333;
+}
+</style>
+</head>
+<body>
+<h1>jquery.tooltip sample</h1>
+<ul id="list1">
+    <li><a href="#" title="my tooltip text">hover me link1</a></li>
+    <li><a href="#" title="another tooltip with some more text...
+    あいうえお日本語です">hover me link2</a></li>
+</ul>
+<ul id="list2">
+    <li><span title="with different style">hover me text</span></li>
+</ul>
+</body>
+</html>

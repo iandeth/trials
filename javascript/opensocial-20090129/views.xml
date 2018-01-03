@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?> 
+<Module>
+    <ModulePrefs title="different views"> 
+        <Require feature="views" />
+    </ModulePrefs> 
+    <Content type="html" view="home">
+    <![CDATA[ 
+        <p>home view</p>
+    ]]>
+    </Content> 
+    <Content type="html" view="profile">
+    <![CDATA[ 
+        <p>profile view</p>
+    ]]>
+    </Content> 
+    <Content type="html" view="canvas,full-mode,other-views">
+    <![CDATA[ 
+        <p>canvas view</p>
+        <script type="text/javascript">
+            console.log( gadgets.views.getCurrentView().getName() );
+            console.log( gadgets.views.getSupportedViews() );
+        </script>
+    ]]>
+    </Content> 
+    <Content type="html">
+    <![CDATA[ 
+        <p>default view</p>
+    ]]>
+    </Content> 
+</Module>

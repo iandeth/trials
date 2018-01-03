@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?> 
+<Module>
+    <ModulePrefs title="has feature"> 
+        <Require feature="setprefs" /> 
+        <Require feature="shareable-prefs" />
+        <Require feature="minimessage" /> 
+        <Require feature="views" /> 
+        <Require feature="dynamic-height" /> 
+        <Require feature="settitle" /> 
+        <Require feature="flash" /> 
+        <Require feature="tabs" /> 
+        <Require feature="opensocial-0.8"/>
+    </ModulePrefs>
+    <Content type="html">
+    <![CDATA[ 
+        <script type="text/javascript" src="http://jqueryjs.googlecode.com/files/jquery-1.3.min.js"></script>
+        <script type="text/javascript">
+            var f = [
+                'setprefs',
+                'shareable-prefs',
+                'minimessage',
+                'views',
+                'dynamic-height',
+                'settitle',
+                'flash',
+                'tabs',
+                'opensocial-0.8'
+            ];
+            $.each( f, function (i,v){
+                document.write( v + ': ' + gadgets.util.hasFeature( v ) + '<br/>' );
+            });
+        </script>
+    ]]>
+    </Content> 
+</Module>

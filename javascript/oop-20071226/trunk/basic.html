@@ -1,0 +1,49 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="ja" lang="ja">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <script>
+        // Animal Class Definition
+        Animal = function (){
+            this.init.apply( this, arguments );
+        };
+        Animal.prototype = {
+            init: function (height){
+                this.height = height || 0;
+            },
+            my_height: function (){
+                return this.height + 'cm';
+            },
+            bark: function (){
+                console.log( 'animal bark' );
+            }
+        };
+
+        // Dog Class Definition
+        Dog = function (){
+            this.init.apply( this, arguments );
+        };
+        Dog.prototype = new Animal();
+        Dog.prototype.bark = function (){
+            console.log( 'dog bark' );
+        };
+        Dog.prototype.height = function (){
+            var r = super
+            return 'override: ' + r;
+        };
+
+        // main
+        var a = new Animal( 160 );
+        a.bark();
+        console.log( 'a height: ' + a.my_height() );
+
+        var d = new Dog( 90 );
+        d.bark();
+        console.log( 'd height: ' + d.my_height() );
+
+    </script>
+</head>
+<body>
+hello
+</body>
+</html>

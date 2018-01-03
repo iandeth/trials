@@ -1,0 +1,56 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>Flickr写真を探す - AB-ROAD</title>
+<link rel="stylesheet" type="text/css"
+    href="css/yui.reset-fonts-grids-base.css" />
+<link rel="stylesheet" type="text/css" href="css/style.css" />
+<script type="text/javascript" src="./js/jquery-1.2.1.js"></script>
+<script type="text/javascript" src="./js/jquery.form.js"></script>
+<script type="text/javascript" src="./js/jquery.debug.js"></script>
+<script type="text/javascript" src="./js/flickr.ui.page.js"></script>
+<script type="text/javascript" src="./js/abroad.master.places.js"></script>
+<script type="text/javascript" src="./js/abroad.ui.places.js"></script>
+<script type="text/javascript" src="./js/myapp.js"></script>
+<script type="text/javascript">
+var api_key = '06496ddcb9f66ccceb67a3889777e539';
+$.debug( 1 );
+var myapp;
+$( function(){
+    myapp = new MyApp();
+});
+</script>
+</head>
+<body>
+<div id="doc3">
+<div id="hd">
+    <h1>Flickr写真を探す</h1>
+</div><!-- end hd -->
+<div id="bd">
+    <div id="search">
+        <form action="" id="flickr">
+            <select class="rui" name="_area"    id="ab-area-sel"></select>
+            <select class="rui" name="_country" id="ab-country-sel"></select>
+            <select class="rui" name="_city"    id="ab-city-sel"></select>
+            <input type="hidden" name="tags" value="" />
+            <input type="hidden" name="api_key" value="" />
+            <input type="hidden" name="method" value="flickr.photos.search" />
+            <input type="hidden" name="sort" value="interestingness-desc" />
+            <input type="hidden" name="per_page" value="9" />
+            <input type="hidden" name="page" value="1" />
+            <input type="hidden" name="privacy_filter" value="1" />
+            <input type="submit" value="　検索　"/>
+        </form>
+    </div><!-- end search -->
+    <div id="flickr-page">
+    </div><!-- end flickr-page -->
+    <div id="result" class="clearfix">
+    </div><!-- end result -->
+    <div id="flickr-page-bottom">
+    </div><!-- end flickr-page-bottom -->
+    <div id="result-misc">
+    </div><!-- end result-misc -->
+</div><!-- end bd -->
+</div><!-- end doc -->
