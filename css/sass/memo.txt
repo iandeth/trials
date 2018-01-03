@@ -1,0 +1,24 @@
+## vim plugin
+https://github.com/tpope/vim-haml
+
+## compile
+sass input.scss output.css
+
+## auto compile
+sass --watch style.scss:style.css
+sass --watch scss_dir:css_dir
+
+## convert scss <-> sass
+sass-convert foo.scss foo.sass
+
+## interactive shell
+sass -i
+
+## output format
+sass --style nested --watch style.scss:style.css  # default
+sass --style expanded
+sass --style compact
+sass --style compressed
+
+## default functions
+## http://sass-lang.com/docs/yardoc/Sass/Script/Functions.html

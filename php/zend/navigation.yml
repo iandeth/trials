@@ -1,0 +1,15 @@
+nav:
+  -
+    label: Page 1
+    uri:   page-1
+    pages:
+        -
+          label: Page 1.1
+          uri:  page-1.1
+        -
+          label: Page 1.2
+          uri: page-1.2
+  -
+    label: Page 2
+    uri: page-2
+

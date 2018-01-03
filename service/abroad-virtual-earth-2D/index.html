@@ -1,0 +1,354 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>地球で旅行検索 - キーワードを元に、オススメの旅先を、地球を使ってご紹介
+with Virtual Earth</title>
+<script type="text/javascript">
+if( document.location.href.match( "#" ) ){
+    // restoration of page state - based on url hash -
+    // not implemented yet.
+    document.location = '';
+}
+</script>
+<script type="text/javascript" src="js/jquery-1.1.3.1.js"></script>
+<script type="text/javascript" src="js/jquery.debug.js"></script>
+<script type="text/javascript" src="js/jquery.history.handler.js"></script>
+<script type="text/javascript" src="js/jquery.tabs.js"></script>
+<script type="text/javascript" src="js/jquery.form.js"></script>
+<script type="text/javascript" src="js/jquery.jsonp.js"></script>
+<script type="text/javascript" src="js/jquery.dimensions.js"></script>
+<script type="text/javascript" src="js/jquery.tooltip.js"></script>
+<script type="text/javascript" src="js/abroad.master.places.js"></script>
+<script type="text/javascript" src="js/abroad.ui.page.js"></script>
+<script type="text/javascript" src="js/abroad.ui.places.js"></script>
+<script type="text/javascript" src="js/abroad.ui.miscs.js"></script>
+<script type="text/javascript" src="js/myapp.js"></script>
+<script type="text/javascript" src="js/vearth.js"></script>
+<script type="text/javascript" src="http://dev.virtualearth.net/mapcontrol/mapcontrol.ashx?mkt=en-us"></script>
+<script type="text/javascript">
+var my_key = '7b18731dfad050ca';
+var myapp;
+// Virtual Earth cannot use $( document ).ready()
+window.onload = function (){
+    $.debug( 1 );
+    myapp = new MyApp({ key:my_key });
+    if( typeof( VEMap ) == 'function' ){
+        myapp.vearth = new VEarth({ id:'vearth', api_key:my_key,
+            show_control:false });
+    }
+};
+</script>
+<link rel="stylesheet" href="css/yui/reset-fonts-grids-base.css" type="text/css" />
+<link rel="stylesheet" href="css/style.css" type="text/css" />
+<link rel="stylesheet" href="css/jquery.tabs.css" type="text/css" />
+</head>
+<body>
+<div id="doc3" class="yui-t3">                   
+
+<div id="hd">
+<div class="inner">
+<div class="yui-gc">
+    <div class="yui-u first">
+    <h1><a href="."><img src="img/small_logo.gif" alt="virtual earth 地球で旅行検索"
+    width="176" height="33"/><span class="desc"> - キーワードを元に、オススメの旅先を、地球を使ってご紹介。</span></a></h1>
+    </div>
+    <div id="by" class="yui-u">
+    <a href="http://webservice.recruit.co.jp/ab-road/"><img
+    src="img/powered-by-abroad.gif" width="135" height="17" alt="AB-ROAD
+    Webサービス" style="vertical-align:text-bottom"/></a>
+    </div>
+</div><!-- end yui-gc -->
+</div><!-- end inner -->
+</div><!-- end hd -->
+
+<div id="bd">
+<div id="yui-main">
+<div class="yui-b map">
+<div class="cont" style="margin-top:0">
+    <div id="vearth" style="position:relative;width:100%"></div>
+</div><!-- end cont -->
+</div><!-- end yui-b map -->
+</div><!-- end yui-main -->
+<div class="yui-b navi">
+<div class="head">キーワード</div>
+<div id="tabs">
+    <ul style="display:none">
+    <li><a href="#step1">step1</a></li>
+    <li><a href="#step2">step2</a></li>
+    <li><a href="#step3">step3</a></li>
+    <li><a href="#step4">step4</a></li>
+    <li><a href="#step5">step5</a></li>
+    <li><a href="#options">options</a></li>
+    <li><a href="#options-tour">options-tour</a></li>
+    </ul>
+
+    <!-- tab step1 -->
+    <div class="cont scroll" id="step1">
+    <form action="" id="form_city">
+    <h3 style="margin-top:0">気になるキーワードを選ぶ</h3>
+    <p class="keycrowd">
+        <a href="#">世界遺産</a>&nbsp;
+        <a href="#">サンダル</a>&nbsp;
+        <a href="#">スキー</a>&nbsp;
+        <a href="#">戦場</a>&nbsp;
+        <a href="#">雄大</a>&nbsp;
+        <a href="#">キリスト</a>&nbsp;
+        <a href="#">大地</a>&nbsp;
+        <a href="#">野球</a>&nbsp;
+        <a href="#">鉄道</a>&nbsp;
+        <a href="#">太古</a>&nbsp;
+        <a href="#">悠久</a>&nbsp;
+        <a href="#">登山</a>&nbsp;
+        <a href="#">バッハ</a>&nbsp;
+        <a href="#">砂浜</a>&nbsp;
+        <a href="#">癒し</a>&nbsp;
+        <a href="#">大河</a>&nbsp;
+        <a href="#">さわやか</a>&nbsp;
+        <a href="#">晩餐</a>&nbsp;
+        <a href="#">ユダヤ</a>&nbsp;
+        <a href="#">整然</a>&nbsp;
+        <a href="#">ライオン</a>&nbsp;
+        <a href="#">行列</a>&nbsp;
+        <a href="#">肌寒い</a>&nbsp;
+        <a href="#">ナチス</a>&nbsp;
+        <a href="#">クラシック</a>&nbsp;
+        <a href="#">雨</a>&nbsp;
+        <a href="#">高い</a>&nbsp;
+        <a href="#">グルメ</a>&nbsp;
+        <a href="#">像</a>&nbsp;
+        <a href="#">チベット</a>&nbsp;
+        <a href="#">化石</a>&nbsp;
+        <a href="#">安い</a>&nbsp;
+        <a href="#">象</a>&nbsp;
+        <a href="#">軽快</a>&nbsp;
+        <a href="#">しっかり</a>&nbsp;
+        <a href="#">リラックス</a>&nbsp;
+        <a href="#">十戒</a>&nbsp;
+        <a href="#">熱い</a>&nbsp;
+        <a href="#">小休止</a>&nbsp;
+        <a href="#">モーツァルト</a>&nbsp;
+        <a href="#">大帝</a>&nbsp;
+        <a href="#">寒い</a>&nbsp;
+        <a href="#">蜀</a>&nbsp;
+        <a href="#">魏</a>&nbsp;
+        <a href="#">呉</a>&nbsp;
+        <a href="#">チーター</a>&nbsp;
+        <a href="#">パンダ</a>&nbsp;
+        <a href="#">草原</a>&nbsp;
+        <a href="#">キリン</a>&nbsp;
+        <a href="#">石像</a>&nbsp;
+        <a href="#">漢</a>&nbsp;
+        <a href="#">カバ</a>&nbsp;
+        <a href="#">石造</a>&nbsp;
+        <a href="#">秋</a>&nbsp;
+        <a href="#">遺跡</a>&nbsp;
+        <a href="#">ギター</a>&nbsp;
+        <a href="#">苔</a>&nbsp;
+        <a href="#">涼しい</a>&nbsp;
+        <a href="#">コアラ</a>&nbsp;
+        <a href="#">清らか</a>&nbsp;
+        <a href="#">春</a>&nbsp;
+        <a href="#">現地集合</a>&nbsp;
+        <a href="#">夏</a>&nbsp;
+        <a href="#">秦</a>&nbsp;
+        <a href="#">くもり</a>&nbsp;
+        <a href="#">冬</a>&nbsp;
+        <a href="#">海</a>&nbsp;
+        <a href="#">ブッシュ</a>&nbsp;
+        <a href="#">蒸し</a>&nbsp;
+        <a href="#">現地解散</a>&nbsp;
+        <a href="#">午前便</a>&nbsp;
+        <a href="#">午後便</a>&nbsp;
+        <a href="#">しっとり</a>&nbsp;
+        <a href="#">朝食付</a>&nbsp;
+        <a href="#">朝食なし</a>&nbsp;
+    </p>
+    <p class="back"><a href="#">*検索オプション</a></p>
+    <h3>自分でキーワードを入れる</h3>
+    <p class="keyword-search">
+        <input type="text" name="keyword" value=""/><button
+        type="submit">検索</button>
+        <span class="cmnt">例: ダイビング、世界遺産、野球</span>
+    </p>
+    <p class="back"><a href="#">*検索オプション</a></p>
+    <h3 id="area">エリアから探す</h3>
+    <p id="ab-places-navi1" style="font-size:80%"></p>
+    <ul id="ab-places-ul" style="margin-top:0"></ul>
+    <p class="back" style="margin-bottom:0"><a href="#">*検索オプション</a></p>
+    </form>
+    </div><!-- end cont -->
+    <!-- end tab step1 -->
+
+    <!-- tab step2 -->
+    <div class="cont scroll" id="step2">
+    <div class="loading" style="display:none">
+        <img src="img/ajax_load_gray.gif" alt="loading"
+            width="16" height="16"/> loading...
+    </div><!-- end loading -->
+    <div class="result">
+        <h2 style="margin-bottom:5px">検索未実施</h2>
+        <h3 class="stat">戻ってやり直してください...</h3>
+        <div class="yui-gc pager">
+            <div class="yui-u first"></div>
+            <div class="yui-u to_step1" style="text-align:right">
+            <a href="#"><span style="font-size:80%">キーワード</span>に戻る</a>
+            </div>
+        </div><!-- end yui-g -->
+        <ol class="result-list"></ol>
+        <div class="note" style="display:none">
+        <p style="text-align:left">*[]カッコの中の数字は、その都市を訪れる海外ツアー数を表しています</p>
+        </div>
+    </div><!-- end result -->
+    </div><!-- end cont -->
+    <!-- end tab step2 -->
+
+    <!-- tab step3 -->
+    <div class="cont scroll" id="step3">
+    <div class="loading" style="display:none">
+        <img src="img/ajax_load_gray.gif" alt="loading"
+            width="16" height="16"/> loading...
+    </div><!-- end loading -->
+    <div class="result">
+        <h2 style="margin-bottom:5px">都市未選択</h2>
+        <h3 class="stat">戻ってやり直してください...</h3>
+        <div class="yui-gc pager">
+            <div class="yui-u first"></div>
+            <div class="yui-u to_step2" style="text-align:right">
+            <a href="#">都市一覧に戻る</a>
+            </div>
+        </div><!-- end yui-g -->
+        <h4 style="margin-top:0">オススメ観光地</h4>
+        <ol class="result-list" style="margin-top:10px"></ol>
+        <div class="note defmap" style="margin-top:0">
+            <p><a href="#">*地図を元の位置に戻す</a></p>
+        </div>
+        <h4>ツアーを探す</h4>
+        <p style="text-align:center;margin:20px"><a href="#" class="to_step4">この都市を訪れるツアーを一覧表示</a></p>
+        <div class="note to_option">
+            <p><a href="#">*検索オプション</a></p>
+        </div>
+    </div><!-- end result -->
+    </div><!-- end cont -->
+    <!-- end tab step3 -->
+
+    <!-- tab step4 -->
+    <div class="cont scroll" id="step4">
+    <div class="loading" style="display:none">
+        <img src="img/ajax_load_gray.gif" alt="loading"
+            width="16" height="16"/> loading...
+    </div><!-- end loading -->
+    <div class="result">
+        <h2 style="margin-bottom:5px">都市未選択</h2>
+        <h3 class="stat">戻ってやり直してください...</h3>
+        <div class="yui-gc pager">
+            <div class="yui-u first"></div>
+            <div class="yui-u to_step3" style="text-align:right">
+            <a href="#">都市詳細に戻る</a>
+            </div>
+        </div><!-- end yui-g -->
+        <ol class="result-list"></ol>
+        <div class="note" style="display:none"></div>
+    </div><!-- end result -->
+    </div><!-- end cont -->
+    <!-- end tab step4 -->
+
+    <!-- tab step5 -->
+    <div class="cont scroll" id="step5">
+    <div class="result">
+        <h2 style="margin-bottom:10px">ツアー未選択</h2>
+        <h3 class="stat">戻ってやり直してください...</h3>
+        <div class="yui-g pager">
+            <div class="yui-u first"></div>
+            <div class="yui-u to_step4" style="text-align:right">
+            <a href="#">ツアー一覧に戻る</a>
+            </div>
+        </div><!-- end yui-g -->
+        <div id="tour-desc"></div>
+        <div class="note" style="display:none"></div>
+    </div><!-- end result -->
+    </div><!-- end cont -->
+    <!-- end tab step5 -->
+
+    <!-- tab options -->
+    <div class="cont scroll" id="options">
+    <form action="" id="form_options">
+    <h3 style="margin-top:0">検索オプション</h3>
+    <h4>検索結果の並び順</h4>
+    <ul>
+        <li><select name="order">
+        <option value="" selected>ツアー数 多い順</option>
+        <option value="1">ツアー数 少ない順</option>
+        <option value="2">エリア順</option>
+        </select></li>
+    </ul>
+    <h4>表示件数</h4>
+    <ul>
+        <li><select name="count">
+        <option value="10"> 1 0 件 </option>
+        <option value="20" selected> 2 0 件 </option>
+        <option value="50"> 5 0 件 </option>
+        <option value="100"> 1 0 0 件 </option>
+        </select></li>
+    </ul>
+    <p style="text-align:center">
+        <button type="submit">閉 じ る</button>
+    </p>
+    <input type="hidden" name="key" value=""/>
+    </form>
+    </div><!-- end cont -->
+    <!-- end tab options -->
+
+    <!-- tab options-tour -->
+    <div class="cont scroll" id="options-tour">
+    <form action="" id="form_options_tour">
+    <h3 style="margin-top:0">ツアー一覧オプション</h3>
+    <h4>出発地</h4>
+    <ul>
+        <li><select id="ab-sel-dept"></select></li>
+    </ul>
+    <h4>該当ツアーの並び順</h4>
+    <ul>
+        <li><select name="order">
+        <option value="">新着順</option>
+        <option value="1" selected>価格安い順</option>
+        <option value="2">価格高い順</option>
+        <option value="3">ツアー期間短い順</option>
+        <option value="4">ツアー期間長い順</option>
+        </select></li>
+    </ul>
+    <h4>表示件数</h4>
+    <ul>
+        <li><select name="count">
+        <option value="10"> 1 0 件 </option>
+        <option value="20" selected> 2 0 件 </option>
+        <option value="50"> 5 0 件 </option>
+        </select></li>
+    </ul>
+    <p style="text-align:center">
+        <button type="submit">閉 じ る</button>
+    </p>
+    </form>
+    </div><!-- end cont -->
+    <!-- end tab options-tour -->
+
+</div><!-- end tabs -->
+</div><!-- end yui-b navi -->
+</div><!-- end bd -->
+
+<div id="ft">
+<div class="inner">
+<p style="text-align:left; float:left;font-size:80%;margin-top:2px;width:60%">
+本サイトはリクルートが提供する実験サービスです。 </p>
+
+<p style="font-size:80%;margin-top:2px">
+<a href="#" class="tips">操作方法</a>　|　<a href="http://mtl.recruit.co.jp/contact.html">お問い合わせ</a>　|　<a
+href="kiyaku.html">利用規約</a>　|　<a
+href="http://mtl.recruit.co.jp">メディアテクノロジーラボ</a></p>
+<div style="clear:both"/>
+</div><!-- end inner-->
+
+</div><!-- end ft -->
+</div><!-- end doc -->
+</body>
+</html>

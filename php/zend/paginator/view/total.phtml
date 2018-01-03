@@ -1,0 +1,8 @@
+<h2><?= implode( '', array(
+    $this->current, ' / ', $this->pageCount, ' ページ表示中'
+))?></h2>
+<h3><?= implode( '', array(
+    '全 ', $this->totalItemCount, ' 件中 ',
+    $this->firstItemNumber, '〜', $this->lastItemNumber, ' 件目表示'
+))?></h3>
+

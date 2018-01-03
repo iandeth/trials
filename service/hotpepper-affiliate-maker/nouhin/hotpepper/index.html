@@ -1,0 +1,194 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>ホットペッパー.jp アフィリエイトツール</title>
+<script type="text/javascript" src="js/prototype.js"></script>
+<script type="text/javascript" src="js/prototype/cookieManager.js"></script>
+<script type="text/javascript" src="js/ui/master/area2.js"></script>
+<script type="text/javascript" src="js/ui/master/genre.js"></script>
+<script type="text/javascript" src="js/ui/ui.js"></script>
+<script type="text/javascript" src="js/yahoo/yahoo.js"></script>
+<script type="text/javascript" src="js/yahoo/dom.js"></script>
+<script type="text/javascript" src="js/yahoo/event.js"></script>
+<script type="text/javascript" src="js/yahoo/tabview.js"></script>
+<script type="text/javascript" src="js/webtoolkit/base64.js"></script>
+<script type="text/javascript" src="js/app.js"></script>
+<link rel="stylesheet" type="text/css" href="css/yahoo/tabview.css" />
+<link rel="stylesheet" type="text/css" href="css/yahoo/border_tabs.css" />
+<link rel="stylesheet" type="text/css" href="css/style.css" />
+<script type="text/javascript">
+var myApp;
+Event.observe(window, 'load', function (){
+	var myTabs = new YAHOO.widget.TabView("tab-ui");
+	new Hotpepper.Area2.Pulldown().init();
+	new Hotpepper.Genre.Pulldown().init();
+	myApp = new App({
+		tab_ui: myTabs,
+		isp_id: '0001',
+		dc: 'ssnEzSMHZjP4',
+		provider_affi_id: 'webri',
+		actioncode: '',
+		vos: ''
+	});
+});
+</script>
+</head>
+<body>
+<div id="container">
+
+<div id="bsp_header">
+<h1>Hotpepper Affiliate Tool</h1>
+</div> <!-- close bsp_header -->
+
+<div id="content">
+<div id="tab-ui" class="yui-navset">
+<ul class="yui-nav">
+	<li class="selected"><a href="#tab1"><em>1. お店を検索</em></a></li> 
+	<li><a href="#tab2"><em>2. アフィリエイト設定</em></a></li> 
+	<li><a href="#tab3"><em>3. クリエイティブ選択</em></a></li> 
+</ul>
+<div class="yui-content">
+
+	<!-- タブ１ここから -->
+	<div>
+	<h2>1. お店を検索</h2>
+	<p class="tab-desc">最初に、ブログで言及したいお店を探してください。</p>
+
+	<div id="col-left">
+	<div id="col-left-inner">
+		<form id="search_keyword" action="javascript:myApp.search('keyword')">
+		<h3>フリーワードで検索</h3>
+		<p style="margin-top:30px">
+		<input type="text" name="Keyword" id="text" style="width:200px;padding:5px"/>
+		<input type="submit" value=" 検　索 "/>
+		</p>
+		<p class="desc" style="margin-bottom:30px">例:「銀座」「銀座 イタリアン」または店名・お店の住所</p>
+
+		</form>
+		<form id="search_pull" action="javascript:myApp.search('pull')">
+		<p style="margin:0;font-size:0.8em"><a href="javascript:void(0)" onclick="$('search-pull-block').style.display='block'">≫あるいは条件を指定する</a></p>
+		<div id="search-pull-block" style="display:none">
+			<h4>地域・エリア　<span style="font-size:0.7em;color:#666">※必須</span></h4>
+			<p>大サービスエリア:</p>
+			<p><select id="hp-sel-lsa" name="LargeServiceAreaCD"></select></p>
+
+			<p>大エリア:</p>
+			<p><select id="hp-sel-la" name="LargeAreaCD"></select></p>
+			<p>中エリア:</p>
+			<p><select id="hp-sel-ma" name="MiddleAreaCD"></select></p>
+			<p>小エリア:</p>
+			<p><select id="hp-sel-sa" name="SmallAreaCD"></select></p>
+			<h4>料理ジャンル</h4>
+
+			<p><select id="hp-sel-genre" name="GenreCD"></select></p>
+			<h4>条件指定が出来たら...</h4>
+			<p><input type="submit" value="検　索" style="width:100px"/></p>
+		</div>
+		</form>
+	</div> <!-- close col-left-inner -->
+	</div> <!-- close col-left -->
+
+	<div id="col-right">
+
+		<h3>検索結果</h3>
+		<div id="search-result"></div>
+	</div> <!-- close col-right -->
+	</div>
+	<!-- タブ１ここまで -->
+
+	<!-- タブ２ここから -->
+	<div>
+	<h2>2. アフィリエイト設定</h2>
+	<p class="tab-desc">あなたのリクルートアフィリエイトIDを設定してください。IDをお持ちでなければ右段のリンクから新規登録をする事が出来ます。あるいはIDをお持ちで無くとも、ブログ貼り付けはご利用可能です。</p>
+
+	<div id="col-left" style="width:350px">
+	<div id="col-left-inner">
+		<form id="form_affi" action="javascript:void(0)">
+
+		<h3>あなたのアフィリエイトID</h3>
+		<p style="margin-top:30px;margin-bottom:30px">
+		<input type="text" id="affi_id" style="width:190px;padding:5px"/>
+		<input type="button" value="設　定" onclick="myApp.tabActionOnAffiliIdSet($F('affi_id'))"/>
+		</p>
+		<h4>IDを忘れてしまった</h4>
+		<p class="desc"><a href="">こちらのリンクからIDを確認してください</a></p>
+
+		<h4>アフィリエイトは利用しない</h4>
+		<p class="desc">アフィリエイトは利用せず、ブログ貼り付けだけを利用したい場合はこちら：</p>
+		<p><input type="button" value="　そのまま次へ　" onclick="myApp.tabActionOnAffiliIdSet('no-use')"/></p>
+		</form>
+	</div> <!-- close col-left-inner -->
+	</div> <!-- close col-left -->
+
+	<div id="col-right" style="width:350px">
+		<h3>リクルートアフィリエイトサービスについて</h3>
+
+		<p class="desc">アフィリエイトするとこんないい事があるよー。リクルートもサービスやってるよー。入るとお得だよー。ほんとすごいよー、的な画像とキャッチ文章、バナー等をこの領域に。</p>
+		<p style="border:1px solid #999;height:250px"></p>
+		<h4>詳しい説明および新規登録はこちら</h4>
+		<p class="desc"><a href="">リクルートのアフィリエイトサービス概要ページ</a></p>
+	</div> <!-- close col-right -->
+	</div>
+	<!-- タブ２ここまで -->
+
+	<!-- タブ３ここから -->
+	<div>
+	<h2>3. クリエイティブ選択</h2>
+	<p class="tab-desc">あなたのブログ記事に挿入するパーツのデザインを選んでください。</p>
+	<div id="col-left" style="width:250px">
+	<div id="col-left-inner">
+		<h3>デザイン種類</h3>
+		<form action="#" id="pattern-form">
+
+		<h4>テキストのみ</h4>
+		<ul class="pattern-select">
+		<li><input type="radio" name="pattern-id" value="text-name" onclick="myApp.setCreativePattern()"> 店名</li>
+
+		<li><input type="radio" name="pattern-id" value="text-genre-name" onclick="myApp.setCreativePattern()"> ジャンル＋店名</li>
+		</ul>
+
+		<h4>画像のみ</h4>
+		<ul class="pattern-select">
+		<li><input type="radio" name="pattern-id" value="image-left" onclick="myApp.setCreativePattern()" checked> 左寄せ</li>
+		<li><input type="radio" name="pattern-id" value="image-right" onclick="myApp.setCreativePattern()"> 右寄せ</li>
+
+		<li><input type="radio" name="pattern-id" value="image-center" onclick="myApp.setCreativePattern()"> 中央寄せ</li>
+		</ul>
+
+		<h4>コンビネーション</h4>
+		<ul class="pattern-select">
+		<li><input type="radio" name="pattern-id" value="combo-a" onclick="myApp.setCreativePattern()"> 基本</li>
+		<li><input type="radio" name="pattern-id" value="combo-b" onclick="myApp.setCreativePattern()"> 詳細</li>
+		<li><input type="radio" name="pattern-id" value="combo-c" onclick="myApp.setCreativePattern()"> 基本 (枠)</li>
+		<li><input type="radio" name="pattern-id" value="combo-d" onclick="myApp.setCreativePattern()"> 詳細 (枠)</li>
+		</ul>
+
+		</form>
+		<p class="desc" style="margin-top:20px">デザインが決まったら、画面右下部に表示されているHTMLコードを、コピー＆ペーストであなたのブログ記事入力エリアに貼り付けてください。
+	</div> <!-- close col-left-inner -->
+	</div> <!-- close col-left -->
+
+	<div id="col-right" style="width:450px">
+		<h3>実際のデザイン</h3>
+		<div id="html-preview">
+		<p class="desc">1. まずは、お店を選んで<br />2. アフィリIDの設定を行って下さい</p>
+
+		</div>
+		<h3>ブログに貼り付けるHTMLコード</h3>
+		<p class="desc">以下のHTMLコードをエントリ書き込み画面の任意の箇所にコピー＆ペーストする事で、上記パーツがブログ記事に挿入されます。</p>
+		<p><textarea id="html-textarea" style="width:95%;font-size:0.8em" rows="6" onclick="this.select()"></textarea></p>
+	</div> <!-- close col-right -->
+	</div>
+	<!-- タブ３ここまで -->
+
+</div> <!-- close yui-content -->
+</div> <!-- close tab-ui -->
+</div> <!-- close content -->
+<br style="clear:both"/>
+<div id="bsp_footer">
+<p>Recruit 2007.</p>
+</div> <!-- close bsp_footer -->
+</div> <!-- close container -->
+</body>
+</html>

@@ -1,0 +1,21 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+good:
+  id: 1
+  name: Good
+  sort_order: 1
+
+better:
+  id: 2
+  name: Better
+  sort_order: 2
+
+poor:
+  id: 3
+  name: Poor
+  sort_order: 3
+
+worst:
+  id: 4
+  name: Worst
+  sort_order: 4

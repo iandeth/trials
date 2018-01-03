@@ -1,0 +1,49 @@
+#!/usr/bin/perl -w
+use strict;
+use FindBin;
+use lib "$FindBin::RealBin/../lib";
+use CGI;
+use CGI::Carp qw/fatalsToBrowser/;
+use Template;
+use URI::Escape;
+use Tools::Facebook;
+
+my $cgi = CGI->new;
+my $fb  = Tools::Facebook->new(
+    app_id         => '204952529541782',
+    app_secret     => 'cc28415a30a494373aa93abfd88adca2',
+    signed_request => $cgi->param('signed_request') || '',
+    canvas_url     => 'http://apps.facebook.com/feosodi_test_one/',
+);
+
+# PATH_INFO 使ってるので新の REQUEST_URI を判定
+my $src_root = uri_unescape $::ENV{REQUEST_URI};
+if( $::ENV{PATH_INFO} ne '/' ){
+    $src_root =~ s/$::ENV{PATH_INFO}//;
+    $src_root .= '/';
+}
+
+# PATH_INFO を解析
+my @pinfo = split '/', $::ENV{PATH_INFO};
+shift @pinfo;
+
+# og:url 用に PATH_INFO 付きの canvas url を作成
+my $permalink = $fb->canvas_url;
+$permalink =~ s{/$}{};  # 最後の / を消す
+$permalink .= $::ENV{PATH_INFO};
+
+# prepare stash
+my $stash = {
+    fb => $fb,
+    http_host => $::ENV{HTTP_HOST},
+    src_root => $src_root,
+    permalink => $permalink,
+    page_id => $pinfo[0],
+    content => $pinfo[1],
+};
+# create response HTMl
+print $cgi->header( -charset=>'UTF-8' );
+my $tt= Template->new({
+    INCLUDE_PATH => $FindBin::RealBin,
+});
+$tt->process('canvas.tmpl', $stash) || die $tt->error();

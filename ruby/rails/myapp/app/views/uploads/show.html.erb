@@ -1,0 +1,40 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Name:</b>
+  <%= @upload.name %>
+</p>
+<p>
+  <b>Img:</b><br/>
+  <%= image_tag @upload.img.url %> <%= @upload.img.url %><br/>
+  <%= image_tag @upload.img.url(:small) %> <%= @upload.img.url(:small) %><br/>
+  <%= image_tag @upload.img.url(:square) %> <%= @upload.img.url(:square) %><br/>
+  <%= image_tag @upload.img.url(:png) %> <%= @upload.img.url(:png) %><br/>
+  <%= image_tag @upload.img.url(:original) %> <%= @upload.img.url(:original) %><br/>
+</p>
+
+<p>
+  <b>Img spec:</b>
+  <ul>
+    <li>name: <%= @upload.img.original_filename %></li>
+    <li>content_type: <%= @upload.img.content_type %></li>
+    <li>size: <%= number_to_human_size @upload.img.size %></li>
+    <li>updated_at: <%= @upload.img.updated_at %></li>
+  </ul>
+</p>
+
+<p>
+  <b>Img hash keys:</b>
+  <ul>
+    <li>small: <%= @upload.img.hash_key(:small) %></li>
+    <li>medium(default): <%= @upload.img.hash_key %></li>
+    <li>square: <%= @upload.img.hash_key(:square) %></li>
+    <li>png: <%= @upload.img.hash_key(:png) %></li>
+    <li>original: <%= @upload.img.hash_key(:original) %></li>
+  </ul>
+</p>
+
+<%= link_to '画像を差し替え', replace_with_server_file_upload_path(@upload) %><br/>
+
+<%= link_to 'Edit', edit_upload_path(@upload) %> |
+<%= link_to 'Back', uploads_path %>

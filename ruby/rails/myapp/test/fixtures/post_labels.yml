@@ -1,0 +1,21 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  post_id: 1
+  label_id: 1
+  memo: メモ１
+
+two:
+  post_id: 1
+  label_id: 3
+  memo: メモ２
+
+three:
+  post_id: 2
+  label_id: 1
+  memo: メモ３
+
+four:
+  post_id: 3
+  label_id: 1
+  memo: メモ４

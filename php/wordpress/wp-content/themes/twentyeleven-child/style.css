@@ -1,0 +1,34 @@
+@charset "utf-8";
+/*
+Theme Name:  Twenty Eleven Child
+Description: Child template sample.
+Template:    twentyeleven
+Author:      iandeth
+*/
+
+@import url("../twentyeleven/style.css");
+
+.entry-content h1,
+.comment-content h1 {
+	font-weight: bold;
+	font-size: 25px;
+	margin: 0 0 .8125em;
+}
+
+.entry-content h2,
+.comment-content h2 {
+	font-weight: bold;
+	font-size: 20px;
+	margin: 0 0 .8125em;
+}
+
+.entry-content h3,
+.comment-content h3 {
+	font-weight: bold;
+	font-size: 20px;
+	margin: 0 0 .8125em;
+	clear: both;
+	letter-spacing: 0.1em;
+	line-height: 20px;
+	text-transform: none;
+}

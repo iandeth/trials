@@ -1,0 +1,23 @@
+[% WRAPPER 'parts/headerfooter.tmpl' %]
+
+<h2 class="navi">BLOG ENTRY EMULATION</h2>
+<div class="entry">
+<div class="honmon">
+
+<h3>レイアウト確認</h3>
+<form action="[% view.urlApp %]/entry" id="f" method="POST">
+<h4>タイトル</h4>
+<p>[% in.title %]</p>
+<h4>本文</h4>
+<div style="width:70%">
+[% mdl.disp_honmon | unesc %]
+</div>
+<p style="clear:both"><input type="submit" value="　修　正　" />　<input type="button" value="　保　存　" /></p>
+[% HIDDEN %]
+<input type="hidden" name="back" value="1" />
+</form>
+
+</div>
+</div>
+
+[% END %]

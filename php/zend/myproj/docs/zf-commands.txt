@@ -1,0 +1,6 @@
+zf.php create project myproj
+zf.php enable layout
+zf.php configure db-adapter 'adapter=pdo_mysql'
+zf.php create db-table Guestbook guestbook
+zf.php create controller Guestbook
+zf.php create form Guestbook

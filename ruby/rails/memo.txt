@@ -1,0 +1,133 @@
+## create local api docs
+$ rake doc:rails
+$ open -a safari doc/api/index.html
+
+## generate app docs
+$ vim doc/README_FOR_APP
+$ rake doc:app
+$ open -a safari doc/app
+
+## rails generate
+$ rails generate controller Say hello goodbye
+$ rails generate scaffold Product title:string description:text image_url:string price:decimal
+
+## rails *
+$ rails server
+
+## rake db
+$ rake db:migrate
+$ rake db:migrate:reset        # drop table and migrate
+$ rake db:migrate:redo STEP=1  # rollback and redo one history
+$ rake db:rollback
+$ rake db:rollback STEP=1  # rollback one history
+$ rake db:seed  # run db/seeds.rb
+$ rake db:setup  # create db + reset + migrate + seed
+
+## rake *
+$ rake test
+$ rake routes   # see all configured routes
+$ rake about    # display appliation's environment
+$ rake stats    # display code volume stats
+$ rake notes    # search and display TODO comments in *.rb files
+$ rake -T       # list all available tasks (or --tasks)
+$ rake -D db:migrate  # descriptive help
+$ rake --trace --dry-run db:setup  # look at task flow
+
+## rake spec
+$ rake spec:models            # run all spec/models/**_spec.rb
+$ rake spec SPEC_OPTS="-f p"  # specify rspec options
+$ rake spec SPEC="model"      # specify file glob (default: spec/**/*_spec.rb)
+
+## svn - remove git related files prior to import
+## ack -ag "(/|^)\\..+$"
+$ rm .gitignore app/mailers/.gitkeep app/models/.gitkeep lib/assets/.gitkeep lib/tasks/.gitkeep test/fixtures/.gitkeep test/functional/.gitkeep test/integration/.gitkeep test/unit/.gitkeep vendor/assets/javascripts/.gitkeep vendor/assets/stylesheets/.gitkeep vendor/plugins/.gitkeep
+
+## svn:ignore
+$ svn revert db/*.sqlite3 tmp log
+$ rm -rf tmp log
+$ svn propset svn:ignore "$(echo 'tmp log' | tr ' ' '\n')" .
+$ svn propset svn:ignore "*.sqlite3" db
+
+## passenger, reload code without restarting daemon
+$ touch tmp/restart.txt
+
+## put gems into version controll
+$ bundle pack
+$ git add Gemfile.lock vendor/cache
+
+
+##
+## ActiveRecord
+##
+
+## inspect table|model def
+> Order.column_names
+=> ["id", "name", "address", "email", ... ]
+
+> Order.columns_hash["pay_type"]
+=> #<ActiveRecord::ConnectionAdapters::SQLiteColumn:0x7fe673f7da80
+  @name="pay_type", @null=true, @default=nil, @sql_type="varchar(10)" ... ]
+
+## fetch raw db value
+> product.updated_at  #=> Time.new('2008-05-13 10:13:14')
+> product.updated_at_before_type_cast  #=> "2008-05-13 10:13:14"
+
+## hash string
+> product.hash  #=> "2741152095645181476"
+
+## find out model attributes
+product.attributes  #=> {"name"=>"Dave Thomas", "pay_type"=>"check"}
+product.attribute_names  #=> ["name", "pay_type"]
+product.attribute_present?("address")  #=> true
+
+
+##
+## Migration
+##
+
+## supported column types via migration
+:binary, :boolean, :date, :datetime, :decimal, :float, :integer, 
+:string, :text, :time, :timestamp
+
+## currency column def via migration
+t.decimal price, precision:8, scale:2
+
+
+##
+## Unit Test
+##
+
+## run all units|functionals|integration tests
+$ rake test  # or
+$ rake
+
+## run unit tests only
+$ rake test:units
+
+## run single test file
+$ ruby -Itest test/units/post_test.rb
+
+## run single test case
+$ ruby -Itest test/units/post_test.rb -n test_has_three_seeds
+$ ruby -Itest test/units/post_test.rb -n /.*has_three.*/  # with regexp
+
+## sync test database with current schema.rb
+## => useful while testing single file, since it skips database creation
+$ rake db:test:prepare
+
+## debug output to log/test.log
+Rails::logger.debug row.to_yaml
+
+## debug print Rails::logger.info to STDOUT
+## => and disable SQL logging also (via Logger::INFO)
+## => to turn on SQL, set to Logger::DEBUG
+$ vim config/environments/test.rb
+logger = Logger.new(STDOUT)
+logger.level = Logger::INFO
+config.logger = logger
+
+## reload code under root/lib directories
+$ vim config/environment/development.rb
+  config.watchable_dirs['lib'] = [:rb]
+$ vim some_controller.rb
+  require_dependency 'foo_module'

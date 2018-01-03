@@ -1,0 +1,9 @@
+<h3>キャッシュしたいテキスト</h3>
+<form method="POST">
+<input type="text" name="text"/><br/>
+<input type="submit" name="_save" value="保存"/>
+</form>
+<?php if($this->text): ?>
+<h3>キャッシュされたテキスト：</h3>
+<pre><?php echo $this->escape($this->text) ?></pre>
+<?php endif ?>

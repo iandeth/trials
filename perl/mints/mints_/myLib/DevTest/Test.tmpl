@@ -1,0 +1,15 @@
+<HTML>
+<BODY>
+asfdasf<br />
+[% mdl.xx %]<br />
+[% mdl.xss.str | unesc %]<br />
+[% env.HTTP_USER_AGENT %]
+[% HIDDEN %]
+[% hoge = { a => 1, b => 2 } %]
+[% view.hashToHidden(hoge) | unesc %]
+<hr>
+[% view.hashToHidden(mdl.xss) | unesc %]
+[% USE date %]
+[% date.format(adm.now,'%Y年%m月%d日 %H時%M分%S秒') %]
+<BODY>
+</HTML>

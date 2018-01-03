@@ -1,0 +1,118 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
+    "http://www.w3.org/TR/html4/strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>ツアーを縦に比較デモ - AB-ROAD</title>
+<link rel="stylesheet" type="text/css"
+    href="css/yui.reset-fonts-grids-base.css" />
+<link rel="stylesheet" type="text/css" href="css/style.css" />
+<script type="text/javascript" src="./js/jquery-1.2.3.js"></script>
+<script type="text/javascript" src="./js/jquery.debug.js"></script>
+<script type="text/javascript" src="./js/jquery.form.js"></script>
+<script type="text/javascript" src="./js/jquery.ui.tabs.click.js"></script>
+<script type="text/javascript" src="./js/jquery.hilightFade.js"></script>
+<script type="text/javascript" src="./js/jquery.history.handler.js"></script>
+<script type="text/javascript" src="./js/jquery.dimensions.js"></script>
+<script type="text/javascript" src="./js/jquery.tooltip.js"></script>
+<script type="text/javascript" src="./js/recruit.ui.js"></script>
+<script type="text/javascript" src="./js/abroad.ui.js"></script>
+<script type="text/javascript" src="./js/myapp.js"></script>
+<script type="text/javascript">
+Recruit.UI.key = '7b18731dfad050ca';
+//$.debug(1);
+var myapp;
+$( function(){
+    myapp = new MyApp( Recruit.UI.key );
+});
+</script>
+</head>
+<body>
+<div id="doc3">
+<div id="hd">
+    <h1>ツアーを縦に比較</h1>
+</div><!-- end hd -->
+<div id="bd">
+    <ul id="tab-ul" class="clearfix">
+        <li><a href="#search">検索</a><span class="mr">&gt;</span></li>
+        <li><a href="#list">一覧</a><span class="mr">&gt;</span></li>
+        <li><a href="#compare">比較</a></li>
+    </ul>
+    <div id="search">
+        <form action="">
+            <table>
+            <tr>
+            <td class="label">出発地</td>
+            <td class="desc"><select id="ab-dept-sel"></select></td>
+            </tr>
+            <tr>
+            <td class="label">行き先</td>
+            <td class="desc">
+                <select id="ab-area-sel"></select> ＞
+                <select id="ab-country-sel"></select> ＞
+                <select id="ab-city-sel"></select>
+            </td>
+            </tr>
+            <tr>
+            <td class="label">出発月</td>
+            <td class="desc"><select id="ab-month-sel"></select></td>
+            </tr>
+            <tr>
+            <td class="label">フリーワード</td>
+            <td class="desc"><input type="text" class="input-text" 
+                name="keyword" value="" /></td>
+            </tr>
+            <tr>
+            <td class="label">期間</td>
+            <td class="desc">
+                <select id="ab-term-min-sel"></select> ～
+                <select id="ab-term-max-sel"></select>
+            </td>
+            </tr>
+            <tr>
+            <td class="label">価格帯</td>
+            <td class="desc">
+                <select id="ab-price-min-sel"></select> ～
+                <select id="ab-price-max-sel"></select>
+            </td>
+            </tr>
+            <tr>
+            <td class="label">並び順</td>
+            <td class="desc"><select id="ab-order-sel"></select></td>
+            </tr>
+            <tr>
+            <td class="label">&nbsp;</td>
+            <td class="desc"><input class="submit" type="submit" value="検索"/></td>
+            </tr>
+            </table>
+            <input type="hidden" name="key" value="" />
+            <input type="hidden" name="count" value="10" />
+            <input type="hidden" name="start" value="1" />
+        </form>
+    </div><!-- end search -->
+    <div id="list">
+        <div class="yui-gc">
+        <div id="result-left" class="yui-u first">
+        <div class="inner">
+            <div id="rui-page"></div>
+            <div id="result-list"></div>
+        </div><!-- end inner -->
+        </div><!-- end result-left -->
+        <div id="result-right" class="yui-u">
+        <div class="inner">
+            <div class="head">my clip</div>
+            <div id="myclip"></div>
+            <div id="myclip-btn">
+                <input type="button" value="一覧表で比較"/>
+            </div>
+        </div><!-- end inner -->
+        </div><!-- end result-right -->
+        </div><!-- end yui-gc -->
+    </div><!-- end list -->
+    <div id="compare">
+        <table id="compare-table" class="cmp-table"></table>
+    </div><!-- end compare -->
+</div><!-- end bd -->
+</div><!-- end doc -->
+</body>
+</html>

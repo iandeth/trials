@@ -1,0 +1,16 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+php:
+  id: 1
+  name: PHP
+  sort_order: 1
+
+perl:
+  id: 2
+  name: Perl
+  sort_order: 2
+
+ruby:
+  id: 3
+  name: Ruby
+  sort_order: 3

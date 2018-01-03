@@ -1,0 +1,15 @@
+production:
+    foo_path: APP_ROOT/foo
+    database:
+        adapter: pdo_mysql
+        params:
+            host: localhost
+            dbname: production_db
+            username: root
+            password: root
+            # persistent: true
+development:
+  _extends: production
+    database:
+        params:
+            dbname: test

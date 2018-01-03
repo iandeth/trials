@@ -1,0 +1,15 @@
+<h1>入力内容の確認</h1>
+<p>下記の内容でよろしいですか？</p>
+<form method="post" action="[% view.url %]/../complete">
+<h4>お名前</h4>
+<p>[% in.name %]</p>
+<h4>メールアドレス</h4>
+<p>[% in.email %]</p>
+<h4>お問い合わせ内容</h4>
+<p>[% in.naiyou | html_line_break %]</p>
+<p>
+[% HIDDEN %]
+<input type="Submit" name="back" value="　戻　る　" />　
+<input type="Submit" value="　送　信　" />
+</p>
+</form>

@@ -1,0 +1,3 @@
+<FilesMatch "^(canvas|tab)$">
+    SetHandler cgi-script
+</FilesMatch>

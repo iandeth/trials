@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+burger:
+  name: ハンバーガー
+  genres: <%= {fastfood:1, western:1}.to_yaml.inspect %>
+  areas: <%= {1=>1, 3=>1}.to_yaml.inspect %>
+
+ramen:
+  name: ラーメン
+  genres: <%= {chinese:1}.to_yaml.inspect %>
+  areas: <%= {2=>1}.to_yaml.inspect %>

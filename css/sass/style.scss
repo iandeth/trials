@@ -1,0 +1,174 @@
+/* !
+ * Fixed Comment: will not be stripped
+ * even under compressed mode
+ *
+ * used sass version is: 3.1.15 (Brainy Betty)
+ */
+
+// double-slash comments are stripped during compile.
+
+/* nesting */
+#navbar {
+  width: 80%;
+  height: 23px;
+
+  ul { list-style-type: none; }
+  li {
+    float: left;
+    a { font-weight: bold; }
+  }
+}
+
+/* nest properties */
+.fakeshadow {
+  border: {
+    style: solid;
+    left: {
+      width: 4px;
+      color: #888;
+    }
+    right: {
+      width: 2px;
+      color: #ccc;
+    }
+  }
+}
+
+/* parent references */
+a {
+  color: #ce4dd6;
+  &:hover { color: #ffb3ff; }
+  &:visited { color: #c458cb; }
+}
+
+/* variables */
+$main-color: #ce4dd6;
+$style: solid;
+#somebar {
+  border-bottom: {
+    color: $main-color;
+    style: $style;
+  }
+}
+a {
+  &:hover { border-bottom: $style 1px; }
+}
+
+/* operations and functions */
+#foobar {
+  $foobar-width: 800px;
+  $items: 5;
+  $foobar-color: #ce4dd6;
+
+  width: $foobar-width;
+  border-bottom: 2px solid $foobar-color;
+  li {
+    float: left;
+    width: $foobar-width / $items - 10px;
+    background-color: lighten($foobar-color, 20%);
+    &:hover {
+      background-color: darken($foobar-color, 10%);
+    }
+  }
+}
+
+/* interpolation */
+$side: top;
+$radius: 10px;
+.rounded-#{$side} {
+  border-#{$side}-radius: $radius;
+  -moz-border-radius-#{$side}: $radius;
+  -webkit-border-#{$side}-radius: $radius;
+}
+
+/* mixins */
+@mixin rounded-top($foo:#ddd, $bar:#eee) {
+  $side: top;
+  $radius: 20px;  // redefining variable affects all doc on compilation
+  border-#{$side}-radius: $radius;
+  -moz-border-radius-#{$side}: $radius;
+  -webkit-border-#{$side}-radius: $radius;
+  color: $foo;
+  border-color: $bar;
+}
+
+#navbar li { @include rounded-top(#999, #888); }
+// or with named parameters
+#navbar li.x { @include rounded-top($bar:#222, $foo:#111); }
+#footer { 
+  color: #ddd;
+  @include rounded-top;  // will override 'color' def
+}
+
+/* @import partials */
+/* to load but not print content in _rounded.scss */
+@import "rounded";
+#beebar li { @include rounded(top); }
+#soobar { @include rounded(top, 5px); }
+#teebar { @include rounded(left, 8px); }
+// or multiple: @import "rounded", "some-other";
+
+/* variable defaults */
+$wee: #ddd;
+$wee: $fff !default;   // assigned only if $wee is undef
+#weebar {
+  color: $wee;
+}
+
+/* extend */
+.error {
+  border: 1px #f00;
+  background-color: #fdd;
+}
+.seriousError {
+  @extend .error;
+  border-width: 3px;
+}
+
+// debug, warn
+// prints result to STDERR
+// warn can be stopped with sass --quiet
+@debug 10em + 12em;
+@warn "some warning: #{10em + 12em}";
+
+/* @if */
+$type: monster;
+.if-p {
+  @if $type == ocean {
+    color: blue;
+  } @else if $type == matador {
+    color: red;
+  } @else if $type == monster {
+    color: green;
+  } @else {
+    color: black;
+  }
+}
+
+/* @for */
+@for $i from 1 through 2 {
+  .item-#{$i} { width: 2em * $i; }
+}
+
+/* @each */
+@each $animal in puma, sea-slug, salamander {
+  .#{$animal}-icon {
+    background-image: url('/images/#{$animal}.png');
+  }
+}
+
+/* @while */
+$i: 3;
+@while $i > 0 {
+  .item-#{$i} { width: 2em * $i; }
+  $i: $i - 2;
+}
+
+/* functions */
+$grid-width: 40px;
+$gutter-width: 10px;
+@function acme-grid-width($n) {
+  @return $n * $grid-width + ($n - 1) * $gutter-width;
+}
+
+#sidebar { width: acme-grid-width(5); }

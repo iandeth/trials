@@ -1,0 +1,377 @@
+.yui-t3 #yui-main .yui-b {
+    margin-left: 23.45em;
+    *margin-left: 22.85em;
+}
+#doc3 {
+    /* border: 1px solid #000; */
+    margin: auto;
+    padding: 5px;
+    background: #FFF;
+}
+#hd, #bd, #ft {
+    font-size: 123.1%;
+    /* font-family: verdana;*/
+}
+#hd {
+    background: #999 url( ../img/gray_grad.gif ) repeat-x; 
+    /* padding: 10px; */
+    color: #FFF;
+    border: 1px solid #333;
+}
+#hd .inner {
+    padding: 7px 10px 2px 5px;
+}
+#hd p {
+    margin: 0;
+}
+#hd a {
+    color: #FFF;
+    text-decoration: none;
+}
+#hd h1 {
+    margin: 0;
+    font-size: 130%;
+    font-weight: bold;
+}
+#hd h1 img {
+    vertical-align: middle;
+}
+#hd span.desc {
+    font-size: 60%;
+    font-weight: normal;
+}
+#hd #by {
+    text-align: right;
+    padding-top: 7px;
+    font-size: 70%;
+}
+#bd {
+    font-family: 'メイリオ', 'Meiryo';
+    font-weight: bold; /* メイリオ + IE7 + jQuery Animation では必須 */
+    /* border: 1px solid #999; */
+    margin: 5px 0 0 0;
+}
+#bd a {
+    color: #A46702;
+    text-decoration: none;
+}
+#bd a:hover {
+    background: #FCDD74;
+}
+#bd .navi {
+    /* background: #DDD; */
+}
+#bd .navi h2 {
+    margin: 0 0 10px 0;
+    color: #880000; 
+    font-size: 131%;
+    /* font-size: 146.5%; */
+    font-weight: bold;
+}
+#bd .navi h2 a {
+    text-decoration: none;
+    color: #880000;
+}
+#bd .navi h2 a:hover {
+    border-bottom: 1px dotted #880000;
+}
+#bd .navi h3 {
+    margin: 20px 0 10px 0;
+    color: #0085FE; 
+    font-size: 116%;
+    border-bottom: 1px solid #0085FE;
+    padding-bottom: 3px;
+}
+#bd .navi h4 {
+    margin: 20px 0 10px 0;
+    font-size: 108%;
+    color: #0085FE; 
+    border-left: 7px solid #0085FE;
+    padding-left: 7px;
+}
+#bd .navi p {
+    padding: 0;
+    margin-bottom: 0.7em;
+}
+#bd .navi blockquote {
+    background: #FCE083;
+    margin: 20px;
+    padding: 10px;
+}
+#bd .navi pre {
+    font-family: monospace;
+    background: #DDD;
+    margin: 20px;
+    padding: 10px;
+    overflow-x: auto;
+    font-size: 85%;
+}
+* html #bd .navi pre {
+    width: 87%;
+}
+#bd .navi ul,
+#bd .navi ol {
+    margin: 20px 40px 10px 40px;
+}
+#bd .navi dl {
+    margin: 20px;
+}
+#bd .navi dt {
+    font-weight: bold;
+}
+#bd .navi dd {
+    margin: 5px 10px 15px 20px;
+}
+#bd .navi .head {
+    background: #0085FE url( ../img/blue_grad.gif ) repeat-x;
+    padding: 5px;
+    color: #0058a8;
+    font-size: 75%;
+    *font-size: 65%;
+}
+#bd .navi .head a {
+    color: #0058a8;
+    border-bottom: 1px dotted #0058a8;
+}
+#bd .navi .head a:hover {
+    background: #0058a8;
+    color: #FFF;
+}
+#bd .navi .back {
+    font-size: 77%;
+    text-align: right;
+    margin: 10px 0 20px 0;
+}
+#bd .navi .cont {
+    margin-top: 5px;
+    margin-bottom: 5px;
+    padding: 15px;
+    border: 1px solid #999;
+}
+#bd .navi .foot {
+    text-align: right;
+    font-size: 85%;
+}
+#bd .navi .scroll {
+    overflow-y: auto;
+}
+#bd .navi .keyword-search {
+    /* background: #DDD; */
+    margin: 30px 30px 10px 30px;
+}
+#bd .navi .keyword-search input {
+    padding: 5px;
+    margin-right: 5px;
+    width: 12em;
+    font-size: 100%;
+}
+#bd .navi .keyword-search button {
+    margin: 0;
+    padding: 0;
+    width: 40px;
+}
+#bd .navi #form_options select,
+#bd .navi #form_options_tour select {
+    font-size: 77%;
+}
+#bd .navi #form_options li,
+#bd .navi #form_options_tour li {
+    list-style-type: none;
+}
+#bd .navi .cmnt {
+    display: block;
+    font-size: 77%;
+    color: #999;
+    margin-top: 5px;
+}
+#bd .navi .stat {
+    margin-top: 0;
+    margin-bottom: 5px;
+    font-size: 77%;
+}
+#bd .navi .pager {
+    margin-top: 0;
+    font-size: 83%;
+}
+#bd .navi .loading {
+    font-size: 80%;
+    color: #999;
+}
+#bd .navi .subtitle {
+    margin: 0;
+    font-size: 77%;
+    color: #999;
+}
+#bd .navi .result-list {
+    margin-right: 0px;
+    margin-left:  0px;
+}
+#bd .navi .result-list li {
+    list-style-type: none;
+    padding: 5px;
+}
+#bd .navi .result-list li.stripe {
+    background: #EEE;
+}
+#bd .navi .result-list .seq {
+    font-size:65%;
+    color:#666;
+}
+#bd .navi #tour-desc {
+    font-size: 90%;
+}
+#bd .navi #tour-desc h4 {
+    margin: 15px 0 15px;
+    color: #999;
+    font-size: 90%;
+}
+#bd .navi #tour-desc p {
+    margin: 10px 20px;
+}
+#bd .navi #tour-desc .out-link {
+    margin-top: 0px;
+    font-size: 90%;
+    text-align: right;
+}
+#bd .navi .note p {
+    color: #999;
+    font-size: 77%;
+    text-align: right;
+    margin: 10px 0 0 0;
+}
+#bd .navi .keycrowd {
+    margin: 20px 10px;
+    margin-bottom: 0;
+    font-size: 100%;
+    font-weight: bold;
+}
+#bd .navi .keycrowd a {
+    /* color: #0085FE; */
+}
+#bd .map p {
+    margin: 0;
+}
+#bd .map ul {
+    margin: 10px 0 15px 20px;
+}
+#bd .map h2 {
+    margin: 0 0 10px 0;
+    color: #880000; 
+    /* font-size: 131%; */
+    font-size: 146.5%;
+}
+#bd .map .head {
+    background: #0085FE;
+    padding: 5px;
+    color: #FFF;
+    font-size: 85%;
+}
+#bd .map .cont {
+    margin: 5px 0 5px 0;
+    /* padding: 10px; */
+    /* border: 1px solid #999; */
+}
+#bd #vearth {
+    height: 450px;
+    background: #000;
+    color: #FFF;
+}
+#bd #vearth .pin {
+    display: block;
+    font-size: 12px;
+    font-weight: bold;
+    text-align: center;   
+}
+#bd #vearth a {
+    color: #0058A8;
+}
+#bd #vearth a:hover {
+    color: #3CA3FF;
+    background: none;
+}
+#ft {
+    background: #999 url( ../img/gray_grad.gif ) repeat-x; 
+    color: #FFF;
+    font-size: 90%;
+    text-align: right;
+    border: 1px solid #333;
+    line-height: 130%;
+}
+#ft .inner {
+    padding: 5px;
+}
+#ft p {
+    margin: 0;
+}
+#ft a {
+    color: #FFF;
+    text-decoration: none;
+}
+#ft a:hover {
+    border-bottom: 1px dotted #FFF;
+}
+#doc3 ul.mb li {
+    margin-bottom: 10px;
+}
+
+/* jquery.tooltip */
+#tooltip {
+    position: absolute;
+    z-index: 3000;
+    border: 1px solid #0058a8; 
+    background-color: #0085FE;
+    color: #FFF;
+    padding: 5px;
+    opacity: 0.80;
+    font-size: 77%;
+}
+#tooltip h3, #tooltip div {
+    font-weight: normal;
+    margin: 0;
+}
+#tooltip.tips {
+    text-align: left;
+    font-size: 100%;
+}
+
+/* virtual earth auto insert div's */
+.ero {
+    top: 0px;
+    left: 0px;
+}
+.ero-progressAnimation {
+    top: 0px;
+    left: 0px;
+}
+.ero a {
+    color: #A46702;
+    text-decoration: none;
+}
+.ero a:hover {
+    background: #FCDD74;
+}
+.ero .ero-body {
+    width: 360px;
+}
+.ero .VE_Pushpin_Popup_Title {
+    background:#0085FE;
+    color:#FFF;
+    padding:5px;
+    margin:-5px 0 15px 0;
+    font-size: 80%;
+    font-family: 'メイリオ', 'Meiryo';
+}
+.ero .VE_Pushpin_Popup_Body {
+    text-align:left;
+    margin:0;
+    font-family: 'メイリオ', 'Meiryo';
+}
+.ero .ero-previewArea .desc {
+    font-size: 115%;
+    line-height: 150%;
+    margin: 10px 0;
+    padding: 0;
+}
+.ero .ero-previewArea div.firstChild {
+    margin: 10px;
+}

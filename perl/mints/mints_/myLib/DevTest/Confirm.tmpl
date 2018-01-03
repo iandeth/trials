@@ -1,0 +1,14 @@
+<HTML>
+<BODY>
+[% in.text1 %]<br />
+[% in.text2 %]<br />
+[% in.text3 %]<br />
+[% in.check1.join(', ') %]<br />
+[% in.tarea | html_line_break %]<br />
+<form action="[% view.urlApp %]/Complete" method="post">
+<input type="submit" name="back" value="back" />
+<input type="submit" value="complete" />
+[% HIDDEN %]
+</form>
+</BODY>
+</HTML>

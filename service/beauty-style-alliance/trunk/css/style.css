@@ -1,0 +1,62 @@
+/* each photos */
+#results {
+    width: 740px;
+}
+#results .each-style {
+    float: left;
+    padding: 0 14px 0 15px;
+    border-right: 1px solid #CCC;
+}
+#results .at-begin {
+    padding-left: 0;
+}
+#results .at-wrap {
+    padding-right: 0;
+    border-right: none;
+}
+#results .each-style .desc {
+    margin: 5px 0 0 0;
+}
+#results .each-style img {
+    border: 0;
+}
+#results .each-style .photo img {
+    width: 154px;
+    height: 205px;
+    border: 4px solid #FFF;
+}
+#results .each-style .photo .img-hover {
+    border: 4px solid #A5194A;
+}
+
+/* jquery.tooltip */
+#tooltip {
+    position: absolute;
+    border: 1px solid #666;
+    background: #FFF;
+    color: #666;
+    padding: 5px;
+    opacity: 0.9;
+    width: 12em;
+    font-size: 0.7em;
+}
+#tooltip h3, #tooltip div {
+    font-weight: normal;
+    margin: 0;
+    font-size: 1em;
+}
+#tooltip.tips {
+    text-align: left;
+}
+
+/* layout clearfix */
+.clearfix:after {
+    content: "";
+    display: block;
+    clear: both;
+}
+.clearfix {display: inline-block;}
+/* Hides from IE-mac \*/
+* html .clearfix {height: 1%;}
+.clearfix {display: block;}
+/* End hide from IE-mac */

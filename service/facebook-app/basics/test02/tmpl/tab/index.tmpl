@@ -1,0 +1,160 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="ja" lang="ja">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.6.1/jquery.min.js"></script>
+    <link rel="stylesheet" type="text/css" media="all" href="../../css/main.css">
+</head>
+<body>
+    <div id="fb-root"></div>
+    <script src="//connect.facebook.net/ja_JP/all.js"></script>
+    <script>
+    var app_id  = '[% fb.app_id | html %]';
+    FB.init({
+        appId  : app_id,
+        status : false,  // check login status
+        cookie : false,  // enable cookies to allow the server to access the session
+        xfbml  : false   // parse XFBML
+    });
+    FB.Canvas.setAutoResize();
+    </script>
+    <h1>Tab App の検証 - Server Side 実装</h1>
+    <h2 class="first">情報取得</h2>
+    <div class="case">
+        <h3>1. Fan Page 内アプリタブの permalink</h3>
+        <div class="sample">
+            <div>
+                <a href="[% fb.tab_app_url | html %]">[% fb.page_info.name | html %]</a>
+            </div>
+        </div>
+        <p class="result ok">
+        Graph API /page_id
+        </p>
+    </div>
+    <div class="case">
+        <h3>2. 許可済みユーザー情報</h3>
+        <div class="sample">
+        [% IF fb.is_auth_user %]
+            <div>[% fb.user_info.name | html %]</div>
+        [% ELSE %]
+            <div class="memo">パーミッション未取得</div>
+        [% END %]
+        </div>
+        <p class="result ok">
+        Graph API /user_id
+        </p>
+    </div>
+    <div class="back_to_top"><a href="#">back to top</a></div>
+
+    <h2>ユーザーのウォールに投稿</h2>
+    <div class="case">
+        <h3>1. アプリから任意内容を自動投稿 - link + message のみ</h3>
+        <div class="sample">
+            <form action="" target="_parent">
+            <input type="hidden" name="do" value="share_via_app"/>
+            <input type="submit" value="シェア via アプリ"/>
+            </form>
+        </div>
+        <p class="result ok">
+        Graph API /user_id/feed へ POST
+        </p>
+        <p class="result warn">
+        ただし link 先を canvas url にするとタイトルが変になる、<br/>
+        page tab url にすると 'facebook.com' としか表示されない<br/>
+        </p>
+    </div>
+    <div class="case">
+        <h3>2. アプリから任意内容を自動投稿 - link + message + name ほか全部</h3>
+        <div class="sample">
+            <form action="" target="_parent">
+            <input type="hidden" name="do"    value="share_via_app"/>
+            <input type="hidden" name="extra" value="1"/>
+            <input type="submit" value="シェア via アプリ"/>
+            </form>
+        </div>
+        <p class="result ok">
+        Graph API /user_id/feed へ POST
+        </p>
+    </div>
+    <div class="back_to_top"><a href="#">back to top</a></div>
+
+    <h2>友達のウォールに投稿</h2>
+    <div class="case">
+        <h3>1. アプリから任意内容を自動投稿</h3>
+        <div class="sample">
+        [% IF fb.is_auth_user %]
+            <form action="" target="_parent">
+            <select name="friend_id">
+                [% FOREACH f IN fb.user_friends %]
+                <option value="[% f.id | html %]">[% f.name | html %]</option>
+                [% END %]
+            </select><br />
+            <input type="hidden" name="do" value="share_via_app_to_friend_wall"/>
+            <input type="submit" value="シェア via アプリ"/>
+            </form>
+        [% ELSE %]
+            <div class="memo">パーミッション未取得</div>
+        [% END %]
+        </div>
+        <p class="result ok">
+        Graph API /user_id/feed へ POST
+        </p>
+    </div>
+    <div class="case">
+        <h3>2. modal dialog でコメントいれさせる</h3>
+        <div class="sample">
+            <p class="memo">JS 版と実装同じ: FB.ui('feed',...)</p>
+        </div>
+    </div>
+    <div class="back_to_top"><a href="#">back to top</a></div>
+
+    <h2>アプリを介さず、投稿先を指定してウォール投稿</h2>
+    <div class="case">
+        <h3>1. window.open 作戦</h3>
+        <div class="sample">
+            <p class="memo">JS 版と実装同じ: sharer.php</p>
+        </div>
+    </div>
+    <div class="back_to_top"><a href="#">back to top</a></div>
+
+    <h2>ページ wall への投稿</h2>
+    <div class="case">
+        <h3>1. 自動投稿 - 今ログイン中のユーザーとして投稿</h3> 
+        [% IF fb.is_auth_user %]
+        <div class="sample">
+            <form action="" target="_parent">
+            <input type="hidden" name="do" value="post_to_page_wall_as_viewer"/>
+            <input type="submit" value="ページ wall へ投稿" />
+            </form>
+        </div>
+        [% ELSE %]
+            <p class="memo">JS版と違ってパーミッションが必要</p>
+        [% END %]
+        <p class="result ok">
+        Graph API /page_id/feed へ POST。
+        JS 版で出来なかった事が permission 取れば出来た。
+        </p>
+    </div>
+    <div class="case">
+        <h3>2. 自動投稿 - ページ名義で投稿</h3> 
+        <div class="sample">
+        [% IF fb.signed_request.page.admin %]
+            <form action="" target="_parent">
+            <input type="hidden" name="do" value="post_to_page_wall_as_page_account"/>
+            <input type="submit" value="ページ wall へ投稿" />
+            </form>
+        [% ELSE %]
+            <p class="memo">ページ管理者じゃないと駄目</p>
+        [% END %]
+        </div>
+        <p class="result ok">
+        manage_pages 権限獲得できていれば Graph API /page_id/feed で OK
+        </p>
+    </div>
+    <div class="back_to_top"><a href="#">back to top</a></div>
+
+    <h2>サーバ側 デバッグ情報</h2>
+    [% fb.dump_env_as_html( ses=>ses ) %]
+    <div class="back_to_top"><a href="#">back to top</a></div>
+</body>
+</html>

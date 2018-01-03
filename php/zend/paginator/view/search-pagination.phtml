@@ -1,0 +1,30 @@
+<!--
+See http://developer.yahoo.com/ypatterns/pattern.php?pattern=searchpagination
+-->
+ 
+<?php if ($this->pageCount): ?>
+<div class="paginationControl">
+<!-- Previous page link -->
+<?php if (isset($this->previous)): ?>
+  <a href="<?= '?page=' . $this->previous ?>">&lt; 前へ</a> |
+<?php else: ?>
+  <span class="disabled">&lt; 前へ</span> |
+<?php endif ?>
+ 
+<!-- Numbered page links -->
+<?php foreach ($this->pagesInRange as $page): ?>
+  <?php if ($page != $this->current): ?>
+    <a href="<?= '?page=' . $page ?>"><?= $page; ?></a> |
+  <?php else: ?>
+    <?= $page; ?> |
+  <?php endif ?>
+<?php endforeach ?>
+ 
+<!-- Next page link -->
+<?php if (isset($this->next)): ?>
+  <a href="<?= '?page=' . $this->next ?>">次へ &gt;</a>
+<?php else: ?>
+  <span class="disabled">次へ &gt;</span>
+<?php endif ?>
+</div>
+<?php endif ?>

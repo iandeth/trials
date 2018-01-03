@@ -1,0 +1,20 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Post:</b>
+  <%= @post_label.post_id %>
+</p>
+
+<p>
+  <b>Label:</b>
+  <%= @post_label.label_id %>
+</p>
+
+<p>
+  <b>Memo:</b>
+  <%= @post_label.memo %>
+</p>
+
+
+<%= link_to 'Edit', edit_post_label_path(@post_label) %> |
+<%= link_to 'Back', post_labels_path %>

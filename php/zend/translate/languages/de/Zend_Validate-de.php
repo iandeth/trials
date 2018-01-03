@@ -1,0 +1,1 @@
+../../../ZendFramework/resources/languages/de/Zend_Validate.php

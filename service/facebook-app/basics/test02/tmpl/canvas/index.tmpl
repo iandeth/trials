@@ -1,0 +1,77 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" 
+    xmlns:og="http://ogp.me/ns#" 
+    xmlns:fb="https://www.facebook.com/2008/fbml"
+    xml:lang="ja" lang="ja">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.6.1/jquery.min.js"></script>
+    <link rel="stylesheet" type="text/css" media="all" href="[% src_root | html %]../../css/main.css">
+
+    <meta property="og:title" content="OG ページタイトルっす。"/>
+    <meta property="og:type" content="article"/>
+    <meta property="og:image" content="http://[% http_host | html %]/trials/facebook-app/basics/img/cola.jpg"/>
+    <meta property="og:url" content="[% permalink | html %]"/>
+    <meta property="og:site_name" content="俺の Facebook ページ"/>
+    <meta property="og:description" content="詳細コンテンツも書けちゃうよ"/>
+</head>
+<body>
+    <div id="fb-root"></div>
+    <script src="//connect.facebook.net/ja_JP/all.js"></script>
+    <script>
+    var app_id  = '[% fb.app_id %]';
+    var session;
+    var me;
+
+    FB.init({
+        appId  : app_id,
+        status : true,  // check login status
+        cookie : true,  // enable cookies to allow the server to access the session
+        xfbml  : true   // parse XFBML
+    });
+
+    FB.Canvas.setAutoResize(1000);
+
+    FB.getLoginStatus(function(res) {
+        console.log( 'getLoginStatus' );
+        if (res.session) {
+            session = res.session;
+            // ユーザー情報を取得
+            FB.api( '/me', function (res2){
+                console.log( 'get user info' );
+                console.log( res2 );
+                me = res2;
+                $('#user-name').append( me.name );
+            });
+        }
+        console.log( res );
+    });
+    </script>
+
+    <h2 style="margin-top:0">動的情報</h2>
+    <div class="case">
+        <h3>GET パラメータ</h3>
+        <div class="sample">
+            page_id: [% page_id | html %]<br/>
+            content: [% content | html %]
+        </div>
+    </div>
+
+    [% IF fb.signed_request.user_id %]
+    <div class="case">
+        <h3>許可済みユーザー情報</h3>
+        <div class="sample">
+            <div id="user-name"></div>
+        </div>
+        <p class="result ok">
+            FB.loginStatus() とか getSession() で取得可
+        </p>
+    </div>
+    [% END %]
+    <div class="back_to_top"><a href="#">back to top</a></div>
+
+    <h2>サーバ側 デバッグ情報</h2>
+    [% fb.dump_env_as_html %]
+    <div class="back_to_top"><a href="#">back to top</a></div>
+</body>
+</html>

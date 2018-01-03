@@ -1,0 +1,83 @@
+## svn ignore setting for new project
+svn propset svn:ignore "*" tmp/cache/models
+svn propset svn:ignore "*" tmp/cache/persistent
+svn propset svn:ignore "*" tmp/cache/views
+svn propset svn:ignore "*" tmp/logs
+svn propset svn:ignore "*" tmp/sessions
+svn propset svn:ignore "*" tmp/tests
+
+## running unit test via shell
+$ ./Console/cake testsuite app Model/Post
+
+## obtain db connection object
+$dbh = $model->getDataSource()->getConnection();
+
+## get image path in view
+<?php echo $this->Html->webroot(IMAGES_URL . '/foo.gif') ?>
+
+## SQL trace in shell/test code
+$model->getDataSource()->showLog();
+
+## Using Sub Queries
+<?php
+    $db = $this->getDataSource();
+    $subq = 'Board.id IN ( ' .
+        'SELECT BoardAdmin.board_id ' .
+        'FROM board_admins AS BoardAdmin ' .
+        'WHERE BoardAdmin.user_id = ' .
+        $db->getConnection()->quote($user_id) . 
+        ' ORDER BY BoardAdmin.sort_order asc' .
+    ')';
+    $conditions[] = $db->expression($subq);
+
+    $rows = $this->find('all', array(
+        'contain' => array('BoardCategory'),
+        'conditions' => $conditions,
+        # 'fields' => array('Board.*', 'BoardCategory.*'),
+    ));
+    ## 実行される SQL はこんな感じ
+    # SELECT 
+    #     Board.*, BoardCategory.*
+    # FROM
+    #     boards AS Board
+    #     LEFT JOIN board_categories AS BoardCategory 
+    #     ON (Board.board_category_id = BoardCategory.id)
+    # WHERE
+    #     Board.id IN ( 
+    #         SELECT BoardAdmin.board_id 
+    #         FROM board_admins AS BoardAdmin 
+    #         WHERE BoardAdmin.user_id = '1'
+    #         ORDER BY BoardAdmin.sort_order asc'
+    #     )
+?>
+
+
+## validation - record exists
+<?php
+    class AppModel:
+    ## 指定された DB レコードが存在するかをチェック
+    ## $this->validate 定義用
+    ## 使い方例: 
+    ## 'board_id' => array(
+    ##     'exists' => array(
+    ##         'rule' => array('validateRecordExists', 'Board'),
+    ##     ),
+    ## )
+    function validateRecordExists($check, $model_name) {
+        $val = array_values($check);
+        $id = $val[0];
+        $m = ClassRegistry::init($model_name);
+        if (!$m)
+            throw new CakeException("Model/$model_name not found");
+        return ($m->field('id', array('id'=>$id)))? true : false;
+    }
+?>
+
+
+## exception test
+<?php
+    public function testUpdateBoardSortOrderForUser_validationError1() {
+        $this->setExpectedException('CakeException', 'user_id is blank');
+        $this->BoardAdmin->updateBoardSortOrderForUser(null, array());
+    }
+?>

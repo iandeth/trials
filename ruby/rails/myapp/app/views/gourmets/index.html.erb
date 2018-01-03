@@ -1,0 +1,23 @@
+<h1>Listing gourmets</h1>
+
+<table>
+  <tr>
+    <th>Name</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @gourmets.each do |gourmet| %>
+  <tr>
+    <td><%= gourmet.name %></td>
+    <td><%= link_to 'Show', gourmet %></td>
+    <td><%= link_to 'Edit', edit_gourmet_path(gourmet) %></td>
+    <td><%= link_to 'Destroy', gourmet, confirm: 'Are you sure?', method: :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Gourmet', new_gourmet_path %>

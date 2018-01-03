@@ -1,0 +1,10 @@
+<h1>guestbook</h1>
+<ul>
+<?php if( $this->guests->count() > 0 ): ?>
+    <?php foreach($this->guests as $g): ?>
+    <li><?= $this->escape($g->user . ' - ' . $g->content) ?>
+    <?php endforeach ?>
+<?php else: ?>
+    <li>なし</li>
+<?php endif ?>
+</ul>

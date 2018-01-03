@@ -1,0 +1,5 @@
+{
+    "red"  : { "keywords": [ "パプリカ", "トマト" ] },
+    "blue" : { "keywords": [ "青空", "海" ] },
+    "green": { "keywords": [ "カエル", "森林" ] }
+}

@@ -1,0 +1,20 @@
+[% WRAPPER 'parts/headerfooter.tmpl' %]
+
+<h2 class="navi">SYSTEM ERROR</h2>
+<div class="entry">
+<div class="honmon">
+<h3>システムエラー</h3>
+[% IF err %]
+	[% IF adm.debug %]
+		[% FOREACH r = err %]<p>[% r %]</p>[% END %]
+	[% ELSE %]
+		<p>指定されたURLは存在しません</p>
+	[% END %]
+[% END %]
+[% FOREACH e = mdl.error %]
+<p style="color:#880000">[% e %]</p>
+[% END %]
+</div><!-- close tag for  id="honmon" -->
+</div><!-- close tag for  id="entry" -->
+
+[% END %]

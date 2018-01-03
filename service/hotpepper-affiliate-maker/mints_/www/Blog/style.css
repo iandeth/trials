@@ -1,0 +1,377 @@
+/* ========================================================== */
+/* 基本設定 */
+/* ========================================================== */
+
+/* HTML BODY設定 */
+body {
+	margin:              0px 0px 0px 0px;
+	background-color:    #848484;
+}
+
+/* ハイパーリンク設定 */
+a {
+	text-decoration:     none;
+	color:               #A46702;
+}
+a:hover {
+	color:               #E79203;
+	text-decoration:     underline;
+}
+
+/* 見出しタグの余計なマージン設定を除去 */
+h1, h2, h3, h4, h5, h6 {
+	margin:              0px 0px 0px 0px;
+	padding:             0px 0px 0px 0px;
+}
+
+/* コンテンツ全体の格納箱 */
+#container {
+	line-height:         100%;
+	margin:              auto;
+	text-align:          left;
+	padding:             0px 0px 0px 0px;
+	width:               650px;
+	background-color:    #FFFFFF;
+	padding:             5px 5px 5px 5px;
+	font-family:         "ヒラギノ角ゴ Pro W3", Tahoma;
+}
+
+/* フォームの余計なマージン設定を除去 */
+form {
+	margin: 0px;
+}
+
+/* フォームのINPUTタグ : 統一設定 */
+input {
+	font-size:           small;
+	color:               #000000;
+}
+
+/* ========================================================== */
+/* サイトヘッダー部分 */
+/* ========================================================== */
+
+/* ヘッダーの格納箱 */
+#banner {
+	background-color:    #444444;
+	padding:             25px 20px 20px 20px;
+	border:              1px solid #505B85;
+}
+
+/* ヘッダー : サイト名 (aとh1両方で定義) */
+#banner a {
+	color:               #FFFFFF;
+	text-decoration:     none;
+}
+#banner a:hover {
+	text-decoration:     underline;
+}
+
+#banner h1 {
+	color:               #FFFFFF;
+	font-weight:          bolder;
+	font-size:           1.4em;
+	padding-bottom:      0.3em;
+}
+
+/* ヘッダー : 詳細コメント */
+#banner .desc {
+	color:               #FFFFFF;
+	font-weight:         normal;
+	font-size:           0.8em;
+	line-height:         130%;
+}
+
+/* ========================================================== */
+/* サイトフッター部分 */
+/* ========================================================== */
+
+/* フッターの格納箱 */
+.footer {
+	float:               left;
+	width:               100%;
+}
+
+.footer .content {
+	margin-top:          5px;
+	padding:             0px;
+	text-align:          right;
+	font-size:           0.8em;
+	color:               #707BA9;
+	line-height:         120%;
+}
+
+
+/* ========================================================== */
+/* 左段コンテンツ */
+/* ========================================================== */
+
+/* 左段コンテンツの格納箱 outer */
+#center {
+	float:               left;
+	width:               100%;
+	overflow:            hidden;
+}
+
+/* 左段コンテンツの格納箱 inner */
+.content {
+	padding:             0px 0px 0px 0px;
+	border:              0px solid #333000;
+	font-size:           0.8em;
+}
+
+/* 日付帯 */
+.content h2 {
+	color:               #FFFFFF;
+	font-size:           0.9em;
+	font-weight:         normal;
+	letter-spacing:      0.1em;
+	border:              0px solid #CCCCCC;
+	background:          #505B85;
+	margin:              5px 0px 5px 0px;
+	padding:             1px 5px 2px 5px;
+}
+
+/* 各エントリのタイトル (iandeth.テンプレートでは不使用) */
+.content h3 {
+	line-height:         110%;
+	color:               #505B90;
+	font-size:           1.5em;
+	font-weight:         bold;
+	margin:              15px 10px 10px 10px;
+}
+
+/* 各エントリの本文 */
+.content p {
+	line-height:         160%;
+	margin:              10px 20px 10px 20px;
+}
+
+/* 各エントリの引用文 */
+.content blockquote {
+	line-height:         160%;
+	background:          #FCE083;
+	margin:              5px 30px 5px 30px;
+	padding:             10px 10px 10px 10px;
+}
+
+/* 各エントリのソース記述文 (preタグ) */
+.content pre {
+	line-height:         140%;
+	background:          #DDDDDD;
+	font-size:           1.0em;
+	border:              1px solid #BBBBBB;
+	margin:              5px 30px 5px 30px;
+	padding:             10px 10px 10px 10px;
+}
+
+/* 各エントリの投稿者情報他 */
+.posted {
+	text-align:          right;
+	font-size:           0.9em;
+}
+
+/* 各エントリの「続きを読む」リンク */
+.extended {
+	font-weight:         bold;
+	font-size:           0.9em;
+}
+
+
+/* ========================================================== */
+/* 右段コンテンツ */
+/* ========================================================== */
+
+/* 右段コンテンツの格納箱 outer */
+#right {
+	float:               left;
+	width:               200px;
+	overflow:            hidden;
+}
+
+/* 右段コンテンツの格納箱 inner */
+.sidebar {
+	padding:             5px 5px 5px 5px;
+	border:              1px solid #91AB36;
+	border-top:          0px;
+	color:               #000000;
+}
+
+/* 各サブコンテンツのヘッダー */
+.sidebar h6 {
+	font-size:           0.65em;
+	font-weight:         normal;
+	color:               #FFFFFF;
+	background-color:    #91AB36;
+	text-align:          center;
+	border:              0px solid #CCCCCC;
+	padding:             1px 5px 2px 5px;
+	margin:              0px 0px 5px 0px;
+}
+
+/* 右段カレンダー */
+#calendar {
+  	line-height:         140%;
+	color:               #666666;
+	font-family:         Georgia;
+	font-size:           0.65em;
+	margin:              5px 5px 5px 5px;
+  	padding:             5px 0px 5px 0px;
+	text-align:          center;
+}
+
+#calendar a {
+	text-decoration:     underline;
+	font-weight:         bold;
+}
+
+/* 右段カレンダー : 表組み定義 */
+#calendar table {
+	padding:             2px;
+	border-collapse:     collapse;
+	border:              0px;
+	width:               100%;
+	text-align:          center;
+}
+
+/* 右段カレンダー : 年月タイトル */
+#calendar caption {
+	text-align:          center;
+	font-weight:         bold;
+	letter-spacing:      0.3em;
+	margin-bottom:       2px;
+	padding-bottom:      2px;
+}
+
+/* 右段カレンダー : 曜日タイトル */
+#calendar th {
+	font-size:           0.5em;
+	font-weight:         normal;
+	border-bottom:       1px solid #999999;
+}
+
+/* 各サブコンテンツの中身 : リストタイプ */
+.sidebar ul {
+	padding:             5px 5px 5px 5px;
+	margin:              5px 5px 5px 5px;
+	font-size:           0.7em;
+	color:               #888888;
+	font-weight:         normal;
+	list-style-type:     none;
+	line-height:         150%;
+}
+.sidebar ul ul {
+	margin:              0px 10px 0px 10px;
+}
+
+/* 各サブコンテンツの中身 : 通常タイプ */
+.link-note {
+	padding:             5px 5px 5px 5px;
+	margin:              5px 5px 5px 5px;
+	font-size:           0.7em;
+	color:               #888888;
+	font-weight:         normal;
+	list-style-type:     none;
+	line-height:         160%;
+}
+
+/* 検索フォームの TEXTBOX（iandeth.オリジナル定義） */
+.sidebar #search{
+	width:               160px;
+	margin:              0px 0px 5px 0px;
+}
+
+/* Syndicate および Powered By */
+#powered {
+	font-size:           0.65em;
+	font-weight:         normal;
+	color:               #000000;
+	text-align:          center;
+	padding:             5px 5px 5px 5px;
+	margin:              5px 5px 5px 5px;
+	text-transform:      uppercase;
+}
+
+
+/* ========================================================== */
+/* 左段コンテンツ : iandeth.オリジナル定義 */
+/* ========================================================== */
+
+/* 日付帯 : ナビゲーション用特殊形 */
+.content .navi {
+	background:          #BBBBBB;
+}
+
+/* 各エントリの格納箱 */
+.entry {
+	margin:              0px 0px 0px 0px;
+	border:              1px solid #CCCCCC;
+}
+
+/* 各エントリのタイトル */
+.entry h1 {
+	line-height:         110%;
+	color:               #505B90;
+	font-size:           1.5em;
+	font-weight:         bold;
+	margin:              15px 10px 10px 10px;
+}
+
+/* 各エントリの本文内 */
+.honmon {
+	padding:             0px 0px 20px 0px;
+}
+
+
+/* 各エントリの本文内 章タイトル */
+.honmon h3 {
+	line-height:         130%;
+	color:               #999999;
+	font-size:           1.2em;
+	font-weight:         bold;
+	border-bottom:       1px solid #CCCCCC;
+	background:          #FFFFFF;
+	padding:             5px 0px 2px 0px;
+	margin:              20px 20px 10px 20px;
+}
+
+/* 各エントリの本文内 強調表現 */
+.entry h4 {
+	line-height:         130%;
+	color:               #666666;
+	font-size:           1.0em;
+	font-weight:         bold;
+    border-left:         3px solid #666666;
+	padding:             0px 0px 0px 5px;
+	margin:              15px 10px 10px 20px;
+}
+/* 各エントリの本文内 リスト記述 */
+.content ul {
+	line-height:         160%;
+	margin:              10px 40px 5px 40px;
+	padding:             5px  10px 5px 10px;
+}
+
+/* 各エントリの本文内 リスト記述(数字) */
+.content ol {
+	line-height:         160%;
+	margin:              10px 50px 5px 50px;
+	padding:             5px  10px 5px 10px;
+}
+
+/* リスト記述 - 各項目ごとに margin-bottom (小) あり */
+.content .mb li {
+	margin-bottom: 0.5em;
+}
+
+/* リスト記述 - 各項目ごとに margin-bottom (大) あり */
+.content .mb2 li {
+	margin-bottom: 1.0em;
+}
+
+/* 左寄せ画像 */
+.content .img_l {
+	float:               left;
+	margin:              0px 10px 0px 0px;
+}
+

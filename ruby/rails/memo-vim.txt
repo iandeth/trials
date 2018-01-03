@@ -1,0 +1,46 @@
+## vim rails plugin
+## https://github.com/tpope/vim-rails
+
+## find & open file
+:find say_controller.rb
+:find say[tab]   # auto-complete
+:find dir/say[tab]
+
+## open controller <> view related|alternate file
+:RV  # with new vertical window
+:AV
+:RT  # with new tab
+:RV
+
+## open specific file
+:Rcontroller say   # say_controller.rb in current window
+:RVcontroller say  # in new vert window
+:RTcontroller say  # in new tab
+:Rmodel
+:Rjavascript
+:Rlayout
+...
+
+## open associated file under cursor
+## def hello => gf on 'hello' => opens view/say/hello.html.erb
+gf
+CTRL-W_f   # open in new window
+CTRL-W_gf  # open in new tab
+
+## open url in browser
+## configure OpenURL first:
+:command -bar -nargs=1 OpenURL :!open -a safari <args>
+## then use:
+:Rpreview [controller/action]
+
+## create ctags to tmp/tags
+:Rtags
+
+## launch webrick in new term window (screen required)
+:Rserver
+
+## show insert mode abbreviation list
+:Rabbrev
+
+## to expand abbreviation,
+## hit CTRL-] after abbrev expression

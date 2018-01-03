@@ -1,0 +1,30 @@
+<p id="notice"><%= notice %></p>
+<p id="notice" style="color:red"><%= alert %></p>
+
+<p>
+  <b>Title:</b>
+  <%= @post.title %>
+</p>
+
+<p>
+  <b>Body:</b>
+  <%= @post.body %>
+</p>
+
+<p>
+  <b>User:</b>
+  <%= @post.user_id %>
+</p>
+
+<p>
+  <b>Category:</b>
+  <%= @post.category_id %>
+</p>
+
+<p>
+  <b>Lock Version:</b>
+  <%= @post.lock_version %>
+</p>
+
+<%= link_to 'Edit', edit_post_path(@post) %> |
+<%= link_to 'Back', posts_path %>

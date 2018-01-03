@@ -1,0 +1,27 @@
+<h1>Listing post_labels</h1>
+
+<table>
+  <tr>
+    <th>Post</th>
+    <th>Label</th>
+    <th>Memo</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @post_labels.each do |post_label| %>
+  <tr>
+    <td><%= post_label.post_id %></td>
+    <td><%= post_label.label_id %></td>
+    <td><%= post_label.memo %></td>
+    <td><%= link_to 'Show', post_label %></td>
+    <td><%= link_to 'Edit', edit_post_label_path(post_label) %></td>
+    <td><%= link_to 'Destroy', post_label, confirm: 'Are you sure?', method: :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Post label', new_post_label_path %>

@@ -1,0 +1,78 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
+    "http://www.w3.org/TR/html4/strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>ツアーを縦に比較デモ - AB-ROAD</title>
+<link rel="stylesheet" type="text/css"
+    href="css/yui.reset-fonts-grids-base.css" />
+<link rel="stylesheet" type="text/css" href="css/style.css" />
+<script type="text/javascript" src="./js/jquery-1.2.1.js"></script>
+<script type="text/javascript" src="./js/jquery.debug.js"></script>
+<script type="text/javascript" src="./js/jquery.form.js"></script>
+<script type="text/javascript" src="./js/jquery.ui.tabs.js"></script>
+<script type="text/javascript" src="./js/jquery.hilightFade.js"></script>
+<script type="text/javascript" src="./js/jquery.history.handler.js"></script>
+<script type="text/javascript" src="./js/jquery.dimensions.js"></script>
+<script type="text/javascript" src="./js/jquery.tooltip.js"></script>
+<script type="text/javascript" src="./js/recruit.ui.page.js"></script>
+<script type="text/javascript" src="./js/myapp.js"></script>
+<script type="text/javascript">
+var api_key = '7b18731dfad050ca';
+//$.debug(1);
+var myapp;
+$( function(){
+    myapp = new MyApp();
+});
+</script>
+</head>
+<body>
+<div id="doc3">
+<div id="hd">
+    <h1>ツアーを縦に比較</h1>
+</div><!-- end hd -->
+<div id="bd">
+    <ul id="tab-ul" class="clearfix">
+        <li><a href="#search">検索</a><span class="mr">&gt;</span></li>
+        <li><a href="#list">一覧</a><span class="mr">&gt;</span></li>
+        <li><a href="#compare">比較</a></li>
+    </ul>
+    <div id="search">
+        <form action="">
+            <input type="text" class="input_text" name="keyword"
+                value="ベルギー" />
+            <input type="hidden" name="key" value="" />
+            <input type="hidden" name="count" value="10" />
+            <input type="hidden" name="start" value="1" />
+            <input type="hidden" name="order" value="1" />
+            <input type="submit" value="検索"/>
+        </form>
+    </div><!-- end search -->
+    <div id="list">
+        <div class="yui-gc">
+        <div id="result-left" class="yui-u first">
+        <div class="inner">
+            <div id="rui-page"></div>
+            <div id="result-list"></div>
+        </div><!-- end inner -->
+        </div><!-- end result-left -->
+        <div id="result-right" class="yui-u">
+        <div class="inner">
+            <div class="head">my clip</div>
+            <div id="myclip"></div>
+            <div id="myclip-btn">
+                <input type="button" value="一覧表で比較"/>
+            </div>
+        </div><!-- end inner -->
+        </div><!-- end result-right -->
+        </div><!-- end yui-gc -->
+    </div><!-- end list -->
+    <div id="compare">
+        <table id="compare-table" class="cmp-table"></table>
+        <table id="sche-table" class="cmp-table"></table>
+        <input type="button" value="○×をつける"/>
+    </div><!-- end compare -->
+</div><!-- end bd -->
+</div><!-- end doc -->
+</body>
+</html>

@@ -1,0 +1,21 @@
+<h1>FlashMessenger Action Helper 使ったサンプル</h1>
+<?php if( $this->fmsgs ): ?>
+    <ul>
+    <?php foreach($this->fmsgs as $m): ?>
+    <li style="color:#880000; font-size:1.2em;">
+        <?= $this->escape($m) ?>
+    </li>
+    <?php endforeach ?>
+    </ul>
+<?php endif ?>
+<?php if( $this->fmsg_set_ok ): ?>
+<p>
+    Flash Message セット成功<br/>
+    <a href="">画面遷移すると初回だけメッセージ出るよ</a>
+</p>
+<?php endif ?>
+<p>
+<form method="POST">
+<input type="submit" name=".flash" value="Flash Message セット"/>
+</form>
+</p>

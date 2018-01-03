@@ -1,0 +1,26 @@
+#!/usr/bin/perl -w
+use strict;
+use FindBin;
+use lib "$FindBin::RealBin/../lib";
+use CGI;
+use CGI::Carp qw/fatalsToBrowser/;
+use Template;
+use Tools::Facebook;
+
+my $cgi = CGI->new;
+my $fb  = Tools::Facebook->new(
+    app_id         => '204952529541782',
+    app_secret     => 'cc28415a30a494373aa93abfd88adca2',
+    signed_request => $cgi->param('signed_request') || '',
+    canvas_url     => 'http://apps.facebook.com/feosodi_test_one/',
+);
+# prepare stash
+my $stash = {
+    fb => $fb,
+};
+# create response HTMl
+print $cgi->header( -charset=>'UTF-8' );
+my $tt= Template->new({
+    INCLUDE_PATH => $FindBin::RealBin,
+});
+$tt->process('tab.tmpl', $stash) || die $tt->error();

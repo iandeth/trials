@@ -1,0 +1,20 @@
+<p id="notice"><%= notice %></p>
+<p id="notice" style="color:red"><%= alert %></p>
+
+<p>
+  <b>Name:</b>
+  <%= @gourmet.name %>
+</p>
+
+<p>
+  <b>Genres:</b>
+  <%= @gourmet.genres.inspect %>
+</p>
+
+<p>
+  <b>Areas:</b>
+  <%= @gourmet.areas.inspect %>
+</p>
+
+<%= link_to 'Edit', edit_gourmet_path(@gourmet) %> |
+<%= link_to 'Back', gourmets_path %>

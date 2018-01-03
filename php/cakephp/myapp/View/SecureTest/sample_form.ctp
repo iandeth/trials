@@ -1,0 +1,1 @@
+<div class="form"><?php echo $this->Form->create(false) ?>    <fieldset>        <legend>CSRF token 付き Form のサンプル</legend>    <?php        echo $this->Form->input('email', array('label'=>'メールアドレス'));    ?>    </fieldset><?php echo $this->Form->end('登録する') ?></div> 

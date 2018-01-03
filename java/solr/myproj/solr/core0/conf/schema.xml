@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!-- http://wiki.apache.org/solr/SchemaXml -->
+<schema name="myproj core0" version="1.4">
+<types>
+  <fieldType name="string" class="solr.StrField" sortMissingLast="true" omitNorms="true"/>
+  <fieldType name="boolean" class="solr.BoolField" sortMissingLast="true" omitNorms="true"/>
+  <fieldtype name="binary" class="solr.BinaryField"/>
+
+  <fieldType name="int" class="solr.TrieIntField" precisionStep="0" omitNorms="true" positionIncrementGap="0"/>
+  <fieldType name="float" class="solr.TrieFloatField" precisionStep="0" omitNorms="true" positionIncrementGap="0"/>
+  <fieldType name="long" class="solr.TrieLongField" precisionStep="0" omitNorms="true" positionIncrementGap="0"/>
+  <fieldType name="double" class="solr.TrieDoubleField" precisionStep="0" omitNorms="true" positionIncrementGap="0"/>
+  <fieldType name="date" class="solr.TrieDateField" omitNorms="true" precisionStep="0" positionIncrementGap="0"/>
+
+  <fieldType name="tint" class="solr.TrieIntField" precisionStep="8" omitNorms="true" positionIncrementGap="0"/>
+  <fieldType name="tfloat" class="solr.TrieFloatField" precisionStep="8" omitNorms="true" positionIncrementGap="0"/>
+  <fieldType name="tlong" class="solr.TrieLongField" precisionStep="8" omitNorms="true" positionIncrementGap="0"/>
+
+  <!-- timezone will be forced as UTC (Z) -->
+  <fieldType name="tdouble" class="solr.TrieDoubleField" precisionStep="8" omitNorms="true" positionIncrementGap="0"/>
+  <fieldType name="tdate" class="solr.TrieDateField" omitNorms="true" precisionStep="6" positionIncrementGap="0"/>
+
+  <fieldType name="text_cjk" class="solr.TextField" positionIncrementGap="100">
+    <analyzer type="index">
+      <tokenizer class="solr.CJKTokenizerFactory"/>
+      <filter class="solr.LowerCaseFilterFactory"/>
+    </analyzer>
+    <analyzer type="query">
+      <tokenizer class="solr.CJKTokenizerFactory"/>
+      <filter class="solr.LowerCaseFilterFactory"/>
+      <filter class="solr.PositionFilterFactory" />
+    </analyzer>
+  </fieldType>
+
+  <fieldType name="random" class="solr.RandomSortField" indexed="true" />
+  <fieldtype name="ignored" stored="false" indexed="false" multiValued="true" class="solr.StrField" />
+  <fieldType name="point" class="solr.PointType" dimension="2" subFieldSuffix="_d"/>
+  <fieldType name="location" class="solr.LatLonType" subFieldSuffix="_coordinate"/>
+  <fieldtype name="geohash" class="solr.GeoHashField"/>
+</types>
+
+<fields>
+  <field name="id" type="string" indexed="true" stored="true" required="true" /> 
+  <field name="name" type="text_cjk" indexed="true" stored="true" required="true" /> 
+  <field name="address" type="text_cjk" indexed="true" stored="true" /> 
+  <field name="area_id" type="int" indexed="true" stored="true" /> 
+  <field name="area_name" type="text_cjk" indexed="true" stored="true" /> 
+  <field name="tag_id" type="int" indexed="true" stored="true" multiValued="true" /> 
+  <field name="tag_name" type="text_cjk" indexed="true" stored="true" multiValued="true" /> 
+  <field name="modified" type="date" indexed="true" stored="true"/>
+  <!-- non-display field for default search, containing all text values -->
+  <field name="search_text" type="text_cjk" indexed="true" stored="false" multiValued="true"/>
+</fields>
+
+<copyField source="name" dest="search_text"/>
+<copyField source="address" dest="search_text"/>
+<copyField source="area_name" dest="search_text"/>
+<copyField source="tag_name" dest="search_text"/>
+
+<uniqueKey>id</uniqueKey>
+
+</schema>

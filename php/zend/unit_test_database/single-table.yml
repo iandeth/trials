@@ -1,0 +1,13 @@
+guestbook:
+  -
+    id: 3
+    user: "ほげ"
+    content: "やっほー"
+  -
+    id: 2
+    user: "bob"
+    content: "I like it!"
+  -
+    id: 1
+    user: "joe"
+    content: "Hello buddy!"

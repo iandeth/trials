@@ -1,0 +1,15 @@
+<h1>お問い合わせ・ご要望フォーム</h1>
+[% IF mdl.error %]
+<p><span style="color:#880000">[% mdl.error | html_line_break | unesc %]</span></p>
+[% ELSE %]
+<p>内容を下記フォームにご記入の上、確認ボタンを押してください。</p>
+[% END %]
+<form method="post" action="[% view.url %]/confirm">
+<h4>お名前</h4>
+<p><input type="text" name="name" style="width:200px" /></p>
+<h4>メールアドレス</h4>
+<p><input type="text" name="email" style="width:200px" /></p>
+<h4>お問い合わせ内容</h4>
+<p><textarea name="naiyou" rows="7" style="width:500px" /></textarea></p>
+<p><input type="submit" value="　確　認　" /></p>
+</form>

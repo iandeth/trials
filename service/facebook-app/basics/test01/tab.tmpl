@@ -1,0 +1,482 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="ja" lang="ja">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.6.1/jquery.min.js"></script>
+    <link rel="stylesheet" type="text/css" media="all" href="../../css/main.css">
+</head>
+<body>
+    <div id="fb-root"></div>
+    <script src="//connect.facebook.net/ja_JP/all.js"></script>
+    <script>
+    var app_id  = '[% fb.app_id %]';
+    var page_id = '[% fb.signed_request.page.id %]';
+    var canvas_url = '[% fb.canvas_url %]';
+    var session;
+    var me;
+    var page;
+
+    FB.init({
+        appId  : app_id,
+        status : true,  // check login status
+        cookie : true,  // enable cookies to allow the server to access the session
+        xfbml  : true   // parse XFBML
+    });
+
+    FB.Canvas.setAutoResize(1000);
+
+    // Page 情報取得
+    // STNDE - FB.api( '139313979453804', function (res){
+    FB.api( page_id, function (res){
+        console.log( 'get page info' );
+        console.log( res );
+        page = res;
+        var linktag = $('<a>' + page.name + '</a>' ).attr( 'href', get_tab_app_uri() );
+        $('#tab-app-uri').append( linktag );
+    });
+
+    FB.api( page_id + '/feed', function (res){
+        console.log( 'get page info - feed' );
+        console.log( res );
+    });
+
+    var sql = 'SELECT name FROM page WHERE page_id = {0}';
+    var q = FB.Data.query(sql, page_id);
+    q.wait(function(rows) {
+        console.log('fql');
+        console.log( rows );
+    });
+
+    $(function (){
+        FB.getLoginStatus(function(res) {
+            console.log( 'getLoginStatus' );
+            if (res.session) {
+                session = res.session;
+                // ユーザー情報を取得
+                FB.api( '/me', function (res2){
+                    console.log( 'get user info' );
+                    console.log( res2 );
+                    me = res2;
+                    $('#user-name').append( me.name );
+                });
+                // 友達の選択プルダウンを作成
+                FB.api( '/me/friends', function (res){
+                    console.log( 'get friends' );
+                    console.log( res );
+                    var sel = $( 'select.friends' );
+                    $.each( res.data, function(i,f){
+                        sel.append(
+                            '<option value="' + f.id + '">' +
+                            f.name + '</option>'
+                        );
+                    });
+                });
+            }
+            console.log( res );
+        });
+
+        // UI event handler 登録
+        $('#share-via-app').click(function(){
+            if( !session ){
+                FB.login(function(res) {
+                    console.log( 'login' );
+                    console.log( res );
+                    if (res.session) {
+                        if (res.perms) {
+                            session = res.session;
+                            console.log( session );
+                            share_via_app();
+                        } else {
+                            alert( '投稿をキャンセルしました' );
+                        }
+                    }
+                }, {
+                    perms: 'read_stream,publish_stream,user_birthday,user_location'
+                });
+                return false;
+            }
+            share_via_app();
+        });
+
+        $('#share-via-app-to-friend-wall').click(function(){
+            var tgt_uid = $( '#friends-list-1' ).val();
+            if( tgt_uid == undefined ){
+                alert( '相手を選んでください' );
+                return;
+            }
+            var args = { 
+                message: '自動投稿だよ'
+            };
+            var path = '/' + tgt_uid + '/feed';
+            if( !session ){
+                FB.login(function(res) {
+                    console.log( 'login' );
+                    console.log( res );
+                    if (res.session) {
+                        if (res.perms) {
+                            session = res.session;
+                            console.log( session );
+                            share_via_app( path, args );
+                        } else {
+                            alert( '投稿をキャンセルしました' );
+                        }
+                    }
+                }, {
+                    perms: 'read_stream,publish_stream,user_birthday,user_location'
+                });
+                return false;
+            }
+            share_via_app( path, args );
+        });
+
+        $('#share-via-user-to-friend-wall').click(function(){
+            var tgt_uid = $( '#friends-list-2' ).val();
+            if( tgt_uid == undefined ){
+                alert( '相手を選んでください' );
+                return;
+            }
+            var link =  get_tab_app_uri() + '&data=foo';
+            FB.ui({
+                method: 'feed',
+                to: tgt_uid,
+                name: 'コンテンツタイトル',
+                link: link,
+                picture: 'http://iandeth.dyndns.org/trials/facebook-app/basics/img/cola.jpg',
+                caption: 'キャプション',
+                description: "詳細テキストだよ",
+                message: 'from -> to メッセージだよ'
+            }, function (res){
+                console.log( 'FB.ui feed to ' +  tgt_uid );
+                console.log( res );
+                if (res && res.post_id) {
+                    alert('ウォールに投稿されました');
+                } else {
+                    console.log('wall post cancelled');
+                }
+            });
+        });
+
+        $('#share-via-user').click(function(){
+            var link =  get_tab_app_uri() + '&data=foo';
+            FB.ui({
+                method: 'feed',
+                name: 'コンテンツタイトル',
+                link: link,
+                picture: 'http://iandeth.dyndns.org/trials/facebook-app/basics/img/cola.jpg',
+                caption: 'キャプション',
+                description: "詳細テキストだよ",
+                message: '',
+                actions: [{ 
+                    name: '回答する',
+                    link: link
+                }]
+            }, function (res){
+                console.log( 'FB.ui feed' );
+                console.log( res );
+                if (res && res.post_id) {
+                    alert('ウォールに投稿されました');
+                } else {
+                    console.log('wall post cancelled');
+                }
+            });
+        });
+
+        $('#post-to-page-wall-as-viewer').click(function(){
+            FB.api('/' + page_id + '/feed', 'post', {
+                message: '自動投稿 - 閲覧中ユーザー名義でページ wall に投稿したよ'
+            }, function(res) {
+                console.log( 'post to page wall' );
+                if (!res || res.error) {
+                    alert( 'ページ wall 投稿に失敗しました' );
+                    console.log( res );
+                } else {
+                    alert( 'ページ wall に投稿しました' );
+                    console.log( res );
+                }
+            });
+        });
+
+        $('#post-to-page-wall-as-page-account').click(function(){
+            FB.api('/' + page_id + '/feed', 'post', {
+                from: page_id,
+                message: '自動投稿 - ページ名義でページ wall に投稿したよ'
+            }, function(res) {
+                console.log( 'post to page wall' );
+                if (!res || res.error) {
+                    alert( 'ページ wall 投稿に失敗しました' );
+                    console.log( res );
+                } else {
+                    alert( 'ページ wall に投稿しました' );
+                    console.log( res );
+                }
+            });
+        });
+
+        $('#post-to-page-wall-as-viewer-dialog').click(function(){
+            FB.ui({
+                method: 'feed',
+                to: page_id,
+                message: 'ダイアログ投稿 - 閲覧中ユーザー名義でページ wall に投稿したよ'
+            }, function(res) {
+                console.log( 'post to page wall' );
+                if (!res || res.error) {
+                    alert( 'ページ wall 投稿に失敗しました' );
+                    console.log( res );
+                } else {
+                    alert( 'ページ wall に投稿しました' );
+                    console.log( res );
+                }
+            });
+        });
+
+        $('#post-to-page-wall-as-page-account-dialog').click(function(){
+            FB.ui({
+                method: 'feed',
+                from: page_id,
+                message: 'ダイアログ投稿 - ページ名義でページ wall に投稿したよ'
+            }, function(res) {
+                console.log( 'post to page wall' );
+                if (!res || res.error) {
+                    alert( 'ページ wall 投稿に失敗しました' );
+                    console.log( res );
+                } else {
+                    alert( 'ページ wall に投稿しました' );
+                    console.log( res );
+                }
+            });
+        });
+    });
+
+    function share_via_app ( path, args ){
+        if( path == undefined )
+            path = '/me/feed';
+        if( args == undefined )
+            args = {};
+        console.log( 'exec ' + path + ' post' );
+        var link =  get_tab_app_uri() + '&data=foo';
+        FB.api( path, 'post', $.extend({
+            name: 'コンテンツタイトル',
+            link: link,
+            picture: 'http://iandeth.dyndns.org/trials/facebook-app/basics/img/cola.jpg',
+            caption: 'キャプション',
+            description: "詳細テキストだよ",
+            message: me.name + ' さんが ×× で ○○ しました。',
+            actions: [{ 
+                name: '回答する',
+                link: link
+            }]
+        }, args ), function(res) {
+            if (!res || res.error) {
+                console.log( '投稿エラー' );
+                console.log( res.error );
+            } else {
+                alert('ウォールに投稿されました');
+            }
+        });
+    }
+
+    function get_tab_app_uri (page_uri, _app_id){
+        if( !page_uri && page)   // if no args, but has global page object...
+            page_uri = page.link;
+        if( !_app_id && app_id)  // same as above
+            _app_id = app_id;
+        return page_uri + '?sk=app_' + app_id;
+    }
+    </script>
+
+    <h1>Tab App の検証</h1>
+    <h2 class="first">情報取得</h2>
+    <div class="case">
+        <h3>1. Fan Page 内アプリタブの permalink</h3>
+        <div class="sample">
+            <div id="tab-app-uri"></div>
+        </div>
+        <p class="result ok">
+            FB.api( page_id ) で取得〜ゴニョゴニョすれば OK
+        </p>
+    </div>
+    [% IF fb.signed_request.user_id %]
+    <div class="case">
+        <h3>2. 許可済みユーザー情報</h3>
+        <div class="sample">
+            <div id="user-name"></div>
+        </div>
+        <p class="result ok">
+            FB.loginStatus() とか getSession() で取得可
+        </p>
+    </div>
+    [% END %]
+    <div class="back_to_top"><a href="#">back to top</a></div>
+
+    <h2>ユーザーのウォールに投稿</h2>
+    <div class="case">
+        <h3>1. アプリから任意内容を自動投稿</h3>
+        <div class="sample">
+            <input type="button" value="シェア via アプリ" id="share-via-app"/>
+        </div>
+        <p class="result ok">
+            Graph API - feed - を使って実現 OK
+        </p>
+    </div>
+    <div class="case">
+        <h3>2. modal dialog でコメントいれさせる</h3>
+        <div class="sample">
+            <input type="button" value="シェア by ユーザー" id="share-via-user"/>
+        </div>
+        <p class="result ok">
+            FB.ui( 'feed' ) を使って実現 OK
+        </p>
+    </div>
+    <div class="back_to_top"><a href="#">back to top</a></div>
+
+    <h2>友達のウォールに投稿</h2>
+    <div class="case">
+        <h3>1. アプリから任意内容を自動投稿</h3>
+        <div class="sample">
+            <select id="friends-list-1" class="friends"></select><br />
+            <input type="button" value="シェア via アプリ" id="share-via-app-to-friend-wall"/>
+        </div>
+        <p class="result ok">
+            Graph API - feed - を使って実現 OK
+        </p>
+    </div>
+    <div class="case">
+        <h3>2. modal dialog でコメントいれさせる</h3>
+        <div class="sample">
+            <select id="friends-list-2" class="friends"></select><br />
+            <input type="button" value="シェア by ユーザー" id="share-via-user-to-friend-wall"/>
+        </div>
+        <p class="result ok">
+            FB.ui( 'feed' ) を使って実現 OK
+        </p>
+    </div>
+    <div class="back_to_top"><a href="#">back to top</a></div>
+
+    <h2>アプリを介さず、投稿先を指定してウォール投稿</h2>
+    <div class="case">
+        <h3>1. window.open 作戦</h3>
+        <div class="sample">
+            <a onclick="window.open('http://www.facebook.com/sharer.php?u=[% fb.canvas_url | html %][% fb.signed_request.page.id | html %]/あ','share','top=300,left=300,width=550,height=350')">
+                <img src="http://iandeth.dyndns.org/trials/facebook-app/basics/img/sharebutton.png">
+            </a>
+        </div>
+        <p class="result ok">
+            sharer.php なるものを window.open するとイケる。<br/>
+            via http://www.facebook.com/ladygaga
+        </p>
+    </div>
+    <div class="back_to_top"><a href="#">back to top</a></div>
+
+    <h2>いいね！</h2>
+    <div class="case">
+        <h3>1. href 指定無しの default 挙動</h3>
+        <div class="sample">
+            <fb:like></fb:like>
+        </div>
+        <p class="result ng">
+            アプリの URL (例 http://creyle.jp/app/index.cgi) に対するいいね！になっちまって NG。
+        </p>
+    </div>
+    <div class="case">
+        <h3>2. page tab app への href 指定</h3>
+        <div class="sample">
+            <fb:like href="http://www.facebook.com/pages/%E5%A4%9C%E4%B8%AD%E3%83%A9%E3%83%BC%E3%83%A1%E3%83%B3%E9%A3%9F%E3%81%B9%E9%9A%8A/158203607563839?sk=app_204952529541782"></fb:like>
+        </div>
+        <p class="result ng">
+            タブアプリの url を指定しても、親のファンページに対するいいね！として認識されてしまい NG。
+        </p>
+    </div>
+    <div class="case">
+        <h3>3. app canvas ビューへの href 指定</h3>
+        <div class="sample">
+            <fb:like href="[% fb.canvas_url | html %][% fb.signed_request.page.id | html %]/あ"></fb:like>
+        </div>
+        <p class="result ok">
+        GET パラメータは使わず PATH_INFO を駆使すれば引数つきの href でいいね！可能。
+        ただし tab app とは別に canvas app も実装する必要あるので手間かかる。
+        </p>
+    </div>
+    <div class="back_to_top"><a href="#">back to top</a></div>
+
+    <h2>コメント</h2>
+    <div class="case">
+        <h3>1. href 指定無しの default 挙動</h3>
+        <div class="sample">
+            <fb:comments width="460"></fb:comments>
+        </div>
+        <p class="result ng">
+            アプリの URL (例 http://creyle.jp/app/index.cgi) に対するコメントになっちまって NG。wall 投稿された後に index.cgi へのリンクになってしまう。
+        </p>
+    </div>
+    <div class="case">
+        <h3>2. page tab app への href 指定</h3>
+        <div class="sample">
+            <fb:comments width="460" href="http://www.facebook.com/pages/%E5%A4%9C%E4%B8%AD%E3%83%A9%E3%83%BC%E3%83%A1%E3%83%B3%E9%A3%9F%E3%81%B9%E9%9A%8A/158203607563839?sk=app_204952529541782"></fb:comments>
+        </div>
+        <p class="result warn">
+            wall 投稿時のリンクは正しく tab app に戻るけど、表示文言がアプリ名では無く、親のファンページ名になってしまいイマイチ △。
+        </p>
+    </div>
+    <div class="case">
+        <h3>3. app canvas ビューへの href 指定</h3>
+        <div class="sample">
+            <fb:comments width="460" href="[% fb.canvas_url | html %][% fb.signed_request.page.id | html %]/あ"></fb:comments>
+        </div>
+        <p class="result ok">
+        GET パラメータは使わず PATH_INFO を駆使すれば引数つきの href でいいね！可能。
+        ただし tab app とは別に canvas app も実装する必要あるので手間かかる。
+        </p>
+    </div>
+    <div class="back_to_top"><a href="#">back to top</a></div>
+
+    <h2>ページ wall への投稿</h2>
+    <div class="case">
+        <h3>1. 自動投稿 - 今ログイン中のユーザーとして投稿</h3> 
+        <div class="sample">
+            <input type="button" value="ページ wall へ投稿" id="post-to-page-wall-as-viewer"/>
+        </div>
+        <p class="result warn">
+        page 管理者ユーザーなら投稿 OK、その他ユーザーは wall の第三者書き込みを許可したページ設定でも NG。
+        </p>
+    </div>
+    <div class="case">
+        <h3>2. 自動投稿 - ページ名義で投稿</h3> 
+        <div class="sample">
+            <input type="button" value="ページ wall へ投稿" id="post-to-page-wall-as-page-account"/>
+        </div>
+        <p class="result warn">
+        page 管理者ユーザーでも無理 (管理者ユーザー名義での投稿になってしまう) NG。
+        ただし page 設定で「閲覧ユーザーの投稿許可」を false 設定した状態で管理人アカウントで投稿するとページ名義になる。
+
+        未検証: 別途 page login access_token 取得すればイケるか
+        </p>
+    </div>
+    <div class="case">
+        <h3>3. ダイアログ表示 - 今ログイン中のユーザーとして投稿</h3> 
+        <div class="sample">
+            <input type="button" value="ページ wall へ投稿" id="post-to-page-wall-as-viewer-dialog"/>
+        </div>
+        <p class="result ng">
+        to: page_id だと何故か invalid 判定されて NG
+        </p>
+    </div>
+    <div class="case">
+        <h3>4. ダイアログ表示 - ページ名義で投稿</h3> 
+        <div class="sample">
+            [% IF fb.signed_request.page.admin %]
+            <input type="button" value="ページ wall へ投稿" id="post-to-page-wall-as-page-account-dialog"/>
+            [% ELSE %]
+            <span style="color:#999">DISABLED - ページの管理者のみ利用可 -</span>
+            [% END %]
+        </div>
+        <p class="result ok">
+        from: page_id で page 管理者ユーザーの場合なら OK
+        </p>
+    </div>
+    <div class="back_to_top"><a href="#">back to top</a></div>
+
+    <h2>サーバ側 デバッグ情報</h2>
+    [% fb.dump_env_as_html %]
+    <div class="back_to_top"><a href="#">back to top</a></div>
+</body>
+</html>

@@ -1,0 +1,48 @@
+
+/************************************/
+/* core                             */
+/************************************/
+* {
+	margin:0px; 
+	padding:0px; 
+	font-style:normal; 
+}
+
+img{border:none;}
+
+h1,h2,h3,h4,h5,h6,ul,li{margin:0px; padding:0px; }
+
+
+
+#area{
+	margin:0 auto;
+	width:810px;
+	}
+	
+ body {
+ text-align:center;
+ background-color:#F5F3EF;
+ 	margin-left: 0px;
+	margin-top: 0px;
+	margin-right: 0px;
+	margin-bottom: 0px;
+}
+.f10 {  font-size: 10px; line-height: 14px; color:#666666; padding:0 0 0 5px; }
+
+.f1002 {  font-size: 10px; line-height: 14px; color:#4B4B4B; }
+
+.f12 {  font-size: 12px; line-height: 18px; color:#4B4B4B; }
+
+.f12pad {  font-size: 12px; line-height: 18px; color:#4B4B4B; padding:5px 0 0 2px; }
+
+.f12w {  font-size: 12px; line-height: 16px; color:#FFFFFF }
+
+.f12allpadding {  font-size: 12px; line-height: 16px; padding:6px 6px 2px 10px}
+
+.f1202 {  font-size: 12px; line-height: 22px; padding:5px 0px 5px 0px}
+
+.f12mid {  font-size: 12px; line-height: 16px;}
+
+.f12blue {  font-size: 12px; line-height: 24px; color:#0066FF}
+
+.f14 {  font-weight: bold; font-size: 13px; line-height: 16px;}

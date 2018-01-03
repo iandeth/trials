@@ -1,0 +1,6 @@
+<h1>JSON レスポンステスト</h1>
+<ul>
+<li>foo: <?= $this->escape($this->foo) ?></li>
+<li>bar: <?= $this->escape(print_r($this->bar,TRUE)) ?></li>
+</ul>
+<a href="<?= $this->url(array('format'=>'json')) ?>">これを JSON レスポンスで</a>

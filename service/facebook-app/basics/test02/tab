@@ -1,0 +1,41 @@
+#!/usr/bin/perl -w
+use strict;
+use FindBin;
+use lib "$FindBin::RealBin/../lib";
+use lib "$FindBin::RealBin/lib";
+use CGI;
+use CGI::Carp qw/fatalsToBrowser/;
+use CGI::Session;
+use Template;
+use Tools::Facebook;
+use App::Tab;
+
+my $cgi = CGI->new;
+my $ses = CGI::Session->new( $cgi );
+$ses->expire('+1h');
+
+my $sr = 'signed_request';
+my $fb = Tools::Facebook->new(
+    app_id         => '116945368394335',
+    app_secret     => 'd4b8cf59672e16edebf63fe524c56a76',
+    signed_request => $cgi->param( $sr ) || $ses->param( $sr ) || '',
+    canvas_url     => 'http://apps.facebook.com/feosodi_test_two/',
+);
+
+## 新たな signed_request が POST されてきていたら
+## session に最新のものを保存
+$ses->param( $sr, $fb->signed_request ) if $cgi->param( $sr );
+
+## resolve & exec action
+my $action = $cgi->param( 'do' ) || 'index';
+my $ctrl = App::Tab->new( cgi=>$cgi, ses=>$ses, fb=>$fb );
+die "no action: $action" if !$ctrl->can($action);
+my $res = $ctrl->$action();
+exit if !$res;
+
+## create response HTMl
+print $ses->header( -charset=>'UTF-8' );
+my $tt= Template->new({
+    INCLUDE_PATH => $FindBin::RealBin,
+});
+$tt->process("tmpl/tab/$action.tmpl", $ctrl) || die $tt->error();

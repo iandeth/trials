@@ -1,0 +1,24 @@
+guestbook:
+  -
+    id: 1
+    user: "joe"
+    content: "Hello buddy!"
+    created: 2010-04-24 17:15:23
+  -
+    id: 2
+    user: "bob"
+    content: "I like it!"
+    created: 
+  -
+    id: 3
+    user: "ほげ"
+    content: "やっほー"
+    created: 2010-04-27 11:54:12
+
+foo:
+  -
+    id: 1
+    text: "あいうえお"
+  -
+    id: 3
+    text: "bar"

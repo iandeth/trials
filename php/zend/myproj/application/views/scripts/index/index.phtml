@@ -1,0 +1,22 @@
+<?php $this->headStyle()->captureStart() ?>
+li { margin-bottom:10px; }
+<?php $this->headStyle()->captureEnd() ?>
+
+<h1>ハロー <?= $this->escape($this->foo) ?></h1>
+<ul>
+<li><a href="<?= $this->url(array('controller'=>'trial','action'=>'session')) ?>">セッション</a>
+<li><a href="<?= $this->url(array('controller'=>'trial','action'=>'canjson')) ?>">JSON レスポンス</a>
+<li><a href="<?= $this->url(array('controller'=>'trial','action'=>'viewjson')) ?>">JSON レスポンス (with JSON view helper)</a>
+<li><a href="<?= $this->url(array('controller'=>'trial','action'=>'actionjson')) ?>">JSON レスポンス (with JSON action helper)</a>
+<li><a href="<?= $this->url(array('controller'=>'trial','action'=>'foo-bar')) ?>">camel なアクション名 URL</a>
+<li><a href="<?= $this->url(array('controller'=>'trial','action'=>'flashm')) ?>">Flash Messenger</a>
+<li><a href="<?= $this->url(array('controller'=>'trial','action'=>'change-view')) ?>">view 切替</a>
+<li><a href="<?= $this->url(array('controller'=>'trial','action'=>'config')) ?>">config 参照</a>
+<li><a href="<?= $this->url(array('controller'=>'trial','action'=>'cache')) ?>">ディスクキャッシュ</a>
+</ul>
+<br/>
+<ul>
+<li><a href="<?= $this->url(array('module'=>'mymod')) ?>">mymod モジュールのトップへ</a>
+<li><a href="<?= $this->baseUrl('/author/') ?>">カスタマイズルート</a>
+<li><a href="<?= $this->baseUrl('/author/bob/293/key1/val1/') ?>">カスタマイズルート + パラメータ</a>
+</ul>

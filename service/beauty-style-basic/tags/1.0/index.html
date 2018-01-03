@@ -1,0 +1,113 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
+    "http://www.w3.org/TR/html4/strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>スタイル検索APIデモ - ビューティー</title>
+<link rel="stylesheet" type="text/css"
+    href="css/yui.reset-fonts-grids-base.css" />
+<link rel="stylesheet" type="text/css" href="css/style.css" />
+<script type="text/javascript" src="./js/jquery-1.2.1.js"></script>
+<script type="text/javascript" src="./js/jquery.debug.js"></script>
+<script type="text/javascript" src="./js/jquery.form.js"></script>
+<script type="text/javascript" src="./js/jquery.ui.tabs.js"></script>
+<script type="text/javascript" src="./js/jquery.hilightFade.js"></script>
+<script type="text/javascript" src="./js/jquery.history.handler.js"></script>
+<script type="text/javascript" src="./js/jquery.dimensions.js"></script>
+<script type="text/javascript" src="./js/jquery.tooltip.js"></script>
+<script type="text/javascript" src="./js/recruit.ui.js"></script>
+<script type="text/javascript" src="./js/beauty.ui.js"></script>
+<script type="text/javascript" src="./js/myapp.js"></script>
+<script type="text/javascript">
+Recruit.UI.key = '7b18731dfad050ca';
+//$.debug(1);
+var myapp;
+$( function(){
+    myapp = new MyApp( Recruit.UI.key );
+});
+</script>
+</head>
+<body>
+<div id="doc3">
+<div id="hd">
+    <h1>スタイル検索APIデモ</h1>
+</div><!-- end hd -->
+<div id="bd">
+    <ul id="tab-ul" class="clearfix">
+        <li><a href="#search">検索</a><span class="mr">&gt;</span></li>
+        <li><a href="#list">一覧</a><span class="mr">&gt;</span></li>
+        <li><a href="#desc">詳細</a></li>
+    </ul>
+    <div id="search" class="each-tab">
+        <form action="">
+            <div class="ui-block">
+                <label>エリア</label>
+                <select id="bty-service-area-sel"></select> ＞
+                <select id="bty-middle-area-sel"></select> ＞
+                <select id="bty-small-area-sel"></select>
+            </div>
+            <div class="ui-block">
+                <label>キーワード</label>
+                <input type="text" name="keyword"/>
+            </div>
+            <div class="ui-block">
+                <label>イメージ</label>
+                <select id="bty-hair-image-sel"></select>
+            </div>
+            <div class="ui-block">
+                <label>髪の長さ</label>
+                <select id="bty-hair-length-sel"></select>
+            </div>
+            <div class="ui-block">
+                <label>髪の量</label>
+                <select id="bty-hair-ryou-sel"></select>
+            </div>
+            <div class="ui-block">
+                <label>髪の質</label>
+                <select id="bty-hair-shitsu-sel"></select>
+            </div>
+            <div class="ui-block">
+                <label>髪の太さ</label>
+                <select id="bty-hair-futosa-sel"></select>
+            </div>
+            <div class="ui-block">
+                <label>髪のクセ</label>
+                <select id="bty-hair-kuse-sel"></select>
+            </div>
+            <div class="ui-block">
+                <label>顔型</label>
+                <select id="bty-hair-kaogata-sel"></select>
+            </div>
+            <div class="ui-block">
+                <label>並び順</label>
+                <select id="bty-order-sel"></select>
+            </div>
+            <div class="ui-block">
+                <label>表示件数</label>
+                <select id="bty-count-sel" name="count">
+                    <option value="10">10</option>
+                    <option value="25" selected="selected">25</option>
+                    <option value="50">50</option>
+                    <option value="100">100</option>
+                </select>
+            </div>
+            <div class="ui-block">
+                <label>&nbsp;</label>
+                <input type="submit" value="検索" />
+            </div>
+            <input type="hidden" name="start" value="1" />
+        </form>
+    </div><!-- end search -->
+    <div id="list" class="each-tab">
+        <div id="rui-page"></div>
+        <div id="result-list"></div>
+        <div id="rui-page-bottom"></div>
+    </div><!-- end list -->
+    <div id="desc" class="each-tab">
+        <div class="photo"></div> 
+        <div class="info"></div> 
+    </div><!-- end desc -->
+</div><!-- end bd -->
+</div><!-- end doc -->
+</body>
+</html>

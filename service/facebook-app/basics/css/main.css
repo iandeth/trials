@@ -1,0 +1,61 @@
+body {
+    font-size: 0.7em;
+    margin: 0 10px 0 0;
+}
+div.case {
+    border: 1px solid #CCC;
+    margin-bottom: 10px;
+    padding: 10px;
+}
+h1 {
+    color: #999;
+    margin-top: 0;
+    font-size: 2.0em;
+}
+h2 {
+    color: #999;
+    background-color: #DDD;
+    padding: 5px;
+    margin-top: 30px;
+}
+h2.first {
+    margin-top: 0px;
+}
+h3 {
+    color: #999;
+    margin: 0 0 20px 0;
+    border-bottom: 1px solid #CCC;
+}
+div.sample {
+    margin: 20px;
+}
+div.sample .memo {
+    color: #999;
+}
+td.label {
+    width: 160px;
+    background-color: #EEE;
+}
+li.btn-list {
+    margin-bottom:10px;
+}
+p.result {
+    margin-bottom: 0px;
+    padding: 5px;
+}
+p.ok {
+    background: #CCFF99;
+    color: #33BB00;
+}
+p.ng {
+    background: #FFD7FF;
+    color: #FF6666;
+}
+p.warn {
+    background: #FFFF66;
+    color: #CC6600;
+}
+div.back_to_top {
+    text-align: right;
+}
+

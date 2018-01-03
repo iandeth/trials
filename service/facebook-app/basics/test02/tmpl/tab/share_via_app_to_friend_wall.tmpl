@@ -1,0 +1,19 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="ja" lang="ja">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link rel="stylesheet" type="text/css" media="all" href="../../css/main.css">
+</head>
+<body>
+    <h1>[% friend_info.name | html %]さんのウォールに投稿しました</h1>
+    <div class="case">
+    <a href="https://www.facebook.com/profile.php?id=[% friend_id | html %]">投稿されたウォールを見る</a><br/>
+    <a href="[% fb.tab_app_url | html %]">Facebook ページに戻る</a>
+    </div>
+    <div class="back_to_top"><a href="#">back to top</a></div>
+
+    <h2>サーバ側 デバッグ情報</h2>
+    [% fb.dump_env_as_html( ses=>ses ) %]
+    <div class="back_to_top"><a href="#">back to top</a></div>
+</body>
+</html>

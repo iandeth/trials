@@ -1,0 +1,105 @@
+##
+## preparation of myproj
+##
+## 1. setup files|directories
+cp -r example myproj
+cd myproj
+rm -rf example* multicore* solr
+ln -s /path/to/myproj/solr
+cd solr/core0/data
+tar xvzf index.tar.gz
+tar xvzf spellchecker.tar.gz
+cd ../../..
+vim solr/core0/conf/solrcore.properties 
+  -> edit dir path
+cd lib
+ln -s /path/to/myproj/lib/mysql-connector-java-5.1.18-bin.jar
+cd ..
+## 2. setup import source mysql database
+cd solr/core0/init
+less database.sql
+  -> copy 'CREATE DATABASE ...' line
+mysql -u root mysql
+mysql> [paste clipboard]
+mysql> \. database.sql
+mysql> exit
+cd ../../..
+## 3. launch jetty webserver
+java -jar start.jar
+open -a safari http://localhost:8983/solr/core0/admin
+## 4. run data import
+http://localhost:8983/solr/core0/dataimport?command=full-import
+
+## delete all
+curl http://localhost:8983/solr/core0/update/?commit=true -H "Content-Type: text/xml" --data-binary '<delete><query>*:*</query></delete>';
+
+## search queries
+http://wiki.apache.org/solr/CommonQueryParameters
+http://wiki.apache.org/solr/QueryParametersIndex
+http://wiki.apache.org/solr/SolrQuerySyntax
+http://wiki.apache.org/solr/SearchHandler
+## - search word
+?q=foo              # 'foo' in default search fields
+?q=foo&df=name      # specify default search field
+?q=id:20            # id == 20
+?q=area_id:1+cat:2  # multiple
+?q=area_id:1+cat:2&q.op=AND  # multiple (specify AND|OR)
+?q=-area_id:3       # area_id other than 3 (negation)
+?q=price:[10 TO *]  # range
+?q=created:[1976-03-06T23:59:59.999Z TO *]  # date range
+## - return fields
+?q=foo&fl=id,name
+?q=foo&fl=*,score  # score = virtual field
+## - sort
+?q=foo&sort=price+asc
+?q=foo&sort=price+asc,title+desc  # multiple
+?q=foo&sort=_docid_+desc  # by id desc
+## - paginate
+?q=foo&start=0&rows=10   # page 1
+?q=foo&start=10&rows=10  # page 2
+## - filter query 
+## - gains performance, because filter queries are cached
+?q=foo&fq=area_id:3              # search by 'foo', and response rows only with area_id=3
+?q=foo&fq=-area_id:3             # area_id other than 3 (negation)
+?q=foo&fq=area_id:3&fq=tag_id:2  # multiple
+?q=foo&fq=price:[1000 TO *]      # range
+## - limit response time
+?q=foo&timeAllowed=1000  # within 1 sec (allow response partial result)
+## - debug
+?q=foo&debugQuery=on
+
+## facet
+## http://www.lucidimagination.com/devzone/technical-articles/faceted-search-solr
+## http://wiki.apache.org/solr/SimpleFacetParameters
+?q=foo&facet=true&facet.field=area_id
+?q=foo&facet=true&facet.field=area_id&facet.field=tag_id  # multiple
+?q=foo&facet=true&facet.field=area_id&facet.mincount=1    # eliminate zero fields
+?q=foo&facet=true&facet.field=area_id&facet.limit=5       # top 5 records only
+## - range facet
+?q=foo&facet=true&facet.query=price:[* TO 100]&facet.query=price:[100 TO 200]&facet.query=[price:200 TO 300]
+# result =>
+#   <lst name="facet_queries">
+#     <int name="price:[* TO 100]">28</int>
+#     <int name="price:[100 TO 200]">54</int>
+#     <int name="price:[200 TO 300]">98</int>
+#   </lst>
+
+## hilighting
+## http://wiki.apache.org/solr/HighlightingParameters
+?q=津田沼&hl=true&hl.fl=name,address,area_name,tag_name
+
+## geo spatial search
+## http://wiki.apache.org/solr/SpatialSearch
+## - with field type: <fieldType name="location" class="solr.LatLonType" />
+?q=foo&fq={!geofilt pt=45.15,-93.85 sfield=location d=5}  # <!-- 5km -->
+## - faster, boundary box search:
+?q=foo&fq={!bbox pt=45.15,-93.85 sfield=location d=5}
+## - sorting by distance
+?q=foo&fq={!bbox}&pt=45.15,-93.85&sfield=location&d=5&sort=geodist()+asc
+## - retrieve distance value
+## - for $version < 4.0: with limitation that q= must only be geodist()
+?q={!func}geodist()&pt=45.15,-93.85&sfield=location&d=5&sort=score+asc
+
+## grouping
+## http://wiki.apache.org/solr/FieldCollapsing
+?q=foo&group=true&group.field=area_name_exact

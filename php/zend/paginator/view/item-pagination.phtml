@@ -1,0 +1,41 @@
+<!--
+See http://developer.yahoo.com/ypatterns/pattern.php?pattern=itempagination
+-->
+ 
+<?php if ($this->pageCount): ?>
+<div class="paginationControl">
+<p>
+全 <?= $this->totalItemCount ?> 件中
+<?= $this->firstItemNumber ?> - <?= $this->lastItemNumber ?> 表示
+</p>
+ 
+<!-- First page link -->
+<?php if (isset($this->previous)): ?>
+  <a href="<?= '?page=' . $this->first ?>">先頭</a> |
+<?php else: ?>
+  <span class="disabled">先頭</span> |
+<?php endif ?>
+ 
+<!-- Previous page link -->
+<?php if (isset($this->previous)): ?>
+  <a href="<?= '?page=' . $this->previous ?>">&lt; 前へ</a> |
+<?php else: ?>
+  <span class="disabled">&lt; 前へ</span> |
+<?php endif ?>
+ 
+<!-- Next page link -->
+<?php if (isset($this->next)): ?>
+  <a href="<?= '?page=' . $this->next ?>">次へ &gt;</a> |
+<?php else: ?>
+  <span class="disabled">次へ &gt;</span> |
+<?php endif ?>
+ 
+<!-- Last page link -->
+<?php if (isset($this->next)): ?>
+  <a href="<?= '?page=' . $this->last ?>">最後</a>
+<?php else: ?>
+  <span class="disabled">最後</span>
+<?php endif ?>
+ 
+</div>
+<?php endif ?>

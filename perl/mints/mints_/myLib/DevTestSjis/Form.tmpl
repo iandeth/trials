@@ -1,0 +1,18 @@
+<HTML>
+<BODY>
+<FORM action="[% view.url %]/confirm" method="post" enctype="multipart/form-data">
+<input type="text" name="text1" /> 
+<b>[% mdl.error.text1 %]</b><br />
+<input type="text" name="text2" /> 
+<b>[% mdl.error.text2 %]</b><br />
+<input type="text" name="text3" /> 
+<b>[% mdl.error.text3 %]</b><br />
+<input type="checkbox" name="check1" value="a"/> a
+<input type="checkbox" name="check1" value="b"/> b
+<input type="checkbox" name="check1" value="c"/> c 
+<b>[% mdl.error.check1 %]</b><br />
+<input type="file" name="tenpu" /><br />
+<input type="submit" value="go" />
+</FORM>
+</BODY>
+</HTML>

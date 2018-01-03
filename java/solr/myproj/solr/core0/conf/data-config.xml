@@ -1,0 +1,18 @@
+<dataConfig>
+    <dataSource driver="com.mysql.jdbc.Driver" 
+        url="jdbc:mysql://localhost:8889/solr_myproj" user="root" password="root" />
+    <document>
+        <entity name="shop" query="SELECT * FROM shops">
+            <entity name="area" query="SELECT * FROM areas WHERE id='${shop.area_id}'" 
+                processor="CachedSqlEntityProcessor">
+                <field column="name" name="area_name" />
+            </entity>
+            <entity name="shop_tag" query="SELECT * FROM shop_tags WHERE shop_id='${shop.id}'">
+                <entity name="tag" query="SELECT * FROM tags WHERE id='${shop_tag.tag_id}'" processor="CachedSqlEntityProcessor">
+                    <field column="name" name="tag_name" />
+                </entity>
+            </entity>
+        </entity>
+    </document>
+</dataConfig>
+

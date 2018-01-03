@@ -1,0 +1,25 @@
+[% WRAPPER 'parts/headerfooter.tmpl' %]
+
+<h2 class="navi">BLOG ENTRY EMULATION</h2>
+<div class="entry">
+<div class="honmon">
+
+<h3>ブログエントリ書き込み</h3>
+<form action="[% view.urlApp %]/confirm" id="f" method="POST">
+<h4>タイトル</h4>
+<p><input type="text" size="50" name="title" value="週末行ったお勧めレストラン" /></p>
+<h4>本文</h4>
+<p><textarea rows="10" style="width:600px;font-size:1.0em" id="honmon" name="honmon">昨日、高校の同窓会で行ったお店が意外に素敵だったのでご紹介します。こじゃれたイタリアンのお店。ミラノに本店を持つ Fitte il Spagno の姉妹店でパスタがどうのこうの、料理は全般的にどうのこうの。ミラノに本店を持つ Fitte il Spagno の姉妹店でパスタがどうのこうの、料理は全般的にどうのこうの。
+</textarea></p>
+
+<h3>アフィリエイト支援ツール</h3>
+<p><a href="#">amazon.co.jp</a>　｜　<a href="#">eBay</a>　｜　<a href="[% view.urlCgi %]/../nouhin/hotpepper/index.html" target="_blank">RECRUIT</a></p>
+
+<h3>最後に体裁を確認</h3>
+<p><input type="submit" value="　確　認　" /></p>
+</form>
+
+</div>
+</div>
+
+[% END %]

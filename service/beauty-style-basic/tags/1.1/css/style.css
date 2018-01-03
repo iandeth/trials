@@ -1,0 +1,123 @@
+#doc3 {
+    background: #FFF;
+    font-size: 123.1%;
+}
+
+/* form */
+#search select {
+    width: 200px;
+}
+#search input[type=text] {
+    padding: 3px;
+    width: 190px;
+}
+#search input[type=submit] {
+    width: 200px;
+}
+#search .ui-block {
+    margin-bottom: 15px;
+}
+#search label {
+    display: block;
+    float: left;
+    width: 7em;
+}
+
+/* result-list */
+#rui-page {
+    margin-bottom: 20px;
+}
+#rui-page-bottom {
+    margin-top: 20px;
+}
+#bd .rui-page-error {
+    color: #FF0000;
+}
+#result-list ol {
+    margin: 0 40px;
+}
+#result-list a.check-on {
+    background: #DDD;
+}
+#result-list li {
+    float: left;
+    margin-left: 10px;
+    list-style-type: none;
+}
+#result-list li.bm {
+    margin-bottom: 10px;
+}
+
+/* desc */
+#desc .photo {
+    float: left;
+    margin-right: 20px;
+}
+#desc .info {
+    float: left;
+    width: 60%;
+}
+#desc .info h2 {
+    margin-top: 0;
+    padding-top: 0;
+}
+#desc .info h3 {
+    margin-top: 30px;
+}
+
+/* jquery.tabs */
+.ui-tabs-hide {
+    display: none;
+}
+ul#tab-ul {
+    margin: 0 0 1em 0;
+}
+ul#tab-ul li {
+    display: block;
+    float: left;
+    margin-right: 10px;
+}
+ul#tab-ul li.ui-tabs-selected a {
+    font-weight: bold;
+    background: #EEE;
+}
+ul#tab-ul li.ui-tabs-disabled a {
+    text-decoration: none;
+    color: #999;
+}
+ul#tab-ul li .mr {
+    margin-left: 10px;
+}
+.each-tab {
+    padding: 10px;
+}
+
+/* jquery.tooltip */
+#tooltip {
+    position: absolute;
+    border: 1px solid #666;
+    background: #999;
+    color: #FFF;
+    padding: 10px;
+    opacity: 1;
+    width: 25em;
+}
+#tooltip h3, #tooltip div {
+    font-weight: normal;
+    margin: 0;
+}
+#tooltip.tips {
+    text-align: left;
+}
+
+/* layout clearfix */
+.clearfix:after {
+    content: "";
+    display: block;
+    clear: both;
+}
+.clearfix {display: inline-block;}
+/* Hides from IE-mac \*/
+* html .clearfix {height: 1%;}
+.clearfix {display: block;}
+/* End hide from IE-mac */

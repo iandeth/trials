@@ -1,0 +1,48 @@
+<%= form_for(@gourmet) do |f| %>
+  <% if @gourmet.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@gourmet.errors.count, "error") %> prohibited this gourmet from being saved:</h2>
+
+      <ul>
+      <% @gourmet.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :name %><br />
+    <%= f.text_field :name %>
+  </div>
+
+  <%
+    ## check_box_tag を使う方式: 1 な key のみ serialize される、
+    ## update action に 1 行追加処理書く必要あり
+  %>
+  <div class="field">
+    <%= f.label :genres %><br />
+    <% Gourmet::GENRES.each do |k,v| %>
+      <%= check_box_tag "gourmet[genres][#{k}]", 1, @gourmet.genres[k.to_sym], id:"genre_#{k}" %>
+      <%= label_tag "genre_#{k}", v %><br/>
+    <% end %>
+  </div>
+
+  <%
+    ## f.check_box を使う方式: 全 key が常に serialize される
+    ## model class 側で method_missing 実装が必要
+  %>
+  <div class="field">
+    <%= f.label :areas %><br />
+    <% Gourmet::AREAS.each do |k,v| %>
+      <%= f.check_box "has_area_#{k}", name:"gourmet[areas][#{k}]", id:"area_#{k}" %>
+      <%= label_tag "area_#{k}", v %><br/>
+    <% end %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
+<%= debug(params) %>
+<%= debug(@gourmet) %>
