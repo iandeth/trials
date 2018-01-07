@@ -1,0 +1,14 @@
+{
+  "name": "protractor-20180108_01-basic",
+  "version": "0.1.0",
+  "description": "",
+  "main": "",
+  "scripts": {
+    "test": ""
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "protractor": "^5.2.2"
+  }
+}
