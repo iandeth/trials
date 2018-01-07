@@ -1,0 +1,16 @@
+{
+  "name": "protractor-20180108_01-basic",
+  "version": "0.1.0",
+  "description": "",
+  "main": "",
+  "scripts": {
+    "test:local-server": "$(npm bin)/webdriver-manager start",
+    "test": "$(npm bin)/protractor conf.js",
+    "test:bs": "$(npm bin)/protractor conf-browserstack.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "protractor": "^5.2.2"
+  }
+}
