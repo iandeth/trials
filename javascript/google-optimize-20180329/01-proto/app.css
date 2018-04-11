@@ -1,0 +1,6 @@
+body { background-color: #EEE }
+#dialog {
+  border: 1px solid #999;
+  padding: 20px;
+  background-color: #FFF;
+}
