@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>FireStore Demo</title>
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script defer src="/__/firebase/6.0.4/firebase-app.js"></script>
+    <script defer src="/__/firebase/6.0.4/firebase-firestore.js"></script>
+    <script defer src="/__/firebase/init.js"></script>
+    <script>
+      var query;
+
+      function initList(app) {
+        var db = app.firestore();
+        query = db.collection('items').limit(2);
+        query.get().then(updateDom);
+
+        var $button = $('#next');
+        $button.on('click', function() {
+          query.get().then(updateDom);
+        });
+      }
+
+      function updateDom(snapShots) {
+        if(snapShots.empty){ 
+          $('#next').hide();
+          return;
+        }
+
+        appendToList(snapShots);
+        $('#next').show();
+
+        var lastDoc = snapShots.docs.slice(-1)[0];
+        console.log('lastDoc', lastDoc.data());
+        query = snapShots.query.startAfter(lastDoc);
+      }
+
+      function appendToList(snapShots) {
+        var $ul = $('#list');
+        snapShots.forEach(function(doc) {
+          var d = doc.data();
+          console.log(doc.id, d);
+          $ul.append('<li>' + doc.id + ': ' + d.name + '</li>');
+        });
+      }
+
+      // main scope
+      $(function() {
+        window.app = firebase.app();
+        initList(app);
+      });
+    </script>
+  </head>
+  <body>
+    <h1>FireStore Demo</h1>
+    <ul id="list"></ul>
+    <button id="next" style="display:none">next page</button>
+  </body>
+</html>
