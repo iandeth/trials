@@ -1,0 +1,12 @@
+{
+  "projects": {
+    "default": "gcal-chousei-20190617"
+  },
+  "targets": {
+    "gcal-chousei-20190617": {
+      "hosting": {
+        "dev": ["gcal-chousei-js-demo-1"]
+      }
+    }
+  }
+}

@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset='utf-8'/>
+    <title>Say hello using the People API</title>
+  </head>
+  <body>
+    <p>Say hello using the People API</p>
+
+    <button id="authorize-button" style="display: none;">Authorize</button>
+    <button id="signout-button" style="display: none;">Sign Out</button>
+    <button id="revoke-button" style="display: none;">Revoke</button>
+
+    <div id="content"></div>
+
+    <script type="text/javascript" src="js/app.js"></script>
+    <script async defer src="https://apis.google.com/js/api.js" onload="this.onload=function(){};handleClientLoad()"></script>
+  </body>
+</html>
