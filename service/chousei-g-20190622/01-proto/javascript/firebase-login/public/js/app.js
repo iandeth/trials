@@ -24,6 +24,7 @@ class App {
 
   run() {
     console.log('app run');
+    new GAPI().init();
     this.initUI();
     this.initSignInCheck();
   }
@@ -34,7 +35,6 @@ class App {
         console.log('signed in', user);
         this.$outBtn.show();
         this.$inBtn.hide();
-        window.user = user;
       } else {
         console.log('signed out')
         this.$outBtn.hide();
@@ -53,6 +53,7 @@ class Auth {
       'https://www.googleapis.com/auth/calendar.events'
     ].join(' '));
     return firebase.auth().signInWithPopup(p).then((res)=> {
+      window.user = res;
       if(res.additionalUserInfo.isNewUser)
         console.log('signup complete', res);
       else
@@ -61,6 +62,27 @@ class Auth {
     }).catch(function(error) {
       console.log('error', error);
       return Promise.reject(error);
+    });
+  }
+}
+
+class GAPI {
+  init() {
+    gapi.load('client:auth2', () => {
+      var apiKey = 'AIzaSyC-cXF7g27RUN5Q10xcHib72-xoyaX3dDQ';
+      var discoveryDocs = ["https://people.googleapis.com/$discovery/rest?version=v1"];
+      var clientId = '1004896667795-calqikba0n9klb1767n1bjsu4monb4n4.apps.googleusercontent.com';
+      var scopes = [
+        'profile',
+        'https://www.googleapis.com/auth/calendar.readonly',
+        'https://www.googleapis.com/auth/calendar.events'
+      ].join(' ');
+      gapi.client.init({
+        apiKey: apiKey,
+        discoveryDocs: discoveryDocs,
+        clientId: clientId,
+        scope: scopes
+      });
     });
   }
 }
