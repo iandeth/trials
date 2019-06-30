@@ -5,10 +5,12 @@ const cors = require('cors')({ origin:true });
 
 admin.initializeApp();
 
-const auth = new google.auth.OAuth2(
-  '1004896667795-calqikba0n9klb1767n1bjsu4monb4n4.apps.googleusercontent.com',
-  'postmessage'
-);
+function getGAuth() {
+  return new google.auth.OAuth2(
+    '1004896667795-calqikba0n9klb1767n1bjsu4monb4n4.apps.googleusercontent.com',
+    'postmessage'
+  );
+};
 
 exports.helloWorld = functions.https.onRequest((req, res) => {
   return cors(req, res, () => {
@@ -36,8 +38,9 @@ exports.addMessage = functions.https.onRequest(async (req, res) => {
 });
 
 exports.getOfflineAccess = functions.https.onRequest(async (req, res) => {
-  var getToken = (code) => {
+  const getToken = (code) => {
     return new Promise((resolve, reject) => {
+      var auth = getGAuth();
       auth.getToken(code, (err, token) => {
         if(err) return reject(err);
         resolve(token);
@@ -54,6 +57,8 @@ exports.getOfflineAccess = functions.https.onRequest(async (req, res) => {
 });
 
 exports.getEventList = functions.https.onRequest(async (req, res) => {
+  // bashi
+  var auth = getGAuth();
   auth.setCredentials({
     //access_token: at
     refresh_token: rt
