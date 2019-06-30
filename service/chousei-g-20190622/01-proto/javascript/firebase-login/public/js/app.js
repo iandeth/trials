@@ -2,6 +2,7 @@ class App {
   constructor() {
     this.$inBtn = $('#signin');
     this.$outBtn = $('#signout');
+    this.$helloBtn = $('#hello');
     this.googleAccessToken = undefined;
     this.googleIdToken = undefined;
   }
@@ -20,10 +21,19 @@ class App {
       firebase.auth().signOut();
       return false;
     }).hide();
+
+    this.$helloBtn.on('click', ()=> {
+      var hello = firebase.functions().httpsCallable('helloWorld');
+      hello().then((r)=> { console.log('hello', r) });
+      return false;
+    });
   }
 
   run() {
     console.log('app run');
+    if(location.hostname.match('localhost|ngrok.io'))
+      firebase.functions().useFunctionsEmulator('http://localhost:5001');
+
     new GAPI().init();
     this.initUI();
     this.initSignInCheck();
@@ -84,5 +94,9 @@ class GAPI {
         scope: scopes
       });
     });
+  }
+
+  getCalEvents() {
+    gapi.client.setToken({ access_token: user.credential.accessToken });
   }
 }

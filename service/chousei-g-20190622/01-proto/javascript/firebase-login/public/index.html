@@ -15,7 +15,7 @@
     <script defer src="/__/firebase/6.2.2/firebase-database.js"></script>
     <script defer src="/__/firebase/6.2.2/firebase-messaging.js"></script>
     <script defer src="/__/firebase/6.2.2/firebase-storage.js"></script>
-    <!-- <script defer src="/__/firebase/6.2.2/firebase-functions.js"></script> -->
+    <script defer src="/__/firebase/6.2.2/firebase-functions.js"></script>
     <!-- initialize the SDK after all desired features are loaded -->
     <script defer src="/__/firebase/init.js"></script>
     <!-- app -->
@@ -51,7 +51,7 @@
 
         try {
           let fapp = firebase.app();
-          let features = ['auth', 'database', 'messaging', 'storage'].filter(feature => typeof fapp[feature] === 'function');
+          let features = ['auth', 'database', 'messaging', 'storage', 'functions'].filter(feature => typeof fapp[feature] === 'function');
           document.getElementById('load').innerHTML = `Firebase SDK loaded with ${features.join(', ')}`;
           app = new App();
           app.run();
