@@ -3,16 +3,42 @@ const admin = require('firebase-admin');
 const { google } = require('googleapis');
 const cors = require('cors')({ origin:true });
 
-admin.initializeApp();
+//console.log(process.env.GOOGLE_APPLICATION_CREDENTIALS);
+admin.initializeApp({
+  credential: admin.credential.applicationDefault()
+});
 
 function getGAuth() {
   return new google.auth.OAuth2(
-    '1004896667795-calqikba0n9klb1767n1bjsu4monb4n4.apps.googleusercontent.com',
+    functions.config().gapi.id,
+    functions.config().gapi.secret,
     'postmessage'
   );
-};
+}
 
-exports.helloWorld = functions.https.onRequest((req, res) => {
+async function verifyCurrentUser(req) {
+  console.log('#verifyIdToken auth header:', req.headers.authorization);
+  if(!req.headers.authorization || !req.headers.authorization.startsWith('Bearer ')) {
+    console.error('#verifyIdToken no bearer header');
+    return;
+  }
+  var token = req.headers.authorization.split('Bearer ')[1];
+  var idt = await admin.auth().verifyIdToken(token);
+  if(!idt) {
+    console.error('#verifyIdToken invalid token');
+    return;
+  }
+  return idt;
+}
+
+async function getCurrentUser(req) {
+  var idt = await verifyCurrentUser(req);
+  if(!idt) return;
+  return await admin.auth().getUser(idt.uid);
+}
+
+exports.helloWorld = functions.https.onRequest(async (req, res) => {
+  var user = await getCurrentUser(req);
   return cors(req, res, () => {
     var data = req.body.data || {};
     var d = {
@@ -20,25 +46,21 @@ exports.helloWorld = functions.https.onRequest((req, res) => {
       q: req.query,
       p: req.params,
       b: req.body,
-      a: data.a
+      a: data.a,
+      u: ((user)? user.toJSON() : undefined)
     };
     res.send({ data:d });
   });
 });
 
-exports.conf = functions.https.onRequest((request, response) => {
-  var c = require("../config/application_default_credentials.json");
-  response.send(JSON.stringify(c));
-});
-
 exports.addMessage = functions.https.onRequest(async (req, res) => {
   const original = req.query.text;
-  const snapshot = await admin.database().ref('/messages').push({original: original});
+  const snapshot = await admin.database().ref('/messages').push({ original: original });
   res.redirect(303, snapshot.ref.toString());
 });
 
 exports.getOfflineAccess = functions.https.onRequest(async (req, res) => {
-  const getToken = (code) => {
+  const getToken = async (code) => {
     return new Promise((resolve, reject) => {
       var auth = getGAuth();
       auth.getToken(code, (err, token) => {
@@ -47,12 +69,16 @@ exports.getOfflineAccess = functions.https.onRequest(async (req, res) => {
       })
     })
   };
-  return cors(req, res, () => {
+  return cors(req, res, async () => {
+    var user = await getCurrentUser(req);
+    if(!user) return res.send('no user found');
+
     var code = (req.body.data || {}).code;
-    getToken(code).then((token) => {
-      var d = { token:token };
-      res.send({ data:d });
-    });
+    if(!code) return res.send('no google auth token found');
+
+    var token = await getToken(code);
+    var d = { token:token, user:user };
+    res.send({ data:d });
   });
 });
 

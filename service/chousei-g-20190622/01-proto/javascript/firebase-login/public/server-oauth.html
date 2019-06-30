@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Welcome to Firebase Hosting</title>
+
+    <!-- external libraries -->
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script defer src="https://apis.google.com/js/api.js"></script>
+    <!-- update the version number as needed -->
+    <script defer src="/__/firebase/6.2.2/firebase-app.js"></script>
+    <!-- include only the Firebase features as you need -->
+    <script defer src="/__/firebase/6.2.2/firebase-auth.js"></script>
+    <script defer src="/__/firebase/6.2.2/firebase-database.js"></script>
+    <script defer src="/__/firebase/6.2.2/firebase-messaging.js"></script>
+    <script defer src="/__/firebase/6.2.2/firebase-storage.js"></script>
+    <script defer src="/__/firebase/6.2.2/firebase-functions.js"></script>
+    <!-- initialize the SDK after all desired features are loaded -->
+    <script defer src="/__/firebase/init.js"></script>
+    <!-- app -->
+    <link rel="stylesheet" media="screen" href="style/base.css">
+    <script defer src="js/app-server-oauth.js"></script>
+  </head>
+  <body>
+    <div id="message">
+      <h2>Welcome</h2>
+      <a href="" id="signup">signup with google</a>
+      <br>
+      <a href="" id="signout">sign out</a>
+      <br>
+      <a href="" id="hello">hello</a>
+    </div>
+    <p id="load">Firebase SDK Loading&hellip;</p>
+
+    <script>
+      $(() => {
+        try {
+          let fapp = firebase.app();
+          let features = ['auth', 'database', 'messaging', 'storage', 'functions'].filter(feature => typeof fapp[feature] === 'function');
+          document.getElementById('load').innerHTML = `Firebase SDK loaded with ${features.join(', ')}`;
+          app = new App();
+          app.run();
+          window.app = app;
+        } catch (e) {
+          console.error(e);
+          document.getElementById('load').innerHTML = 'Error loading the Firebase SDK, check the console.';
+        }
+      });
+    </script>
+  </body>
+</html>
