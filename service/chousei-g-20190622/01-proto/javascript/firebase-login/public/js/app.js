@@ -2,6 +2,7 @@ class App {
   constructor() {
     this.$inBtn = $('#signin');
     this.$outBtn = $('#signout');
+    this.$offlineBtn = $('#offline');
     this.$helloBtn = $('#hello');
     this.googleAccessToken = undefined;
     this.googleIdToken = undefined;
@@ -22,9 +23,17 @@ class App {
       return false;
     }).hide();
 
+    this.$offlineBtn.on('click', ()=> {
+      new GAPI().grantOfflineAccess().then((code) => {
+        var goa = firebase.functions().httpsCallable('getOfflineAccess');
+        goa({ code:code }).then((r)=> { console.log('offline cf', r) });
+      });
+      return false;
+    }).hide();
+
     this.$helloBtn.on('click', ()=> {
       var hello = firebase.functions().httpsCallable('helloWorld');
-      hello().then((r)=> { console.log('hello', r) });
+      hello({ a:1, b:2 }).then((r)=> { console.log('hello', r) });
       return false;
     });
   }
@@ -44,10 +53,12 @@ class App {
       if(user) {
         console.log('signed in', user);
         this.$outBtn.show();
+        this.$offlineBtn.show();
         this.$inBtn.hide();
       } else {
         console.log('signed out')
         this.$outBtn.hide();
+        this.$offlineBtn.hide();
         this.$inBtn.show();
       }
     });
@@ -96,7 +107,10 @@ class GAPI {
     });
   }
 
-  getCalEvents() {
-    gapi.client.setToken({ access_token: user.credential.accessToken });
+  grantOfflineAccess() {
+    return gapi.auth2.getAuthInstance().grantOfflineAccess().then((res) => {
+      console.log('offline', res);
+      return Promise.resolve(res.code);
+    });
   }
 }

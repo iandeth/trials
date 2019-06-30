@@ -5,9 +5,22 @@ const cors = require('cors')({ origin:true });
 
 admin.initializeApp();
 
+const auth = new google.auth.OAuth2(
+  '1004896667795-calqikba0n9klb1767n1bjsu4monb4n4.apps.googleusercontent.com',
+  'postmessage'
+);
+
 exports.helloWorld = functions.https.onRequest((req, res) => {
   return cors(req, res, () => {
-    res.send({ data:"Hello from Firebase!" });
+    var data = req.body.data || {};
+    var d = {
+      t: "Hello from Firebase!",
+      q: req.query,
+      p: req.params,
+      b: req.body,
+      a: data.a
+    };
+    res.send({ data:d });
   });
 });
 
@@ -22,20 +35,32 @@ exports.addMessage = functions.https.onRequest(async (req, res) => {
   res.redirect(303, snapshot.ref.toString());
 });
 
-exports.gapiToken = functions.https.onRequest(async (request, response) => {
-  const auth = new google.auth.OAuth2(
-    '1004896667795-calqikba0n9klb1767n1bjsu4monb4n4.apps.googleusercontent.com',
-    'ccfzQk5keLPA8VxyllA0nx6M',
-    'postmessage'
-  );
-  const rt = '';
-  const at = '';
+exports.getOfflineAccess = functions.https.onRequest(async (req, res) => {
+  var getToken = (code) => {
+    return new Promise((resolve, reject) => {
+      auth.getToken(code, (err, token) => {
+        if(err) return reject(err);
+        resolve(token);
+      })
+    })
+  };
+  return cors(req, res, () => {
+    var code = (req.body.data || {}).code;
+    getToken(code).then((token) => {
+      var d = { token:token };
+      res.send({ data:d });
+    });
+  });
+});
 
+exports.getEventList = functions.https.onRequest(async (req, res) => {
   auth.setCredentials({
     //access_token: at
     refresh_token: rt
   });
   const cal = google.calendar({ version:'v3', auth:auth });
   const events = await cal.events.list({ calendarId:'primary' });
-  response.send(events.data);
+  return cors(req, res, () => {
+    res.send({ data:events.data });
+  });
 });
