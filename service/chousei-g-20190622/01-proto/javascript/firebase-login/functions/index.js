@@ -17,7 +17,7 @@ function getGAuth() {
 }
 
 async function verifyCurrentUser(req) {
-  console.log('#verifyIdToken auth header:', req.headers.authorization);
+  //console.log('#verifyIdToken auth header:', req.headers.authorization);
   if(!req.headers.authorization || !req.headers.authorization.startsWith('Bearer ')) {
     console.error('#verifyIdToken no bearer header');
     return;
