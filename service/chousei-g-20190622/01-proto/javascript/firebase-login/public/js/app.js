@@ -23,14 +23,14 @@ class App {
 
     this.$offlineBtn.on('click', ()=> {
       this.gapi.grantOfflineAccess().then((code) => {
-        var goa = firebase.functions().httpsCallable('getOfflineAccess');
+        var goa = firebase.functions().httpsCallable('user_getOfflineAccess');
         goa({ code:code }).then((r)=> { console.log('offline cf', r) });
       });
       return false;
     }).hide();
 
     this.$helloBtn.on('click', ()=> {
-      var hello = firebase.functions().httpsCallable('helloWorld');
+      var hello = firebase.functions().httpsCallable('misc_helloWorld');
       hello({ a:1, b:2 }).then((r)=> { console.log('hello', r) });
       return false;
     });
