@@ -17,7 +17,7 @@ class GAPI {
     return new Promise((resolve, reject) => {
       this.getAuth().getToken(code, (err, token) => {
         if(err) return reject(err);
-        resolve(token);
+        return resolve(token);
       })
     })
   }
@@ -28,20 +28,20 @@ class CurrentUser {
     //console.log('#verifyIdToken auth header:', req.headers.authorization);
     if(!req.headers.authorization || !req.headers.authorization.startsWith('Bearer ')) {
       console.error('#verifyIdToken no bearer header');
-      return;
+      return undefined;
     }
-    var token = req.headers.authorization.split('Bearer ')[1];
-    var idt = await admin.auth().verifyIdToken(token);
+    let token = req.headers.authorization.split('Bearer ')[1];
+    let idt = await admin.auth().verifyIdToken(token);
     if(!idt) {
       console.error('#verifyIdToken invalid token');
-      return;
+      return undefined;
     }
     return idt;
   }
 
   static async get(req) {
-    var idt = await this.verify(req);
-    if(!idt) return;
+    let idt = await this.verify(req);
+    if(!idt) return undefined;
     return await admin.auth().getUser(idt.uid);
   }
 }

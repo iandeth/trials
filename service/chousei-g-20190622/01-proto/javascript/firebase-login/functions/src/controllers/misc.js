@@ -4,10 +4,10 @@ const admin = require('firebase-admin');
 const utils = require('../utils');
 
 class Misc {
-  static async helloWorld(req, res) {
-    var user = await utils.CurrentUser.get(req);
-    var data = req.body.data || {};
-    var d = {
+  async helloWorld(req, res) {
+    let user = await utils.CurrentUser.get(req);
+    let data = req.body.data || {};
+    let d = {
       t: "Hello from Firebase!",
       q: req.query,
       p: req.params,
@@ -16,13 +16,13 @@ class Misc {
       u: ((user)? user.toJSON() : undefined),
       conf: functions.config().firebase
     };
-    res.send({ data:d });
+    return res.send({ data:d });
   }
 
-  static async addMessage(req, res) {
-    const original = req.query.text;
-    const snapshot = await admin.database().ref('/messages').push({ original: original });
-    res.redirect(303, snapshot.ref.toString());
+  async addMessage(req, res) {
+    let original = req.query.text;
+    let snapshot = await admin.database().ref('/messages').push({ original: original });
+    return res.redirect(303, snapshot.ref.toString());
   }
 }
 

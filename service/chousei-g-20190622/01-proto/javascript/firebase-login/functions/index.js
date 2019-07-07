@@ -3,9 +3,8 @@ const functions = require('firebase-functions');
 const admin = require('firebase-admin');
 const cors = require('cors')({ origin:true });
 
-const ctrl = {};
-ctrl.misc = require('./src/controllers/misc');
-ctrl.user = require('./src/controllers/user');
+const MiscC = require('./src/controllers/misc');
+const UserC = require('./src/controllers/user');
 
 //console.log(process.env.GOOGLE_APPLICATION_CREDENTIALS);
 admin.initializeApp({
@@ -14,15 +13,15 @@ admin.initializeApp({
 
 // routing
 exports.misc_helloWorld = functions.https.onRequest((req, res) => {
-  return cors(req, res, async () => { await ctrl.misc.helloWorld(req, res) });
+  return cors(req, res, async () => { await new MiscC().helloWorld(req, res) });
 });
 
 exports.misc_addMessage = functions.https.onRequest((req, res) => {
-  return cors(req, res, async () => { await ctrl.misc.addMessage(req, res) });
+  return cors(req, res, async () => { await new MiscC().addMessage(req, res) });
 });
 
 exports.user_getOfflineAccess = functions.https.onRequest((req, res) => {
-  return cors(req, res, async () => { await ctrl.user.getOfflineAccess(req, res) });
+  return cors(req, res, async () => { await new UserC().getOfflineAccess(req, res) });
 });
 
 /*

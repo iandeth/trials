@@ -18,3 +18,13 @@ cd functions
 firebase functions:config:get > .runtimeconfig.json
 ```
 
+# deploy firebase rules
+```
+firebase deploy --only firestore:rules
+```
+
+# lint check cloud function rules
+```
+cd functions
+npm run lint
+```

@@ -1,7 +1,13 @@
+rules_version = '2';
+
 service cloud.firestore {
   match /databases/{database}/documents {
-    match /{document=**} {
-      allow read, write;
+    allow read, write: if false;
+
+    // can only be accessed by service account
+    match /user_secrets/{user_secret}/{document=**} {
+      allow read, write: if false;
     }
+
   }
 }
