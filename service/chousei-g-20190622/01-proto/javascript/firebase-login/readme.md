@@ -1,4 +1,5 @@
 # docs
+https://blog.quid.works/serverless-oauth2-flows/
 https://github.com/firebase/functions-samples
 https://github.com/googleapis/google-api-nodejs-client
 https://developers.google.com/calendar/v3/reference/events/list
