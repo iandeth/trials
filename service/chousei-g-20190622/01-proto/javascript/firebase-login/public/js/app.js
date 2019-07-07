@@ -9,6 +9,19 @@ class App {
     this.gapi = undefined;
   }
 
+  run() {
+    console.log('app run');
+    if(location.hostname.match('localhost|ngrok.io'))
+      firebase.functions().useFunctionsEmulator('http://localhost:5001');
+
+    this.auth = new Auth();
+    this.gapi = new GAPI();
+    this.gapi.init();
+
+    this.initUI();
+    this.initSignInCheck();
+  }
+
   initUI() {
     this.$inBtn.on('click', ()=> {
       console.log('signin start');
@@ -34,19 +47,6 @@ class App {
       hello({ a:1, b:2 }).then((r)=> { console.log('hello', r) });
       return false;
     });
-  }
-
-  run() {
-    console.log('app run');
-    if(location.hostname.match('localhost|ngrok.io'))
-      firebase.functions().useFunctionsEmulator('http://localhost:5001');
-
-    this.auth = new Auth();
-    this.gapi = new GAPI();
-    this.gapi.init();
-
-    this.initUI();
-    this.initSignInCheck();
   }
 
   initSignInCheck() {
