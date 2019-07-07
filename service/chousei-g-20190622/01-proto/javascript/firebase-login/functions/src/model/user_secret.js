@@ -14,9 +14,9 @@ class UserSecretM {
   }
 
   set(data={}) {
-    if(!data || !data.refresh_token)
-      return Promise.reject(new Error('token not found'));
-    return this._doc().set(data);
+    if(!data || !data.access_token)
+      return Promise.reject(new Error('invalid token'));
+    return this._doc().set(data, { merge:true });
   }
 
   // private methods

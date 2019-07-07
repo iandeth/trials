@@ -1,5 +1,4 @@
 'use strict';
-const admin = require('firebase-admin');
 const utils = require('../utils');
 const UserCalendarM = require('../model/user_calendar.js');
 

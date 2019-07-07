@@ -28,7 +28,7 @@ class UserCalendarM {
     let sm = new UserSecretM(user);
     let s = await sm.get();
 
-    let auth = utils.GAPI.getAuth();
+    let auth = utils.GAPI.getAuth(user);
     auth.setCredentials({
       access_token: s.access_token, refresh_token: s.refresh_token
     });
