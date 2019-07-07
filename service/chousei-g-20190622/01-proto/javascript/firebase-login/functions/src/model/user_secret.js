@@ -3,7 +3,7 @@ const admin = require('firebase-admin');
 
 class UserSecretM {
   constructor(user) {
-    if(!user || !user.uid) throw 'user is empty';
+    if(!user || !user.uid) throw new Error('user is empty');
     this.user = user;
     this.db = admin.firestore();
   }
