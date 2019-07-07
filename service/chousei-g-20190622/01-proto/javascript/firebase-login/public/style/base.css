@@ -10,3 +10,4 @@ body { background: #ECEFF1; color: rgba(0,0,0,0.87); font-family: Roboto, Helvet
   body, #message { margin-top: 0; background: white; box-shadow: none; }
   body { border-top: 16px solid #ffa100; }
 }
+.panel { margin-bottom: 20px; }
