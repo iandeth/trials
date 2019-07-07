@@ -1,4 +1,5 @@
-# cloud functions approach
+# docs
+https://github.com/firebase/functions-samples
 https://github.com/googleapis/google-api-nodejs-client
 
 # service account set for localhost

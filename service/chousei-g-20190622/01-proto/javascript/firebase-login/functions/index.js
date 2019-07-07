@@ -38,8 +38,8 @@ async function getCurrentUser(req) {
 }
 
 exports.helloWorld = functions.https.onRequest(async (req, res) => {
-  var user = await getCurrentUser(req);
-  return cors(req, res, () => {
+  return cors(req, res, async () => {
+    var user = await getCurrentUser(req);
     var data = req.body.data || {};
     var d = {
       t: "Hello from Firebase!",
@@ -60,7 +60,7 @@ exports.addMessage = functions.https.onRequest(async (req, res) => {
 });
 
 exports.getOfflineAccess = functions.https.onRequest(async (req, res) => {
-  const getToken = async (code) => {
+  const getToken = (code) => {
     return new Promise((resolve, reject) => {
       var auth = getGAuth();
       auth.getToken(code, (err, token) => {
