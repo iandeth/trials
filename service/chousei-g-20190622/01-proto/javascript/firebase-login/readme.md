@@ -1,6 +1,8 @@
 # docs
 https://github.com/firebase/functions-samples
 https://github.com/googleapis/google-api-nodejs-client
+https://developers.google.com/calendar/v3/reference/events/list
+https://firebase.google.com/docs/firestore/query-data/get-data
 
 # service account set for localhost
 ```

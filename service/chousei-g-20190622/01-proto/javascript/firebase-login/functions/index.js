@@ -3,8 +3,9 @@ const functions = require('firebase-functions');
 const admin = require('firebase-admin');
 const cors = require('cors')({ origin:true });
 
-const MiscC = require('./src/controllers/misc');
-const UserC = require('./src/controllers/user');
+const MiscC = require('./src/controller/misc');
+const UserC = require('./src/controller/user');
+const CalendarC = require('./src/controller/calendar');
 
 //console.log(process.env.GOOGLE_APPLICATION_CREDENTIALS);
 admin.initializeApp({
@@ -24,17 +25,6 @@ exports.user_getOfflineAccess = functions.https.onRequest((req, res) => {
   return cors(req, res, async () => { await new UserC().getOfflineAccess(req, res) });
 });
 
-/*
-exports.getEventList = functions.https.onRequest(async (req, res) => {
-  var auth = utils.GAPI.getAuth();
-  auth.setCredentials({
-    //access_token: at
-    refresh_token: rt
-  });
-  const cal = google.calendar({ version:'v3', auth:auth });
-  const events = await cal.events.list({ calendarId:'primary' });
-  return cors(req, res, () => {
-    res.send({ data:events.data });
-  });
+exports.calendar_getEventsForUser = functions.https.onRequest((req, res) => {
+  return cors(req, res, async () => { await new CalendarC().getEventsForUser(req, res) });
 });
-*/

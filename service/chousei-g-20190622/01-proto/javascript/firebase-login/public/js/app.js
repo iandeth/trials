@@ -27,6 +27,7 @@ class App {
     var $inBtn = $('#signin');
     var $outBtn = $('#signout');
     var $offlineBtn = $('#offline');
+    var $getEventsBtn = $('#get-events');
     var $helloBtn = $('#hello');
 
     $inBtn.on('click', ()=> {
@@ -41,9 +42,27 @@ class App {
     });
 
     $offlineBtn.on('click', ()=> {
+      $offlineBtn.hide();
       this.gapi.grantOfflineAccess().then((code)=> {
         var goa = firebase.functions().httpsCallable('user_getOfflineAccess');
-        goa({ code:code }).then((r)=> { console.log('offline cf', r) });
+        goa({ code:code }).then((r)=> {
+          console.log('offline cf', r);
+          $offlineBtn.show();
+        });
+      });
+      return false;
+    });
+
+    $getEventsBtn.on('click', ()=> {
+      $getEventsBtn.hide();
+      var ge = firebase.functions().httpsCallable('calendar_getEventsForUser');
+      ge().then((r)=> {
+        console.log('get cal events', r);
+        var events = r.data.events || [];
+        events.forEach((ev)=> {
+          console.log('%s %s', ev.summary, ev.start.dateTime);
+        });
+        $getEventsBtn.show();
       });
       return false;
     });

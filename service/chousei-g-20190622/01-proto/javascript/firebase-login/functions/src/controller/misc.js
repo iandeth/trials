@@ -3,7 +3,7 @@ const functions = require('firebase-functions');
 const admin = require('firebase-admin');
 const utils = require('../utils');
 
-class Misc {
+class MiscC {
   async helloWorld(req, res) {
     let user = await utils.CurrentUser.get(req);
     let data = req.body.data || {};
@@ -26,4 +26,4 @@ class Misc {
   }
 }
 
-module.exports = Misc;
+module.exports = MiscC;
