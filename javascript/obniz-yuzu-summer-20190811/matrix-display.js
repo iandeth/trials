@@ -2,6 +2,7 @@
 console.log('ver 20190811-01');
 
 // https://obniz.io/ja/sdk/parts/MatrixLED_MAX7219/README.md
+// JS canvas API: https://mzl.la/2YVip7I
 class MatrixDisplay {
   constructor() {
     this.obniz = new Obniz("9207-0920");
@@ -41,9 +42,14 @@ class MatrixDisplay {
     m.draw(c);
   }
 
-  fillTextAsTicker(text = 'hello', intv = 200) { // interval milli seconds
-    var pos = 0;
+  fillTextAsTicker(text = 'hello', intv = 100) { // interval milli seconds
+    var tw = Math.round(this.canvas.measureText(text).width);
+    var pos = this.matrix.width;
+
     this.tickerId = setInterval(async ()=> {
+      if(pos < tw * -1)
+        pos = this.matrix.width; // 左端に消えたら開始位置に戻す
+
       this.fillText(text, pos);
       pos--;
     }, intv);
