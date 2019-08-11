@@ -27,30 +27,42 @@ class DistanceSensor {
   }
 
   _startMonitoring() {
-    var prev = 0;
+    var i = 0;
+    var bases = [];
+    var baseDist;
     this.obniz.repeat(async ()=> {
-      var df = await sonar.measureWait(); // distance in float
-      var d = Math.floor(df / 10);
-      console.log(`distance: ${d} cm`);
+      var df = await this.sensor.measureWait(); // distance in float
+      var d = Math.floor(df / 10); // mm to cm
 
-      if(this._isNearDistance(prev, d, 20) == false) {
-        console.log('is far distance');
+      // 最初の 5 回は基準距離を判定
+      if(i < 5) {
+        bases.push(d);
+        if(i == 4) {
+          baseDist = bases.reduce((sum, v)=> {
+            if(!v) return sum;
+            return sum + v;
+          })
+          if(!baseDist) {
+            console.error('baseDist not resolved, retry');
+            i = 0; bases = []; return;
+          }
+          baseDist = Math.floor(baseDist / bases.length / 10) * 10;
+          console.log('base dist is:', baseDist, bases);
+        }
+        i++;
+        return;
       }
 
-      prev = d;
-      await obniz.wait(200);
+      if(d < baseDist) {
+        console.log('close distance', baseDist, d);
+        $('#alert').show(200);
+      } else {
+        $('#alert').hide(200);
+      }
+
+      i++;
+      await this.obniz.wait(200);
     });
-  }
-
-  _isNearDistance(prev = 0, now = 0, allowDiff = 20) {
-    if(prev == 0) return true;
-
-    // round 1st digit
-    var p = Math.round(prev / 10) * 10;
-    var n = Math.round(now / 10) * 10;
-
-    // true if diff is within N cm
-    return (Math.abs(p - n) <= allowDiff)? true : false;
   }
 }
 
