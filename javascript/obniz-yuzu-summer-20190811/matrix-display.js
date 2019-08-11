@@ -1,3 +1,6 @@
+'use strict';
+console.log('ver 20190811-01');
+
 // https://obniz.io/ja/sdk/parts/MatrixLED_MAX7219/README.md
 class MatrixDisplay {
   constructor() {
@@ -10,7 +13,7 @@ class MatrixDisplay {
     this.tickerId = undefined; // setInterval id
   }
 
-  run() {
+  init() {
     this.obniz.onconnect = async ()=> {
       var d = this.obniz.display;
       d.clear();
@@ -21,8 +24,7 @@ class MatrixDisplay {
 
       $(()=> {
         var text = $('#text').val();
-        //this.fillText(text);
-        this.fillTextAsTicker(text);
+        this.fillText(text);
       });
     };
   }
@@ -39,7 +41,7 @@ class MatrixDisplay {
     m.draw(c);
   }
 
-  fillTextAsTicker(text = 'hello', intv = 100) { // interval milli seconds
+  fillTextAsTicker(text = 'hello', intv = 200) { // interval milli seconds
     var pos = 0;
     this.tickerId = setInterval(async ()=> {
       this.fillText(text, pos);
@@ -47,33 +49,12 @@ class MatrixDisplay {
     }, intv);
   }
 
-  // private methods
-  _run() {
-    /*
-    var dispMtxText = (txt='hello world') => {
-
-      ctx.fillStyle = "black";
-      ctx.fillRect(0, 0, matrix.width, matrix.height);
-      ctx.fillStyle = "white";
-      ctx.font = "9px sans-serif";
-      //ctx.textBaseline = "top";
-
-      var leftPos = 0;
-      this.obniz.repeat(async ()=> {
-        //this.obniz.display.clear();
-        //this.obniz.display.print(`repeat: ${leftPos}`);
-
-        ctx.clearRect(0, 0, matrix.width, matrix.height);
-        ctx.fillText(txt, leftPos, 7);
-        matrix.draw(ctx);
-
-        await this.obniz.wait(5);
-        leftPos--;
-      });
-    };
-    */
+  clearTicker() {
+    if(!this.tickerId) return;
+    clearInterval(this.tickerId);
   }
 
+  // private methods
   _initMatrix() {
     var m = this.obniz.wired("MatrixLED_MAX7219", this.matrixOpt);
     m.init(8 * 4, 8);
@@ -95,8 +76,15 @@ class UI {
   init() {
     $(()=> {
       $('#applyTextBtn').click(()=> {
+        var md = this.matrixDisplay;
+        md.clearTicker();
+
         var text = $('#text').val();
-        this.matrixDisplay.fillText(text);
+        var asTicker = $('#ticker').prop('checked');
+        if(asTicker)
+          md.fillTextAsTicker(text);
+        else
+          md.fillText(text);
       });
     });
   }
@@ -104,6 +92,6 @@ class UI {
 
 // main scope
 var md = new MatrixDisplay();
-md.run();
+md.init();
 
 new UI(md).init();
