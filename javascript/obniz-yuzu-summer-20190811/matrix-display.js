@@ -6,7 +6,7 @@ console.log('ver 20190811-01');
 class MatrixDisplay {
   constructor() {
     this.obniz = new Obniz("9207-0920");
-    this.matrixOpt = { clk:0, cs:1, din:2, gnd:3, vcc:4 };
+    this.partsOpt = { clk:0, cs:1, din:2, gnd:3, vcc:4 };
     this.font = "9px sans-serif";
 
     this.matrix = undefined;
@@ -19,7 +19,6 @@ class MatrixDisplay {
       var d = this.obniz.display;
       d.clear();
       d.print("MatrixDisplay");
-      d.print("#run");
 
       this._initMatrix();
 
@@ -62,7 +61,7 @@ class MatrixDisplay {
 
   // private methods
   _initMatrix() {
-    var m = this.obniz.wired("MatrixLED_MAX7219", this.matrixOpt);
+    var m = this.obniz.wired("MatrixLED_MAX7219", this.partsOpt);
     m.init(8 * 4, 8);
     m.brightness(1); // 0 - 15
     m.clear();
