@@ -58,7 +58,7 @@ class MatrixDisplay {
   _createMatrixAndCanvasInstance(opt) {
     var m = this.obniz.wired("MatrixLED_MAX7219", opt);
     m.init(8 * 4, 8);
-    m.brightness(1); // 0 - 15
+    m.brightness(10); // 0 - 15
     m.clear();
 
     var c = this.obniz.util.createCanvasContext(m.width, m.height);
@@ -93,8 +93,9 @@ class MatrixDisplayDouble extends MatrixDisplay {
   constructor() {
     super();
     //this.font = "16px sans-serif";
-    this.font = "16px Courier New";
-    //this.font = "16px Arial";
+    //this.font = "16px Courier New";
+    //this.font = "16px Noto Sans CJK JP Bold";
+    this.font = "16px VL Gothic";
     this.partsOpt2 = { clk:5, cs:6, din:7, gnd:8, vcc:9 };
     this.matrix2 = undefined;
     this.canvas2 = undefined;
