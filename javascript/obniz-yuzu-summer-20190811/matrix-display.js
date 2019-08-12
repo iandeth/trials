@@ -126,16 +126,21 @@ class UI {
       $('#applyTextBtn').click(()=> {
         var text = $('#text').val();
         var asTicker = $('#ticker').prop('checked');
-        if(asTicker)
-          md.fillTextAsTicker(text);
-        else
+        if(asTicker) {
+          var intv = $('#tickerIntv').val() || 50;
+          md.fillTextAsTicker(text, intv);
+        } else {
           md.fillText(text);
+        }
       });
 
       $('#showRailsInfo').click(()=> {
         var rs = new RailsInfo();
         rs.fetch().then((text)=> {
-          md.fillTextAsTicker(text);
+          var intv = $('#tickerIntv').val() || 50;
+          md.fillTextAsTicker(text, intv);
+
+          // HTML 側にも結果表示
           var $ul = $('ul#railsInfo');
           $ul.find('li').remove();
           rs.lastInfo.forEach((r)=> {
