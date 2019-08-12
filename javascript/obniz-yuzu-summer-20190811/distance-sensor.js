@@ -1,12 +1,13 @@
 'use strict';
-console.log('ver 20190811-01');
+console.log('ver 20190812-01');
 
 // https://obniz.io/ja/sdk/parts/HC-SR04/README.md
 class DistanceSensor {
-  constructor() {
+  constructor(ui) {
     this.obniz = new Obniz("9207-0920");
     this.partsOpt = { gnd:5, echo:6, trigger:7, vcc:8 };
     this.sensor = undefined;
+    this.ui = ui;
   }
 
   init() {
@@ -38,15 +39,11 @@ class DistanceSensor {
       if(i < 5) {
         bases.push(d);
         if(i == 4) {
-          baseDist = bases.reduce((sum, v)=> {
-            if(!v) return sum;
-            return sum + v;
-          })
-          if(!baseDist) {
+          baseDist = this._resolveBaseDist(bases);
+          if(!baseDist) { // 計測不能だった場合は再計測
             console.error('baseDist not resolved, retry');
             i = 0; bases = []; return;
           }
-          baseDist = Math.floor(baseDist / bases.length / 10) * 10;
           console.log('base dist is:', baseDist, bases);
         }
         i++;
@@ -54,31 +51,37 @@ class DistanceSensor {
       }
 
       if(d < baseDist) {
-        console.log('close distance', baseDist, d);
-        $('#alert').show(200);
+        console.log('alertShow', baseDist, d);
+        this.ui.alertShow();
       } else {
-        $('#alert').hide(200);
+        this.ui.alertHide();
       }
 
       i++;
       await this.obniz.wait(200);
     });
   }
+
+  _resolveBaseDist(bases) {
+    var baseDist = bases.reduce((sum, v)=> {
+      if(!v) return sum;
+      return sum + v;
+    })
+    if(!baseDist) return;
+    return Math.floor(baseDist / bases.length / 10) * 10;
+  }
 }
 
 class UI {
-  constructor(ds) {
-    this.distanceSensor = ds;
+  alertShow() {
+    $('#alert').show(100);
   }
 
-  init() {
-    $(()=> {
-    });
+  alertHide() {
+    $('#alert').hide(100);
   }
 }
 
 // main scope
-var md = new DistanceSensor();
-md.init();
-
-new UI(md).init();
+var ui = new UI();
+new DistanceSensor(ui).init();
