@@ -1,5 +1,5 @@
 'use strict';
-console.log('ver 20190811-01');
+console.log('ver 20190812-01');
 
 // https://obniz.io/ja/sdk/parts/MatrixLED_MAX7219/README.md
 // JS canvas API: https://mzl.la/2YVip7I
@@ -50,26 +50,36 @@ class MatrixDisplay {
 
   // private methods
   _initMatrix() {
-    var m = this.obniz.wired("MatrixLED_MAX7219", this.partsOpt);
+    var r = this._createMatrixAndCanvasInstance(this.partsOpt);
+    this.matrix = r.matrix;
+    this.canvas = r.canvas;
+  }
+
+  _createMatrixAndCanvasInstance(opt) {
+    var m = this.obniz.wired("MatrixLED_MAX7219", opt);
     m.init(8 * 4, 8);
     m.brightness(1); // 0 - 15
     m.clear();
-    this.matrix = m;
 
     var c = this.obniz.util.createCanvasContext(m.width, m.height);
     c.font = this.font;
-    this.canvas = c;
+
+    return { matrix:m, canvas:c };
   }
 
   _fillText(text = 'hello', leftPos = 0) {
-    var m = this.matrix;
-    var c = this.canvas;
+    this._fillTextWithMatrix(this.matrix, this.canvas, text, leftPos);
+  }
+
+  _fillTextWithMatrix(matrix, canvas, text = 'hello', leftPos = 0, baselinePos = 7) {
+    var m = matrix;
+    var c = canvas;
 
     c.fillStyle = "black";
     c.fillRect(0, 0, m.width, m.height);
 
     c.fillStyle = "white";
-    c.fillText(text, leftPos, 7);
+    c.fillText(text, leftPos, baselinePos);
     m.draw(c);
   }
 
@@ -77,7 +87,37 @@ class MatrixDisplay {
     if(!this.tickerId) return;
     clearInterval(this.tickerId);
   }
+}
 
+class MatrixDisplayDouble extends MatrixDisplay {
+  constructor() {
+    super();
+    //this.font = "16px sans-serif";
+    this.font = "16px Courier New";
+    //this.font = "16px Arial";
+    this.partsOpt2 = { clk:5, cs:6, din:7, gnd:8, vcc:9 };
+    this.matrix2 = undefined;
+    this.canvas2 = undefined;
+  }
+
+  _initMatrix(opt) {
+    super._initMatrix();
+
+    // 二つ目の matrix/canvas set を作成
+    var r = this._createMatrixAndCanvasInstance(this.partsOpt2);
+    this.matrix2 = r.matrix;
+    this.canvas2 = r.canvas;
+  }
+
+  _fillText(text = 'hello', leftPos = 0) {
+    // 二つの matrix に描画
+    [
+      { m:this.matrix, c:this.canvas, baseline:14 },
+      { m:this.matrix2, c:this.canvas2, baseline:6 }
+    ].forEach((r)=> {
+      this._fillTextWithMatrix(r.m, r.c, text, leftPos, r.baseline);
+    });
+  }
 }
 
 class RailsInfo {
@@ -154,7 +194,8 @@ class UI {
 }
 
 // main scope
-var md = new MatrixDisplay();
+//var md = new MatrixDisplay();
+var md = new MatrixDisplayDouble();
 md.init();
 
 new UI(md).init();
