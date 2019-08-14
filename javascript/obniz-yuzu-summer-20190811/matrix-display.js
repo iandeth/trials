@@ -125,6 +125,7 @@ class RailsInfo {
   constructor() {
     this.lastInfo = undefined;
   }
+
   fetch() {
     return this._fetch()
       .then((lines)=> this._parse(lines));
