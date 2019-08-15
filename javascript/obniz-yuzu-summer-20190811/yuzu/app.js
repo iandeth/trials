@@ -14,7 +14,33 @@ obniz.onconnect = async ()=> {
   c.fillStyle = 'black';
   c.fillRect(0, 0, m.width, m.height);
 
+  var yuzudeth;
+  var time = new Date().getMinutes();
+  if (time % 2 == 0) {
+    yuzudeth = 'even';
+    c.font = '9px sans-serif';
+  } else {
+    yuzudeth = 'odd';
+    m.brightness(0);
+  }
+
   c.fillStyle = 'white';
-  c.fillText('hello', 0, 7);
+  c.fillText(yuzudeth, 0, 7);
   m.draw(c);
 };
+
+$(()=> {
+  $('#apply').on('click', ()=> {
+    var text = $('#text').val();
+    if(text == '') {
+      text = 'empty!';
+    }
+
+    c.fillStyle = 'black';
+    c.fillRect(0, 0, m.width, m.height);
+
+    c.fillStyle = 'white';
+    c.fillText(text, 0, 7);
+    m.draw(c);
+  });
+});
