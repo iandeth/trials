@@ -14,18 +14,18 @@ obniz.onconnect = async ()=> {
   c.fillStyle = 'black';
   c.fillRect(0, 0, m.width, m.height);
 
-  var yuzudeth;
+  var text;
   var time = new Date().getMinutes();
   if (time % 2 == 0) {
-    yuzudeth = 'even';
+    text = 'even';
     c.font = '9px sans-serif';
   } else {
-    yuzudeth = 'odd';
+    text = 'odd';
     m.brightness(0);
   }
 
   c.fillStyle = 'white';
-  c.fillText(yuzudeth, 0, 7);
+  c.fillText(text, 0, 7);
   m.draw(c);
 };
 
