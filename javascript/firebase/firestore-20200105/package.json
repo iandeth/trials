@@ -15,7 +15,6 @@
   "license": "ISC",
   "devDependencies": {
     "clean-webpack-plugin": "*",
-    "clean-webpack-plugin": "*",
     "css-loader": "*",
     "eslint": "*",
     "eslint-loader": "*",
@@ -23,7 +22,8 @@
     "webpack": "*",
     "webpack-cli": "*",
     "webpack-dev-server": "*",
-    "webpack-merge": "*"
+    "webpack-merge": "*",
+    "jquery": "*"
   },
   "dependencies": {
     "buble": "*",

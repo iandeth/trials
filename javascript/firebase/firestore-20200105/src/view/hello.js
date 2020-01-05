@@ -1,8 +1,5 @@
 import style from './hello.css';
 
-const Promise = kzs.Promise;
-const $ = kzs.$;
-
 export default class {
   run(m) {
     style.use(); // append style

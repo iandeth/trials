@@ -1,7 +1,8 @@
 {
   "env": {
     "browser": true,
-    "es6": true
+    "es6": true,
+    "jquery": true
   },
   "extends": "eslint:recommended",
   "globals": {
@@ -15,7 +16,7 @@
   "rules": {
     "no-debugger": ["warn"],
     "no-undef": ["error"],
-    "no-unused-vars": ["error", { "varsIgnorePattern": "^(Promise|\\$)$" }]
+    "no-unused-vars": ["error", { "varsIgnorePattern": "^(\\$)$" }]
   },
   "globals": {
     "kzs": "readonly"

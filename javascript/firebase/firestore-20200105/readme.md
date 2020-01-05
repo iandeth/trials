@@ -23,27 +23,36 @@ npm install
 ```
 
 # development
+## ①src 配下 code
 新たな terminal を開いて project root dir で以下実行:
 ```
 npm start
 ```
-→ dev/index.html がブラウザ起動されます。
+→ dist/ がブラウザ起動されます。
 entrypoint js file も以下のような URL で配信されます。
 ※src 配下の file を保存する度に自動更新されます。
 ```
 http://localhost:8080/hello.bundle.js
 ```
+## ②firebase
+もうひとつ terminal を開いて project root dir で以下実行:
+```
+firebase serve
+```
+→ public/ がブラウザ起動されます:
+```
+http://localhost:5000/
+```
+public/index.html にベタ書き script tag で①を読み込んでいるので、この状態で src 配下 code を更新すると自動反映されます。
+
+さらに cloud functions も以下 URL で host されます:
+```
+# entrypoint 例
+http://localhost:5001/bashi-fiddle-20200105/us-central1/helloWorld
+```
 
 # production
 ```
-npm run build
+firebase deploy
 ```
-dist 配下に以下のような hash つきの static file が生成されます。
-これらを CDN に upload すべし。
-※旧バージョンの dist file は自動で削除されます。
-```
-dist/
-  hello.752f64ecfa4e6f325937.js
-```
-dist 配下 file は git commit しない運用で。
-※ .gitignore で無視設定済み
+→ src 配下 code が build された後に firebase hosting に deploy されます

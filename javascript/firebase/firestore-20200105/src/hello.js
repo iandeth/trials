@@ -1,4 +1,4 @@
-import C from 'controller/hello';
+import HelloController from 'controller/hello';
 
-kzs.console.log('kzHelloController', 'v20190815-1');
-window.kzHelloController = C;
+console.log('HelloController#run', 'v20190815-1');
+new HelloController().run();
