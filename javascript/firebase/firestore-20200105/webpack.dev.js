@@ -9,6 +9,6 @@ module.exports = merge(common, {
     compress: true
   },
   output: {
-    filename: '[name].dev.js'
+    filename: 'js/[name].dev.js'
   }
 });

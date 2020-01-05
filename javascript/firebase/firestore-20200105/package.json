@@ -8,23 +8,26 @@
     "lint": "npx eslint src",
     "build": "webpack --config webpack.prod.js",
     "build-dev": "webpack --config webpack.dev.js",
-    "start": "webpack-dev-server --open --config webpack.dev.js"
+    "start": "webpack --watch --progress --config webpack.dev.js",
+    "start-server": "webpack-dev-server --open --config webpack.dev.js"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "clean-webpack-plugin": "*",
-    "css-loader": "*",
-    "eslint": "*",
-    "eslint-loader": "*",
-    "style-loader": "*",
+    "jquery": "*",
+    "firebase": "*",
     "webpack": "*",
     "webpack-cli": "*",
     "webpack-dev-server": "*",
     "webpack-merge": "*",
-    "jquery": "*",
-    "firebase": "*"
+    "clean-webpack-plugin": "*",
+    "html-webpack-plugin": "*",
+    "css-loader": "*",
+    "eslint": "*",
+    "eslint-loader": "*",
+    "style-loader": "*",
+    "file-loader": "*"
   },
   "dependencies": {
     "buble": "*",

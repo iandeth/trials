@@ -5,6 +5,6 @@ module.exports = merge(common, {
   mode: 'production',
   devtool: 'source-map',
   output: {
-    filename: '[name].prd.js'
+    filename: 'js/[name].[contenthash].js'
   }
 });
