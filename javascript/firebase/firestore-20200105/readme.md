@@ -23,7 +23,13 @@ npm install -g firebase-tools
 cd {project-root-dir}
 npm install
 ```
-→ fsevents の install error が出るけど気にしないでおｋ
+
+※fsevents の install error が出た場合、原因は pyenv にある。
+以下のように system python をつかえば解決
+```
+pyenv local system
+npm install
+```
 
 ## ②functions 配下 code 用
 ```

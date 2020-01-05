@@ -7,7 +7,9 @@
   "extends": "eslint:recommended",
   "globals": {
     "Atomics": "readonly",
-    "SharedArrayBuffer": "readonly"
+    "SharedArrayBuffer": "readonly",
+    "kzs": "readonly",
+    "firebase": "readonly"
   },
   "parserOptions": {
     "ecmaVersion": 2018,
@@ -16,9 +18,6 @@
   "rules": {
     "no-debugger": ["warn"],
     "no-undef": ["error"],
-    "no-unused-vars": ["error", { "varsIgnorePattern": "^(\\$)$" }]
-  },
-  "globals": {
-    "kzs": "readonly"
+    "no-unused-vars": ["error", { "varsIgnorePattern": "^(firebase)$" }]
   }
 }

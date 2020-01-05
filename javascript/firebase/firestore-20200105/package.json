@@ -23,7 +23,8 @@
     "webpack-cli": "*",
     "webpack-dev-server": "*",
     "webpack-merge": "*",
-    "jquery": "*"
+    "jquery": "*",
+    "firebase": "*"
   },
   "dependencies": {
     "buble": "*",
