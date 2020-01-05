@@ -24,13 +24,6 @@ cd {project-root-dir}
 npm install
 ```
 
-※fsevents の install error が出た場合、原因は pyenv にある。
-以下のように system python をつかえば解決
-```
-pyenv local system
-npm install
-```
-
 ## ②functions 配下 code 用
 ```
 cd {project-root-dir}/functions
@@ -43,12 +36,11 @@ npm install
 ```
 npm start
 ```
-→ dist/ がブラウザ起動されます。
-entrypoint js file も以下のような URL で配信されます。
-※src 配下の file を保存する度に自動更新されます。
-```
-http://localhost:8080/hello.bundle.js
-```
+→ dist/ 配下に deploy 用 js/html/image ファイル群が生成されます
+※ 元から dist/ 配下にあった file は全消去されるよ (=clean build)
+
+以降 ctrl-c で command を終了させない限りは js code を変更する度にファイルが再生成され続けます (=watch mode)
+
 ## ②firebase
 もうひとつ terminal を開いて project root dir で以下実行:
 ```
@@ -58,7 +50,7 @@ firebase serve
 ```
 http://localhost:5000/
 ```
-public/index.html にベタ書き script tag で①を読み込んでいるので、この状態で src 配下 code を更新すると自動反映されます。
+これを使って code 変更を保存 → browser reload で繰り返しの動作確認ができる。
 
 さらに cloud functions も以下 URL で host されます:
 ```

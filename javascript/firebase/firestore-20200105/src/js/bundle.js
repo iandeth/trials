@@ -1,5 +1,4 @@
 'use strict';
-import 'common/style.css';
 import IndexController from 'js/controller/index';
 
 console.log('bundle.js', 'v20200105-2');

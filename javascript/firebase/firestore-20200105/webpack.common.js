@@ -24,7 +24,7 @@ module.exports = {
         test: /js\/.+\.js$/i,
         exclude: /node_modules/,
         loader: 'eslint-loader',
-        options: { configFile: "./.eslintrc.json" }
+        options: { configFile:"./.eslintrc.json" }
       },
       {
         test: /js\/.+\.js$/i,
@@ -34,13 +34,15 @@ module.exports = {
         test: /\.css$/i,
         exclude: /common\/.+\.css$/i,
         use: [
-          { loader: 'style-loader', options: { injectType: 'lazyStyleTag' } },
+          { loader:'style-loader', options:{ injectType:'lazyStyleTag' } },
           'css-loader'
         ]
       },
       {
         test: /common\/.+\.css$/i,
-        use: ['style-loader', 'css-loader']
+        use: [
+          { loader:'file-loader', options:{ regExp:/src\/(.+)\/[^/]+\.[^/]+$/, name:'/[1]/[name].[ext]' } }
+        ]
       }
     ],
   },
