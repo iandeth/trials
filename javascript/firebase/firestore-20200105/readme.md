@@ -7,18 +7,27 @@ https://github.com/nodenv/nodenv
 
 ## install node
 ```
-nodenv install 13.0.1
+nodenv install 10.15.3
 nodenv rehash
 ```
 
-## install firebase cli
+## install global npms
 ```
+npm install -g fsevents
 npm install -g firebase-tools
 ```
 
 ## install npm packages
+## ①src 配下 code 用
 ```
 cd {project-root-dir}
+npm install
+```
+→ fsevents の install error が出るけど気にしないでおｋ
+
+## ②functions 配下 code 用
+```
+cd {project-root-dir}/functions
 npm install
 ```
 
