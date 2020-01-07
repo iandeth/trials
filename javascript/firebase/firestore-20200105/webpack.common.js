@@ -26,7 +26,7 @@ module.exports = {
       {
         // https://eslint.org/docs/rules/
         enforce: "pre",
-        test: /js\/.+\.js$/,
+        test: /js\/.+\.js$/i,
         loader: 'eslint-loader',
         options: { configFile:"./.eslintrc.json" }
       },
@@ -48,7 +48,7 @@ module.exports = {
         use: ['style-loader', 'css-loader']
       },
       {
-        test: /\.(png|jp(e)?g|gif)$/i,
+        test: /\.(png|jp(e)?g|gif|ico)$/i,
         use: [
           { loader:'file-loader', options:fileLoaderOpt }
         ]
