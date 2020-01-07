@@ -6,7 +6,7 @@ import DetailController from 'js/controller/detail';
 console.log('bundle.js', 'v20200105-2');
 $(()=> {
   let app = firebase.app();
-  let features = ['auth', 'functions', 'database'].filter(feature => typeof app[feature] === 'function');
+  let features = ['auth', 'functions', 'database', 'performance'].filter(feature => typeof app[feature] === 'function');
   console.log(`Firebase SDK loaded with ${features.join(', ')}`);
 
   var path = window.location.pathname;
