@@ -12,7 +12,7 @@ $(()=> {
   var path = window.location.pathname;
   if(path == '/')
     new IndexController().run();
-  else if(path == '/detail/')
+  else if(path.match('^/detail/\\d+/$'))
     new DetailController().run();
 
   //var x = async ()=> {
