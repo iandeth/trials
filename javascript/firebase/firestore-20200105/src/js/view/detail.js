@@ -1,17 +1,17 @@
-import style from 'index/style.css';
-import iconImg from 'index/icon.png';
+import style from 'detail/style.css';
+import iconImg from 'detail/icon.png';
 
 export default class IndexView {
-  run(m) {
+  run() {
     style.use();
-    this._render(m);
+    this._render();
   }
 
   // private methods
-  _render(m) {
+  _render() {
     $('body').append(`
       <div class="result">
-        <strong>${m.dog.bark()}</strong><br>
+        <strong>this is detail page</strong><br>
         <img src="${iconImg}" width="20">
       </div>
     `);

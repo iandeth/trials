@@ -15,19 +15,19 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "jquery": "*",
     "firebase": "*",
     "webpack": "*",
     "webpack-cli": "*",
     "webpack-dev-server": "*",
     "webpack-merge": "*",
     "clean-webpack-plugin": "*",
-    "html-webpack-plugin": "*",
-    "css-loader": "*",
     "eslint": "*",
     "eslint-loader": "*",
+    "css-loader": "*",
     "style-loader": "*",
-    "file-loader": "*"
+    "file-loader": "*",
+    "html-webpack-plugin": "*",
+    "mini-css-extract-plugin": "*"
   },
   "dependencies": {
     "buble": "*",

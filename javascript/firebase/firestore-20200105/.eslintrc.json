@@ -8,9 +8,8 @@
   "globals": {
     "Atomics": "readonly",
     "SharedArrayBuffer": "readonly",
-    "kzs": "readonly",
     "firebase": "readonly",
-    "require": "readonly"
+    "kzs": "readonly"
   },
   "parserOptions": {
     "ecmaVersion": 2018,
