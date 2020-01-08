@@ -1,21 +1,29 @@
 'use strict';
 import 'common/style.css';
-import IndexController from 'js/controller/index';
-import DetailController from 'js/controller/detail';
+import FirebaseUtil from 'js/common/firebase-util';
+import Router from 'js/common/router';
 
-console.log('bundle.js', 'v20200105-2');
-$(()=> {
-  let app = firebase.app();
-  let features = ['auth', 'functions', 'database', 'performance'].filter(feature => typeof app[feature] === 'function');
-  console.log(`Firebase SDK loaded with ${features.join(', ')}`);
-
-  var path = window.location.pathname;
-  if(path == '/')
-    new IndexController().run();
-  else if(path.match('^/detail/\\d+/$'))
-    new DetailController().run();
+// ここから main scope
+console.log('begin');
+Promise.resolve() // begin promise chain
+  .then(()=> {
+    // firebase SDK の初期化完了を待つ
+    return FirebaseUtil.waitForSDK();
+  })
+  .then(()=> {
+    // url path から実行 controller を判定 → 実行
+    var path = window.location.pathname;
+    var c = new Router().getControllerForPath(path);
+    if(!c) return Promise.reject('controller not routed');
+    console.log('routed controller', c);
+    return c.run();
+  })
+  .then(()=> console.log('end'))
+  .catch(function(e) {
+    if(e instanceof Error) console.error(e);
+    else console.error('rejected:', e);
+  });
 
   //var x = async ()=> {
   //  return await $.get('http://localhost:5000/');
   //};
-});
