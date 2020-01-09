@@ -1,7 +1,8 @@
+import BaseView from 'js/view/base';
 import style from 'detail/style.css';
 import iconImg from 'detail/icon.png';
 
-export default class DetailView {
+export default class DetailView extends BaseView {
   run(s={}) {
     style.use();
     this._setMeta(s);
@@ -11,7 +12,7 @@ export default class DetailView {
 
   // private methods
   _setMeta(s={}) {
-    $('title').text(`Detail ID #${s.prm.id}`);
+    $('title').text(`Detail ID #${s.prm.id} | ${this.siteName}`);
   }
 
   _render(s={}) {

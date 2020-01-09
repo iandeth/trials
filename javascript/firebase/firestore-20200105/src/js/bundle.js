@@ -2,6 +2,7 @@
 import 'common/style.css';
 import FirebaseUtil from 'js/common/firebase-util';
 import Router from 'js/common/router';
+import ServiceUnavailableController from 'js/controller/service-unavailable.js';
 
 // ここから main scope
 console.log('begin');
@@ -22,6 +23,7 @@ Promise.resolve() // begin promise chain
   .catch(function(e) {
     if(e instanceof Error) console.error(e);
     else console.error('rejected:', e);
+    new ServiceUnavailableController().run();
   });
 
   //var x = async ()=> {

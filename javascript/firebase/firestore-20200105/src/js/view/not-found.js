@@ -1,4 +1,6 @@
-export default class NotFoundView {
+import BaseView from 'js/view/base';
+
+export default class NotFoundView extends BaseView {
   run() {
     this._setMeta();
     this._render();
@@ -7,7 +9,7 @@ export default class NotFoundView {
 
   // private methods
   _setMeta() {
-    $('title').text('Page Not Found');
+    $('title').text(`Page Not Found | ${this.siteName}`);
   }
 
   _render() {

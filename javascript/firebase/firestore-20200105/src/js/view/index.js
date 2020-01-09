@@ -1,7 +1,8 @@
+import BaseView from 'js/view/base';
 import style from 'index/style.css';
 import iconImg from 'index/icon.png';
 
-export default class IndexView {
+export default class IndexView extends BaseView {
   run(s={}) {
     style.use();
     this._setMeta();
@@ -11,7 +12,7 @@ export default class IndexView {
 
   // private methods
   _setMeta() {
-    $('title').text('Firebase Demo');
+    $('title').text(this.siteName);
   }
 
   _render(s={}) {
