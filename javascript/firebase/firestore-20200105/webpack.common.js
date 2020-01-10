@@ -58,6 +58,7 @@ module.exports = {
     moduleIds: 'hashed'
   },
   output: {
-    publicPath: '/'
+    publicPath: '/',
+    filename: 'js/[name].[contenthash].js'
   }
 };

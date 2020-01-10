@@ -3,8 +3,5 @@ const common = require('./webpack.common.js');
 
 module.exports = merge(common, {
   mode: 'production',
-  devtool: 'source-map',
-  output: {
-    filename: 'js/[name].[contenthash].js'
-  }
+  devtool: 'source-map'
 });

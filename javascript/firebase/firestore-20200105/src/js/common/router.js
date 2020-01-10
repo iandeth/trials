@@ -1,16 +1,22 @@
 import IndexController from 'js/controller/index';
 import DetailController from 'js/controller/detail';
-import NotFoundController from 'js/controller/not-found';
+import LoginController from 'js/controller/login';
+import MyController from 'js/controller/my';
 
 export default class Router {
   getControllerForPath(path) {
+    var s = { c:undefined, requireLogin: false };
     if(path == '/') {
-      return new IndexController();
+      s.c = new IndexController();
     } else if(path.match('^/detail/(\\d+)/$')) {
       var prm = { id:RegExp.$1 };
-      return new DetailController({ prm:prm });
-    } else {
-      return new NotFoundController();
+      s.c = new DetailController({ prm:prm });
+    } else if(path.match('^/login/$')) {
+      s.c = new LoginController();
+    } else if(path.match('^/my/$')) {
+      s.requireLogin = true;
+      s.c = new MyController();
     }
+    return s;
   }
 }

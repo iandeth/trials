@@ -18,7 +18,9 @@
       "**/node_modules/**"
     ],
     "rewrites": [
-      { "source":"/detail/*/", "destination": "/index.html" }
+      { "source":"/detail/*/", "destination": "/index.html" },
+      { "source":"/my/", "destination": "/index.html" },
+      { "source":"/login/", "destination": "/index.html" }
     ],
     "trailingSlash": true
   },

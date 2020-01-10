@@ -28,6 +28,7 @@ export default class IndexView extends BaseView {
         <strong>${s.dog.bark()}</strong><br>
         <img src="${iconImg}" width="20">
         <div><a href="/detail/20/">detail #20</a></div>
+        <div><a href="/my/">my page</a></div>
       </div>
     `);
   }

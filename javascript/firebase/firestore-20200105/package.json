@@ -32,6 +32,7 @@
   "dependencies": {
     "buble": "*",
     "buble-loader": "*",
+    "js-cookie": "^2.2.1",
     "promise-polyfill": "*"
   }
 }
