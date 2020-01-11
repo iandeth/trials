@@ -6,7 +6,7 @@ export default class FirebaseUtil {
         let features = [
           'auth', 'functions', 'database', 'performance'
         ].filter(f => typeof app[f] === 'function');
-        console.log(`Firebase SDK loaded with ${features.join(', ')}`);
+        console.log(`firebase: ${features.join(', ')}`);
         resolve();
       });
     });

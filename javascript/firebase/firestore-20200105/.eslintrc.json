@@ -18,6 +18,6 @@
   "rules": {
     "no-debugger": ["warn"],
     "no-undef": ["error"],
-    "no-unused-vars": ["error", { "varsIgnorePattern": "^(firebase)$" }]
+    "no-unused-vars": ["error"]
   }
 }
