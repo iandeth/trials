@@ -1,10 +1,9 @@
 import BaseController from 'js/controller/base';
-import View from 'js/view/detail';
+import IndexView from 'js/view/detail/index';
 
 export default class DetailController extends BaseController {
-  run() {
+  index() {
     //throw new Error('id not found');
-    var s = { prm:this.prm };
-    return new View().run(s);
+    return new IndexView().run(this);
   }
 }

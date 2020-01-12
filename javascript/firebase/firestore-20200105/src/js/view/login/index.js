@@ -1,9 +1,9 @@
 import BaseView from 'js/view/base';
 
 export default class LoginView extends BaseView {
-  run() {
-    this._setMeta();
-    this._render();
+  run(c) {
+    this._setMeta(c);
+    this._render(c);
     console.log('#run done');
   }
 

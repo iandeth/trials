@@ -1,9 +1,9 @@
 import BaseView from 'js/view/base';
 
-export default class MyView extends BaseView {
-  run(s) {
-    this._setMeta();
-    this._render(s);
+export default class MyIndexView extends BaseView {
+  run(c) {
+    this._setMeta(c);
+    this._render(c);
     console.log('#run done');
   }
 
@@ -12,9 +12,9 @@ export default class MyView extends BaseView {
     $('title').text(`My Page | ${this.siteName}`);
   }
 
-  _render(s) {
+  _render(c) {
     $('#message').append(`
-      <h2>id #${s.current_user.id}</h2>
+      <h2>id #${c.current_user.id}</h2>
       <h1>My Page</h1>
       <p>ログインユーザーの my page だよ</p>
     `);

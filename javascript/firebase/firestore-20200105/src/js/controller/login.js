@@ -1,8 +1,8 @@
 import BaseController from 'js/controller/base';
-import View from 'js/view/login';
+import IndexView from 'js/view/login/index';
 
 export default class LoginController extends BaseController {
-  run() {
-    return new View().run();
+  index() {
+    return new IndexView().run(this);
   }
 }

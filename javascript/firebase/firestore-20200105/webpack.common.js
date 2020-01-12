@@ -35,7 +35,7 @@ module.exports = {
       },
       {
         test: /\.css$/i,
-        exclude: /src\/common\/.+\.css$/,
+        exclude: /src\/assets\/common\/.+\.css$/,
         use: [
           { loader:'style-loader', options:{ injectType:'lazyStyleTag' } },
           'css-loader'
@@ -43,7 +43,7 @@ module.exports = {
       },
       {
         test: /\.css$/i,
-        include: /src\/common\/.+\.css$/,
+        include: /src\/assets\/common\/.+\.css$/,
         use: ['style-loader', 'css-loader']
       },
       {

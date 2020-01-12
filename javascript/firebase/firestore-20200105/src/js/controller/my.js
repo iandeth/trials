@@ -1,9 +1,8 @@
 import BaseController from 'js/controller/base';
-import View from 'js/view/my';
+import IndexView from 'js/view/my/index';
 
 export default class MyController extends BaseController {
-  run() {
-    var s = { current_user:this.current_user };
-    return new View().run(s);
+  index() {
+    return new IndexView().run(this);
   }
 }

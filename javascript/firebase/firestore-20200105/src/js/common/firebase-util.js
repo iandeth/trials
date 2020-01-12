@@ -4,7 +4,7 @@ export default class FirebaseUtil {
       $(()=> {
         let app = firebase.app();
         let features = [
-          'auth', 'functions', 'database', 'performance'
+          'auth', 'functions', 'firestore', 'database', 'performance'
         ].filter(f => typeof app[f] === 'function');
         console.log(`firebase: ${features.join(', ')}`);
         resolve();

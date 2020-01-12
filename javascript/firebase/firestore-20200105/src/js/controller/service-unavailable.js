@@ -1,8 +1,8 @@
 import BaseController from 'js/controller/base';
-import View from 'js/view/service-unavailable';
+import IndexView from 'js/view/service-unavailable/index';
 
 export default class ServiceUnavailableController extends BaseController {
-  run() {
-    return new View().run();
+  index() {
+    return new IndexView().run(this);
   }
 }

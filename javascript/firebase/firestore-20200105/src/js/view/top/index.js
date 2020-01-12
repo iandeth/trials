@@ -1,12 +1,12 @@
 import BaseView from 'js/view/base';
-import style from 'index/style.css';
-import iconImg from 'index/icon.png';
+import style from 'assets/top/style.css';
+import iconImg from 'assets/top/icon.png';
 
-export default class IndexView extends BaseView {
-  run(s={}) {
+export default class TopIndexView extends BaseView {
+  run(c) {
     style.use();
-    this._setMeta();
-    this._render(s);
+    this._setMeta(c);
+    this._render(c);
     console.log('#run done');
   }
 
@@ -15,7 +15,7 @@ export default class IndexView extends BaseView {
     $('title').text(this.siteName);
   }
 
-  _render(s={}) {
+  _render(c) {
     $('#message').append(`
       <h2>Top Page</h2>
       <h1>Firebase Hosting Setup Complete</h1>
@@ -25,7 +25,7 @@ export default class IndexView extends BaseView {
 
     $('body').append(`
       <div class="result">
-        <strong>${s.dog.bark()}</strong><br>
+        <strong>${c.dog.bark()}</strong><br>
         <img src="${iconImg}" width="20">
         <div><a href="/detail/20/">detail #20</a></div>
         <div><a href="/my/">my page</a></div>

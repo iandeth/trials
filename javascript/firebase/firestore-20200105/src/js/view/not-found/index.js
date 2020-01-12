@@ -1,9 +1,9 @@
 import BaseView from 'js/view/base';
 
-export default class NotFoundView extends BaseView {
-  run() {
-    this._setMeta();
-    this._render();
+export default class NotFoundIndexView extends BaseView {
+  run(c) {
+    this._setMeta(c);
+    this._render(c);
     console.log('#run done');
   }
 

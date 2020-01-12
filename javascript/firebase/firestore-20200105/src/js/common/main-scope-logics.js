@@ -13,10 +13,12 @@ export default class MainScopeLogics {
   }
 
   static resolveController(path) {
-    var s = new Router().getControllerForPath(path);
+    var s = new Router().getControllerActionForPath(path);
     if(!s.c)
       return Promise.reject('404 controller not routed');
-    console.log('routed controller', s);
+    if(!s.c[s.a])
+      return Promise.reject(`404 action ${(s.a)? '#'+s.a+' ' : ''}not defined for ${s.c.constructor.name}`);
+    console.log('routed', s);
     return s;
   }
 
@@ -33,8 +35,8 @@ export default class MainScopeLogics {
     return Promise.reject('require login');
   }
 
-  static runController(s) {
-    return s.c.run();
+  static runControllerAction(s) {
+    return s.c[s.a]();
   }
 
   static finalizeChain() {
@@ -55,6 +57,6 @@ export default class MainScopeLogics {
       c = new ServiceUnavailableController();
     }
     console.error('rejected:', e);
-    return c.run();
+    return c.index();
   }
 }

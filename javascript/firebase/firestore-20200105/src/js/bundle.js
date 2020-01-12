@@ -1,5 +1,5 @@
 'use strict';
-import 'common/style.css';
+import 'assets/common/style.css';
 import M from 'js/common/main-scope-logics';
 
 // main scope
@@ -10,7 +10,7 @@ Promise.resolve() // begin promise chain
   .then(M.waitFirebaseSDK)
   .then(()=> M.resolveController(path))
   .then(M.checkLogin)
-  .then(M.runController)
+  .then(M.runControllerAction)
   .then(M.finalizeChain)
   .catch(M.handleError);
 
