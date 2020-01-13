@@ -1,0 +1,7 @@
+.result {
+  padding: 10px;
+  background-color: #DDD;
+  background-image: url(./bg.jpg);
+  background-repeat: no-repeat;
+  background-position: center;
+}
