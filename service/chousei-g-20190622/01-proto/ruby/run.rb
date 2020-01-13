@@ -33,6 +33,7 @@ class App < Thor
     end
 
     def application_credentials_for(scope)
+      ENV['GOOGLE_APPLICATION_CREDENTIALS'] = 'config/application_default_credentials.json'
       Google::Auth.get_application_default(scope)
     end
 
@@ -68,6 +69,17 @@ class App < Thor
   method_option :user, type: :string, required: true
   def auth
     pp user_credentials_for(SCOPE, options[:user])
+  end
+
+  desc 'auth_with_code', 'get credentials from already retrieved authorization code'
+  method_option :user, type: :string, required: true
+  def auth_with_code
+    client_id = Google::Auth::ClientId.from_file(client_secrets_path)
+    token_store = Google::Auth::Stores::FileTokenStore.new(:file => token_store_path)
+    authorizer = Google::Auth::UserAuthorizer.new(client_id, SCOPE, token_store)
+
+    code = ask "Enter the authorization code:"
+    pp authorizer.get_and_store_credentials_from_code(user_id:options[:user], code:code, base_url:OOB_URI)
   end
 
   desc 'userinfo', 'get user info'
@@ -132,10 +144,8 @@ class App < Thor
     calendar.authorization = user_credentials_for(SCOPE, options[:user])
 
     opt = {}
-    result = calendar.get_calendar_list('primary', opt)
-    result.items.each do |c|
-      say "#{c.summary}, #{c.id}, #{c.primary == true}"
-    end
+    r = calendar.get_calendar_list('primary', opt)
+    say "#{r.summary}, #{r.id}, #{r.primary == true}"
   end
 
   desc 'create_event', 'Create an event'
