@@ -1,0 +1,17 @@
+{
+  "name": "basics-20200530",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "npx tsc",
+    "build-watch": "npx tsc --watch"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "prettier": "^2.0.5",
+    "typescript": "^3.9.3"
+  }
+}
