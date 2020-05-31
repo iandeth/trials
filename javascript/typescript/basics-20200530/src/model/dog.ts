@@ -1,4 +1,4 @@
-import Animal from "./animal";
+import Animal from "src/model/animal";
 
 export default class Dog extends Animal {
   constructor(name: string) {
@@ -6,5 +6,9 @@ export default class Dog extends Animal {
 
     // readonly error
     //this.legs = 4;
+  }
+
+  bark() {
+    console.log("bow wow");
   }
 }
