@@ -9,6 +9,7 @@ console.log(msg);
 
 const sam = new Dog("sam");
 console.log("name", sam.name);
+
 sam.name = "willy";
 console.log("name changed", sam.name);
 

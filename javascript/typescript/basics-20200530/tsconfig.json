@@ -1,11 +1,23 @@
 {
+  // doc https://bit.ly/2ZSb0Gh
   "compilerOptions": {
-    "baseUrl": ".", // can use path like "src/model/animal", but be careful with this https://bit.ly/3gzYOjz
+    // project options
+    "module": "commonjs", // for node.js runtime
     "outDir": "dist",
+    "removeComments": false,
     "sourceMap": false,
-    "noImplicitAny": true,
-    "module": "commonjs",
     "target": "es6",
-    "removeComments": true
+
+    // module resolution
+    "baseUrl": ".", // can use path like "src/model/animal", but be careful with this https://bit.ly/3gzYOjz
+
+    // strict checks
+    "strict": true,
+
+    // lint checks
+    "noFallthroughCasesInSwitch": true,
+    "noImplicitReturns": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true
   }
 }

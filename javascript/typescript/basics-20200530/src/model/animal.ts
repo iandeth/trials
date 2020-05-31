@@ -2,7 +2,7 @@ export default abstract class Animal {
   // instance property
   name: string;
 
-  // define property shortcut (but readonly): legs
+  // define property shortcut (only works with readonly): legs
   constructor(name: string, readonly legs: number) {
     this.name = name;
   }

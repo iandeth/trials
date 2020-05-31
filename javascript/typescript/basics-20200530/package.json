@@ -11,7 +11,9 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "app-module-path": "^2.2.0",
+    "app-module-path": "^2.2.0"
+  },
+  "devDependencies": {
     "prettier": "^2.0.5",
     "typescript": "^3.9.3"
   }

@@ -8,7 +8,7 @@ export default class Dog extends Animal {
     //this.legs = 4;
   }
 
-  bark() {
+  bark(): void {
     console.log("bow wow");
   }
 }
