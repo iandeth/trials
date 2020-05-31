@@ -5,9 +5,11 @@
 # babel
 
 - https://www.typescriptlang.org/docs/handbook/integrating-with-build-tools.html
+- https://nansystem.com/migrate-babel-polyfill-to-core-js/
 
 ```sh
 npm install --save-dev @babel/cli @babel/core @babel/preset-env @babel/preset-typescript
+npm install --save-dev core-js regenerator-runtime
 ```
 
 ```json
@@ -25,7 +27,7 @@ npm install --save-dev @babel/cli @babel/core @babel/preset-env @babel/preset-ty
           "safari": "11"
         },
         "useBuiltIns": "usage",
-        "corejs": "3.6.5"
+        "corejs": 3
       }
     ],
     "@babel/preset-typescript"
