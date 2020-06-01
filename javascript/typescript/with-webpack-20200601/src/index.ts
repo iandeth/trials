@@ -20,3 +20,8 @@ sam.bark();
 // readonly error
 //sam.legs = 8;
 //sam.name = "sammy";
+
+// global jquery working
+$(() => {
+  $("<h2>jquery working</h2>").insertAfter("h1");
+});
