@@ -16,12 +16,14 @@
   "devDependencies": {
     "clean-webpack-plugin": "*",
     "css-loader": "*",
+    "prettier": "*",
     "style-loader": "*",
+    "ts-loader": "^7.0.5",
+    "typescript": "^3.9.3",
     "webpack": "*",
     "webpack-cli": "*",
     "webpack-dev-server": "*",
-    "webpack-merge": "*",
-    "prettier": "*"
+    "webpack-merge": "*"
   },
   "dependencies": {}
 }
