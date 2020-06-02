@@ -26,7 +26,7 @@ const runClasses = () => {
 const runJQ = () => {
   // global jquery working
   $(() => {
-    $("<h2>jquery working</h2>").insertAfter("h1");
+    $("<h2>jquery working!</h2>").insertAfter("h1");
   });
 };
 

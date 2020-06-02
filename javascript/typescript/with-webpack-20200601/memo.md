@@ -1,9 +1,17 @@
+# typescript
+
+- https://webpack.js.org/guides/typescript/
+
+```
+npm install --save-dev typescript ts-loader
+```
+
 # babel
 
+- https://github.com/babel/babel-loader
 - https://nansystem.com/migrate-babel-polyfill-to-core-js/
-- https://qiita.com/SoraKumo/items/9ab9382419e78dea9b98
 
 ```sh
-install --save-dev @babel/core @babel/preset-env core-js regenerator-runtime
-install --save-dev babel-loader
+npm install --save-dev @babel/core @babel/preset-env core-js regenerator-runtime
+npm install --save-dev babel-loader
 ```

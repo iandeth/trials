@@ -1,4 +1,4 @@
-var path = require("path");
+const path = require("path");
 const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 
 module.exports = {
@@ -12,7 +12,14 @@ module.exports = {
   plugins: [new CleanWebpackPlugin()],
   module: {
     rules: [
-      { test: /\.tsx?$/, use: ["ts-loader"], exclude: /node_modules/ },
+      {
+        test: /\.tsx?$/,
+        exclude: /node_modules/,
+        use: [
+          { loader: "babel-loader", options: { cacheDirectory: true } },
+          { loader: "ts-loader" },
+        ],
+      },
       { test: /\.css$/i, use: ["style-loader/useable", "css-loader"] },
     ],
   },
