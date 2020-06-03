@@ -45,4 +45,5 @@ Promise.resolve()
   .then(async () => {
     const r = await runAsync();
     console.log("#runAsync returns:", r);
-  });
+  })
+  .then(() => console.log("Array#includes", [1].includes(1)));
