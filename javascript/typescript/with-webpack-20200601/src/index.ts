@@ -1,4 +1,6 @@
 import Dog from "src/model/dog";
+//import Cat from "src/model/cat";
+//console.log(Cat);
 
 const runClasses = () => {
   let msg = "hello";
