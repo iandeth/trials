@@ -18,6 +18,7 @@ module.exports = {
         use: [
           { loader: "babel-loader", options: { cacheDirectory: true } },
           { loader: "ts-loader" },
+          { loader: "eslint-loader", options: { cache: true } },
         ],
       },
       { test: /\.css$/i, use: ["style-loader/useable", "css-loader"] },

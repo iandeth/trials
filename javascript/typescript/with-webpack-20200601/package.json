@@ -28,6 +28,7 @@
     "css-loader": "*",
     "eslint": "^7.2.0",
     "eslint-config-prettier": "^6.11.0",
+    "eslint-loader": "^4.0.2",
     "prettier": "*",
     "regenerator-runtime": "^0.13.5",
     "style-loader": "*",

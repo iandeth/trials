@@ -25,6 +25,7 @@ npm install -D ts-loader # for webpack
 ```sh
 npm install -D eslint
 npm install -D @typescript-eslint/parser @typescript-eslint/eslint-plugin # for typescript
+npm install -D eslint-loader # for webpack
 ```
 
 # prettier
