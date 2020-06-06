@@ -3,7 +3,7 @@ import Dog from "src/model/dog";
 //console.log(Cat);
 
 const runClasses = () => {
-  let msg = "hello";
+  let msg = "hello!";
   console.log(msg);
 
   // type error
