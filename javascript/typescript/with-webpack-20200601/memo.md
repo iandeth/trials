@@ -17,10 +17,15 @@ npm install -D typescript @types/jquery
 npm install -D ts-loader # for webpack
 ```
 
-# ESLint
+# eslint
 
 - https://eslint.org/
 - https://github.com/typescript-eslint/typescript-eslint
+
+```sh
+npm install -D eslint
+npm install -D @typescript-eslint/parser @typescript-eslint/eslint-plugin # for typescript
+```
 
 # prettier
 

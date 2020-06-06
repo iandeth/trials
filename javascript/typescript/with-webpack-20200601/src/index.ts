@@ -3,10 +3,12 @@ import Dog from "src/model/dog";
 //console.log(Cat);
 
 const runClasses = () => {
-  let msg = "hello!";
+  const msg = "hello!";
+  // eslint: prefer const error
+  //let msg = "hello!";
   console.log(msg);
 
-  // type error
+  // ts: type error
   //msg = 2;
 
   const sam = new Dog("sam");
@@ -20,7 +22,7 @@ const runClasses = () => {
 
   sam.bark();
 
-  // readonly error
+  // ts: readonly error
   //sam.legs = 8;
   //sam.name = "sammy";
 };
