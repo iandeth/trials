@@ -48,14 +48,8 @@ http://localhost:8080/bundle.dev.js
 npm run build
 ```
 
-dist 配下に以下のような hash つきの static file が生成されます。
+dist 配下に必要な file 群が生成されます
 これらを CDN に upload すべし。
-※旧バージョンの dist file は自動で削除されます。
-
-```
-dist/
-  bundle.js
-```
 
 dist 配下 file は git commit しない運用で。
 ※ .gitignore で無視設定済み
