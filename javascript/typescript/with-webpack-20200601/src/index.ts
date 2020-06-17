@@ -1,3 +1,4 @@
+import "src/assets/styles.css";
 import Dog from "src/model/dog";
 //import Cat from "src/model/cat";
 //console.log(Cat);

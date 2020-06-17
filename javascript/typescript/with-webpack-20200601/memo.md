@@ -5,7 +5,7 @@
 ```sh
 npm install -D webpack webpack-cli webpack-dev-server
 npm install -D webpack-merge clean-webpack-plugin
-npm install -D css-loader style-loader
+npm install -D css-loader style-loader html-webpack-plugin file-loader
 ```
 
 # typescript
