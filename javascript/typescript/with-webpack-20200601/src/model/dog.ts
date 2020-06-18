@@ -7,9 +7,9 @@ export default class Dog extends Animal {
     //this.legs = 4;
   }
 
-  bark(): void {
+  bark(): string {
     // ts: no-unused-vars warning
     //const foo = 1;
-    console.log("bow wow");
+    return "bow wow";
   }
 }

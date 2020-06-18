@@ -5,8 +5,8 @@ import Dog from "src/model/dog";
 
 const runClasses = () => {
   const msg = "hello!";
-  // eslint: prefer const error
-  //let msg = "hello!";
+  // eslint: unexpected var error
+  //var msg = "hello!";
   console.log(msg);
 
   // ts: type error
@@ -21,7 +21,7 @@ const runClasses = () => {
   const mr = sam.move(2);
   console.log("move return", mr);
 
-  sam.bark();
+  console.log("bark", sam.bark());
 
   // ts: readonly error
   //sam.legs = 8;

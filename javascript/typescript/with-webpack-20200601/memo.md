@@ -50,3 +50,13 @@ npm install -D babel-loader # for webpack
 # for https://bit.ly/2Xu1Xdb
 npm install -D @babel/plugin-transform-runtime @babel/runtime-corejs3
 ```
+
+# mocha + chai
+
+- https://mochajs.org/
+- https://www.chaijs.com/
+
+```sh
+npm install -D mocha chai chai-as-promised sinon
+npm install -D @types/mocha @types/chai @types/chai-as-promised @types/sinon # for typescript
+```

@@ -2,10 +2,10 @@ import Animal from "src/model/animal";
 
 export default class Cat extends Animal {
   constructor(name: string) {
-    super(name, 4);
+    super(name, 2);
   }
 
-  bark(): void {
-    console.log("mew");
+  bark(): string {
+    return "mew";
   }
 }

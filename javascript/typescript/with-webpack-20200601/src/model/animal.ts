@@ -8,9 +8,8 @@ export default abstract class Animal {
   }
 
   move(steps = 1): { steps: number; legs: number } {
-    console.log(`moving ${steps} steps with ${this.legs} legs`);
     return { steps: steps, legs: this.legs };
   }
 
-  abstract bark(): void;
+  abstract bark(): string;
 }
