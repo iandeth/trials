@@ -30,7 +30,7 @@ npm install
 
 新たな terminal を開いて project root dir で以下実行:
 
-```
+```sh
 npm start
 ```
 
@@ -41,6 +41,19 @@ entrypoint js file も以下のような URL で配信されます。
 ```
 http://localhost:8080/bundle.dev.js
 ```
+
+## unit testing
+
+前述の development server を止めて以下を実行:
+
+```sh
+npm run start-test
+```
+
+→ test/ 配下の \*.spec.ts が build され、test/index.html がブラウザ起動されます。
+test/index.ts にて import されている \*.spec.ts files の中身がすべてブラウザ上で実行されます。
+
+任意の test case だけ再実行したい場合は画面右側の ▷ を click するべし
 
 # production
 
