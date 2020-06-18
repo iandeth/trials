@@ -42,7 +42,7 @@ entrypoint js file も以下のような URL で配信されます。
 http://localhost:8080/bundle.dev.js
 ```
 
-## unit testing
+# unit test
 
 前述の development server を止めて以下を実行:
 
