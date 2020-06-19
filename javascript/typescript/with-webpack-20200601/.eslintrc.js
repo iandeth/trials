@@ -15,5 +15,7 @@ module.exports = {
     "plugin:@typescript-eslint/recommended",
     "prettier/@typescript-eslint",
   ],
-  rules: {},
+  rules: {
+    "@typescript-eslint/no-explicit-any": "off", // any は許可でまずやってみよ
+  },
 };

@@ -4,3 +4,4 @@ coverage
 
 # project settings
 webpack.*.js
+\.*.js
