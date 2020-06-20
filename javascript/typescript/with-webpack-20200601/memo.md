@@ -57,6 +57,17 @@ npm install -D @babel/plugin-transform-runtime @babel/runtime-corejs3
 - https://www.chaijs.com/
 
 ```sh
-npm install -D mocha chai chai-as-promised sinon
+npm install mocha chai chai-as-promised sinon # not dev-dependency b/c it'll run in web browsers
 npm install -D @types/mocha @types/chai @types/chai-as-promised @types/sinon # for typescript
+```
+
+## es5 非対応 npm module を babel にかける方法
+
+今回の chai-as-promised がそうだったけど、[この方法](https://developer.epages.com/blog/coding/how-to-transpile-node-modules-with-babel-and-webpack-in-a-monorepo/)でうまくいかず断念
+
+```
+# es5 非対応 module を判別する方法
+# ただし対象 module が package.json の dependencies (not dev-dependencies) に列挙されている必要あり
+npm install -D are-you-es5
+are-you-es5 check -r .
 ```
