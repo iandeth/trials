@@ -1,0 +1,21 @@
+{
+  // doc https://bit.ly/2ZSb0Gh
+  // for webpack https://bit.ly/2XnW5SH
+  "compilerOptions": {
+    // project options
+    "module": "es6",
+    "removeComments": false,
+    "sourceMap": true,
+    "target": "es6",
+
+    // strict checks
+    "strict": true,
+
+    // lint checks
+    // disable for eslint use instead
+    "noFallthroughCasesInSwitch": false,
+    "noImplicitReturns": false,
+    "noUnusedLocals": false,
+    "noUnusedParameters": false
+  }
+}

@@ -1,0 +1,7 @@
+node_modules
+dist
+coverage
+
+# project settings
+webpack.*.js
+\.*.js
