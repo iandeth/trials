@@ -9,6 +9,7 @@
 - (ie11 support)[https://github.com/facebook/create-react-app/blob/master/packages/react-app-polyfill/README.md]
   - (unresolved: not working in dev server)[https://github.com/facebook/create-react-app/issues/5336]
 - (VS Code + Prettier)[https://create-react-app.dev/docs/setting-up-your-editor]
+  - (VS Code jest)[https://create-react-app.dev/docs/running-tests#editor-integration]
 - (analyzing bundle size)[https://create-react-app.dev/docs/analyzing-the-bundle-size]
 - (absolute path imports)[https://create-react-app.dev/docs/importing-a-component/#absolute-imports]
 - (env variables)[https://create-react-app.dev/docs/adding-custom-environment-variables]
