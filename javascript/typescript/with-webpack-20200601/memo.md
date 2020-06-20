@@ -63,11 +63,13 @@ npm install -D @types/mocha @types/chai @types/chai-as-promised @types/sinon # f
 
 ## es5 非対応 npm module を babel にかける方法
 
-今回の chai-as-promised がそうだったけど、[この方法](https://developer.epages.com/blog/coding/how-to-transpile-node-modules-with-babel-and-webpack-in-a-monorepo/)でうまくいかず断念
+- babel は npm modules を変換対象にしていない (build 重くなるから避けるのが基本)
+- 今回 chai-as-promised が es5 非対応だった
+- なので[この方法](https://developer.epages.com/blog/coding/how-to-transpile-node-modules-with-babel-and-webpack-in-a-monorepo/)で対処試みるも、うまくいかず断念
 
 ```
 # es5 非対応 module を判別する方法
-# ただし対象 module が package.json の dependencies (not dev-dependencies) に列挙されている必要あり
+# ※ただし対象 module が package.json の dependencies (not dev-dependencies) に列挙されている必要あり
 npm install -D are-you-es5
 are-you-es5 check -r .
 ```
