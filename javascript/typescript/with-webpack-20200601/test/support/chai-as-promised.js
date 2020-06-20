@@ -1,5 +1,5 @@
 "use strict";
-/* eslint-disable no-invalid-this */
+/* eslint-disable */
 
 var _interopRequireDefault = require("@babel/runtime-corejs3/helpers/interopRequireDefault");
 
