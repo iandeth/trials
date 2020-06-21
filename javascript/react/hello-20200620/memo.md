@@ -25,3 +25,11 @@ npm install source-map-explorer # and edit package.json
 
 - [react router](https://reacttraining.com/react-router/web/guides/quick-start)
 - [reach router](https://reach.tech/router)
+
+# advancded topics
+
+- [local test production build][https://create-react-app.dev/docs/deployment#static-server]
+- [combine local api server](https://www.newline.co/fullstack-react/articles/using-create-react-app-with-a-server/)
+- [An Almost Static Stack][https://medium.com/superhighfives/an-almost-static-stack-6df0a2791319]
+- [firebase](https://create-react-app.dev/docs/deployment#firebase)
+  - [search cra-template](https://www.npmjs.com/search?q=cra-template-firebase)
