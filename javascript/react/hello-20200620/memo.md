@@ -10,6 +10,7 @@
   - (unresolved: not working in dev server)[https://github.com/facebook/create-react-app/issues/5336]
 - (VS Code + Prettier)[https://create-react-app.dev/docs/setting-up-your-editor]
   - (VS Code jest)[https://create-react-app.dev/docs/running-tests#editor-integration]
+  - (babel hilighting)[https://marketplace.visualstudio.com/items?itemName=mgmcdermott.vscode-language-babel]
 - (analyzing bundle size)[https://create-react-app.dev/docs/analyzing-the-bundle-size]
 - (absolute path imports)[https://create-react-app.dev/docs/importing-a-component/#absolute-imports]
 - (env variables)[https://create-react-app.dev/docs/adding-custom-environment-variables]
@@ -37,3 +38,20 @@ npm install @reach/router
 - [An Almost Static Stack][https://medium.com/superhighfives/an-almost-static-stack-6df0a2791319]
 - [firebase](https://create-react-app.dev/docs/deployment#firebase)
   - [search cra-template](https://www.npmjs.com/search?q=cra-template-firebase)
+
+# 確認点
+
+## 管理 site
+
+懸念
+
+- 入力 validation 機能 https://bit.ly/3ftb0B6 は「インポート」時に発動？
+- 運用担当者が複数人いた場合、誰かが編集途中に他の人が「インポート」すると、意図しない情報が反映されそう
+  - 本番公開されなければ無問題だけど
+  - 当面は 1 人運用で充分そう？にも思えるので OK
+
+## 公開 LP page
+
+確認
+
+- x
