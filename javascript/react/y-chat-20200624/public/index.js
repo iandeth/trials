@@ -3,24 +3,14 @@
 class Timeline {
   constructor() {
     this.tl = undefined; // timeline dom root
-    this.msgFixtures = [
-      "foo",
-      "bar",
-      "buz",
-      "quux",
-      "quuz",
-      "corge",
-      "grault",
-      "garply",
-      "waldo",
-      "fred",
-    ];
   }
 
-  run() {
+  run(auto = true) {
     $(() => {
       this.tl = $("#timeline");
-      this._autoAdd();
+      if (auto) {
+        this._autoAdd();
+      }
       this._initSendUI();
     });
   }
@@ -32,8 +22,7 @@ class Timeline {
       // random 500 to 2000
       const rand = Math.round(Math.random() * (2000 - 500)) + 500;
       setTimeout(() => {
-        const msg = this._createRandomItem();
-        this._addMsg(msg);
+        this._addMessage("_RANDOM_");
         loop();
       }, rand);
     };
@@ -42,31 +31,58 @@ class Timeline {
 
   _initSendUI() {
     $("#msg-button").on("click", () => {
-      const msg = $("#msg-input").val().trim();
-      if (!msg) return;
-      this._addMsg(msg, true);
+      const text = $("#msg-input").val().trim();
+      if (text === "") return;
+      this._addMessage(text, true);
     });
   }
 
-  _addMsg(msg, hilight = false) {
-    const c = hilight ? 'class="hilight"' : "";
-    this.tl.append(`<li ${c}>${msg}</li>`);
+  _addMessage(text, hilight = false) {
+    const msg = new TimelineMessage(text, hilight);
+    this.tl.append(msg.render());
+  }
+}
+
+class TimelineMessage {
+  constructor(text, hilight = false) {
+    this.fixtures = [
+      "foo",
+      "bar",
+      "buz",
+      "quux",
+      "quuz",
+      "corge",
+      "grault",
+      "garply",
+      "waldo",
+      "fred",
+    ];
+    this.hilight = hilight;
+    if (text === "_RANDOM_") this.text = this._createRandomText();
+    else this.text = text;
   }
 
-  _createRandomItem() {
+  render() {
+    if (this.text === "") return;
+    const c = this.hilight ? 'class="hilight"' : "";
+    return $(`<li ${c}>${this.text}</li>`);
+  }
+
+  // private methods
+  _createRandomText() {
     // via https://stackoverflow.com/a/4550514
-    return this.msgFixtures[
-      Math.floor(Math.random() * this.msgFixtures.length)
-    ];
+    return this.fixtures[Math.floor(Math.random() * this.fixtures.length)];
   }
 }
 
 class Reactions {
-  run() {
+  run(auto = true) {
     $(() => {
-      this._autoAdd();
-      this._autoAdd();
-      this._autoAdd();
+      if (auto) {
+        this._autoAdd();
+        this._autoAdd();
+        this._autoAdd();
+      }
       this._initSendUI();
     });
   }
@@ -77,7 +93,7 @@ class Reactions {
       // random 100 to 2000
       const rand = Math.round(Math.random() * (2000 - 100)) + 100;
       setTimeout(() => {
-        new ReactionIcon().init("random", "wide");
+        new ReactionIcon().render("random", "wide");
         loop();
       }, rand);
     };
@@ -86,7 +102,7 @@ class Reactions {
 
   _initSendUI() {
     $("#send-reaction").on("click", () => {
-      new ReactionIcon().init("laugh", "narrow");
+      new ReactionIcon().render("laugh", "narrow");
       return false;
     });
   }
@@ -97,7 +113,7 @@ class ReactionIcon {
     this.imgs = ["laugh", "heart"];
   }
 
-  init(type = "laugh", ypos = "wide") {
+  render(type = "laugh", ypos = "wide") {
     if (type === "random")
       type = this.imgs[Math.floor(Math.random() * this.imgs.length)];
 
@@ -133,6 +149,27 @@ class ReactionIcon {
   }
 }
 
+class Controller {
+  run() {
+    this._runTimeline();
+    this._runReactions();
+  }
+
+  // private methods
+  _runTimeline() {
+    let auto = true;
+    const p = window.location.search;
+    if (p.match(/tl=0/)) auto = false;
+    new Timeline().run(auto);
+  }
+
+  _runReactions() {
+    let auto = true;
+    const p = window.location.search;
+    if (p.match(/re=0/)) auto = false;
+    new Reactions().run(auto);
+  }
+}
+
 // main scope
-new Timeline().run();
-new Reactions().run();
+new Controller().run();
