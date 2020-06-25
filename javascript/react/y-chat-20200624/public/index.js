@@ -1,6 +1,6 @@
 "use strict";
 
-class TimelineController {
+class Timeline {
   constructor() {
     this.tl = undefined; // timeline dom root
     this.msgFixtures = [
@@ -20,19 +20,19 @@ class TimelineController {
   run() {
     $(() => {
       this.tl = $("#timeline");
-      this._addRandomMsgs();
+      this._autoAdd();
       this._initSendUI();
     });
   }
 
   // private methods
-  _addRandomMsgs() {
+  _autoAdd() {
     // via https://stackoverflow.com/a/6962808
     const loop = () => {
       // random 500 to 2000
       const rand = Math.round(Math.random() * (2000 - 500)) + 500;
       setTimeout(() => {
-        const msg = this._createRandomMsg();
+        const msg = this._createRandomItem();
         this._addMsg(msg);
         loop();
       }, rand);
@@ -53,7 +53,7 @@ class TimelineController {
     this.tl.append(`<li ${c}>${msg}</li>`);
   }
 
-  _createRandomMsg() {
+  _createRandomItem() {
     // via https://stackoverflow.com/a/4550514
     return this.msgFixtures[
       Math.floor(Math.random() * this.msgFixtures.length)
@@ -61,17 +61,32 @@ class TimelineController {
   }
 }
 
-class ReactionController {
+class Reactions {
   run() {
     $(() => {
+      this._autoAdd();
+      this._autoAdd();
+      this._autoAdd();
       this._initSendUI();
     });
   }
 
   // private methods
+  _autoAdd() {
+    const loop = () => {
+      // random 100 to 2000
+      const rand = Math.round(Math.random() * (2000 - 100)) + 100;
+      setTimeout(() => {
+        new ReactionIcon().init("random", "wide");
+        loop();
+      }, rand);
+    };
+    loop();
+  }
+
   _initSendUI() {
     $("#send-reaction").on("click", () => {
-      new ReactionIcon().init();
+      new ReactionIcon().init("laugh", "narrow");
       return false;
     });
   }
@@ -79,14 +94,18 @@ class ReactionController {
 
 class ReactionIcon {
   constructor() {
-    this.src = "icon-laugh.png";
+    this.imgs = ["laugh", "heart"];
   }
 
-  init() {
-    const $img = $(`<img src="${this.src}" class="reaction-icon" />`);
+  init(type = "laugh", ypos = "wide") {
+    if (type === "random")
+      type = this.imgs[Math.floor(Math.random() * this.imgs.length)];
+
+    const src = `icon-${type}.png`;
+    const $img = $(`<img src="${src}" class="reaction-icon" />`);
     // ランダム位置で配置
     this._setRandomXPos($img);
-    this._setRandomYPos($img, "narrow");
+    this._setRandomYPos($img, ypos);
     $("body").append($img);
 
     // 上に移動するアニメーション
@@ -115,5 +134,5 @@ class ReactionIcon {
 }
 
 // main scope
-new TimelineController().run();
-new ReactionController().run();
+new Timeline().run();
+new Reactions().run();
