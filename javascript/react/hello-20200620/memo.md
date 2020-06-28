@@ -28,7 +28,7 @@ npm install source-map-explorer # and edit package.json
 - [react router](https://reacttraining.com/react-router/web/guides/quick-start)
 
 ```sh
-npm install @reach/router
+npm install @reach/router @types/reach__router
 ```
 
 # advancded topics

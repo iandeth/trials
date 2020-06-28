@@ -1,8 +1,9 @@
 import React from "react";
+import { RouteComponentProps } from "@reach/router";
 import logo from "logo.svg";
 import "App.css";
 
-export default class App extends React.Component {
+export default class App extends React.Component<RouteComponentProps> {
   render() {
     return (
       <div className="App">

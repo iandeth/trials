@@ -5,11 +5,20 @@ import React from "react";
 import ReactDOM from "react-dom";
 import "index.css";
 import App from "App";
+import List from "List";
+import NotFound from "NotFound";
+import { Router } from "@reach/router";
+
 import * as serviceWorker from "serviceWorker";
 
+// @ts-ignore
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <Router>
+      <App path="/" />
+      <List path="/list" />
+      <NotFound default />
+    </Router>
   </React.StrictMode>,
   document.getElementById("root")
 );
