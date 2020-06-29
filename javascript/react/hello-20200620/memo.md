@@ -38,3 +38,4 @@ npm install @reach/router @types/reach__router
 - [An Almost Static Stack][https://medium.com/superhighfives/an-almost-static-stack-6df0a2791319]
 - [firebase](https://create-react-app.dev/docs/deployment#firebase)
   - [search cra-template](https://www.npmjs.com/search?q=cra-template-firebase)
+- [formik](https://jaredpalmer.com/formik)
