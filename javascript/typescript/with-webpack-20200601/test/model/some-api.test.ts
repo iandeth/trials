@@ -37,7 +37,7 @@ describe("SomeApi", function () {
         this.server.respondWith(url, res);
       });
 
-      after("setup mock api server", function () {
+      after("reset mock api server", function () {
         this.server.restore();
       });
 
