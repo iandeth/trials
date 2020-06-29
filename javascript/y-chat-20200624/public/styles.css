@@ -1,0 +1,31 @@
+@keyframes yellowfade {
+  from {
+    background: yellow;
+  }
+  to {
+    background: transparent;
+  }
+}
+
+.hilight {
+  animation-name: yellowfade;
+  animation-duration: 1.5s;
+}
+
+.actions-ui {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 30px;
+  padding: 1em;
+}
+
+.reaction-icon {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 35px;
+  height: 35px;
+  transition: all 3s ease;
+}
