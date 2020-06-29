@@ -64,7 +64,7 @@ npm install -D @types/mocha @types/chai @types/chai-as-promised @types/sinon # f
 ## es5 非対応 npm module を babel にかける方法
 
 - babel は npm modules を変換対象にしていない (build 重くなるから避けるのが基本)
-- 今回 chai-as-promised が es5 非対応だった
+- 今回 chai-as-promised が es5 非対応だった (=es6 の記法で書かれているので IE11 等で動作しない)
 - 単品で babel をかけたものを使う事で解決
 
 ```sh
@@ -76,6 +76,6 @@ are-you-es5 check -r .
 
 ```sh
 # 単品で babel をかける
-babel node_modules/chai-as-promised/lib/chai-as-promised.js > chai-as-promised-es6.js
-vim chai-as-promised-es6.js  #=> code 先頭に /* eslint-disable */ を追記
+babel node_modules/chai-as-promised/lib/chai-as-promised.js > chai-as-promised-es5.js
+vim chai-as-promised-es5.js  #=> code 先頭に /* eslint-disable */ を追記
 ```
