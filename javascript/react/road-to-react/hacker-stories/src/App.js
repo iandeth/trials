@@ -1,4 +1,5 @@
 import React from "react";
+import axios from "axios";
 import "./App.css";
 
 const API_ENDPOINT = "https://hn.algolia.com/api/v1/search?query=";
@@ -19,6 +20,7 @@ const storiesReducer = (state, action) => {
         data: action.payload,
       };
     case "STORIES_FETCH_FAILURE":
+      console.error(action.error);
       return {
         ...state,
         isLoading: false,
@@ -51,37 +53,44 @@ const useSemiPersistentState = (key, initialState) => {
 const App = () => {
   console.log("app render");
   const [searchTerm, setSearchTerm] = useSemiPersistentState("search", "React");
+  const [url, setUrl] = React.useState(`${API_ENDPOINT}${searchTerm}`);
+
   const [stories, dispatchStories] = React.useReducer(storiesReducer, {
     data: [],
     isLoading: false,
     isError: false,
   });
 
-  React.useEffect(() => {
+  const handleFetchStories = React.useCallback(async () => {
     dispatchStories({ type: "STORIES_FETCH_INIT" });
 
-    fetch(`${API_ENDPOINT}react`)
-      .then((response) => response.json())
-      .then((result) => {
-        dispatchStories({
-          type: "STORIES_FETCH_SUCCESS",
-          payload: result.hits,
-        });
-      })
-      .catch(() => dispatchStories({ type: "STORIES_FETCH_FAILURE" }));
-  }, []);
+    try {
+      console.log("axios");
+      const result = await axios.get(url);
+      dispatchStories({
+        type: "STORIES_FETCH_SUCCESS",
+        payload: result.data.hits,
+      });
+    } catch (e) {
+      dispatchStories({ type: "STORIES_FETCH_FAILURE", error: e });
+    }
+  }, [url]);
+
+  React.useEffect(() => {
+    handleFetchStories();
+  }, [handleFetchStories]);
 
   const handleRemoveStory = (item) => {
     dispatchStories({ type: "REMOVE_STORY", payload: item });
   };
 
-  const handleSearch = (event) => {
+  const handleSearchInput = (event) => {
     setSearchTerm(event.target.value);
   };
 
-  const searchedStories = stories.data.filter((story) =>
-    story.title.toLowerCase().includes(searchTerm.toLowerCase())
-  );
+  const handleSearchSubmit = () => {
+    setUrl(`${API_ENDPOINT}${searchTerm}`);
+  };
 
   return (
     <div>
@@ -91,16 +100,21 @@ const App = () => {
         label="Search"
         value={searchTerm}
         isFocused={true}
-        onInputChange={handleSearch}
+        onInputChange={handleSearchInput}
       >
         <strong>Search:</strong>
       </InputWithLabel>
+
+      <button type="button" disabled={!searchTerm} onClick={handleSearchSubmit}>
+        Submit
+      </button>
+
       <hr />
       {stories.isError && <p>Something went wrong ...</p>}
       {stories.isLoading ? (
         <p>Loading ...</p>
       ) : (
-        <List list={searchedStories} onRemoveItem={handleRemoveStory} />
+        <List list={stories.data} onRemoveItem={handleRemoveStory} />
       )}
     </div>
   );
@@ -153,10 +167,9 @@ const Item = ({ item, onRemoveItem }) => {
         <a href={item.url}>{item.title}</a>
       </span>{" "}
       <span>{item.author}</span> <span>{item.num_comments}</span>{" "}
-      <span>{item.points}</span>
+      <span>{item.points}</span>{" "}
       <span>
         <button type="button" onClick={handleRemoveItem}>
-          {" "}
           Dismiss
         </button>
       </span>
