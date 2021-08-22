@@ -1,0 +1,79 @@
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>距離センサー</title>
+    <script src="https://obniz.io/js/jquery-3.2.1.min.js"></script>
+    <script src="https://unpkg.com/obniz@3.x/obniz.js"></script>
+    <script>
+      "use strict";
+      console.log("ver 2021-08-22-01");
+
+      // https://obniz.io/ja/sdk/parts/HC-SR04/README.md
+      class DistanceSensor {
+        constructor(ui) {
+          // https://obniz.com/ja/console/myapps/6610
+          // https://obniz.com/ja/webapp/6610/run?obniz_id=9207-0920
+          this.obniz = new Obniz("OBNIZ_ID_HERE");
+          //this.obniz = new Obniz("9207-0920");
+
+          this.partsOpt = { gnd: 0, echo: 1, trigger: 2, vcc: 3 };
+          this.sensor = undefined;
+          this.ui = ui;
+        }
+
+        init() {
+          this.obniz.onconnect = async () => {
+            var d = this.obniz.display;
+            d.clear();
+            d.print("DistanceSensor");
+            this._initSensor();
+            this._startMonitoring();
+          };
+        }
+
+        // private methods
+        _initSensor() {
+          this.sensor = this.obniz.wired("HC-SR04", this.partsOpt);
+        }
+
+        _startMonitoring() {
+          // 計測ループ
+          this.obniz.repeat(async () => {
+            var df = await this.sensor.measureWait();
+            var d = Math.floor(df / 10); // mm to cm
+            this.ui.show(d);
+            await this.obniz.wait(100);
+          });
+        }
+      }
+
+      class UI {
+        show(dist) {
+          $("#show").text(`${dist} cm`);
+        }
+      }
+
+      // メインの処理
+      $(() => {
+        var ui = new UI();
+        new DistanceSensor(ui).init();
+      });
+    </script>
+  </head>
+  <body>
+    <div id="obniz-debug"></div>
+    <h1>距離センサー</h1>
+    <div
+      id="show"
+      style="
+        padding: 100px 10px;
+        text-align: center;
+        font-size: 1.5em;
+        font-weight: bold;
+      "
+    >
+      0 cm
+    </div>
+  </body>
+</html>
