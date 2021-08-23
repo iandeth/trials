@@ -1,18 +1,29 @@
 <html>
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <script src="https://obniz.io/js/jquery-3.2.1.min.js"></script>
-  <script src="https://unpkg.com/obniz@2.2.0/obniz.js"></script>
-  <script src="distance-sensor.js"></script>
-  <title>obniz: distance sensor</title>
-</head>
-<body>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <script src="https://obniz.io/js/jquery-3.2.1.min.js"></script>
+    <script src="https://unpkg.com/obniz@3.x/obniz.js"></script>
+    <script src="distance-sensor.js"></script>
+    <title>obniz: distance sensor</title>
+  </head>
+  <body>
+    <div id="obniz-debug"></div>
+    <h1>distance sensor</h1>
+    <div>
+      <button id="resetBtn">初期化</button>
+    </div>
 
-  <div id="obniz-debug"></div>
-  <h1>distance sensor</h1>
-
-  <div id="alert" style="display:none; padding:10px; background-color:#880000; color:white">誰かトイレにいるよ</div>
-
-</body>
+    <div
+      id="alert"
+      style="
+        display: none;
+        padding: 10px;
+        background-color: #880000;
+        color: white;
+      "
+    >
+      誰かトイレにいるよ
+    </div>
+  </body>
 </html>

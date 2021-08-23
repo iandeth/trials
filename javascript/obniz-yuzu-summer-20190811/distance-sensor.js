@@ -1,17 +1,17 @@
-'use strict';
-console.log('ver 20190812-01');
+"use strict";
+console.log("ver 2021-08-22-01");
 
 // https://obniz.io/ja/sdk/parts/HC-SR04/README.md
 class DistanceSensor {
   constructor(ui) {
     this.obniz = new Obniz("9207-0920");
-    this.partsOpt = { gnd:5, echo:6, trigger:7, vcc:8 };
+    this.partsOpt = { gnd: 0, echo: 1, trigger: 2, vcc: 3 };
     this.sensor = undefined;
     this.ui = ui;
   }
 
   init() {
-    this.obniz.onconnect = async ()=> {
+    this.obniz.onconnect = async () => {
       var d = this.obniz.display;
       d.clear();
       d.print("DistanceSensor");
@@ -31,27 +31,40 @@ class DistanceSensor {
     var i = 0;
     var bases = [];
     var baseDist;
-    this.obniz.repeat(async ()=> {
-      var df = await this.sensor.measureWait(); // distance in float
+
+    // 初期化ボタン
+    $("#resetBtn").on("click", () => {
+      i = 0;
+      baseDist = "";
+      bases = [];
+      console.log("初期化");
+    });
+
+    // 計測ループ
+    this.obniz.repeat(async () => {
+      var df = await this.sensor.measureWait();
       var d = Math.floor(df / 10); // mm to cm
 
       // 最初の 5 回は基準距離を判定
-      if(i < 5) {
+      if (i < 5) {
         bases.push(d);
-        if(i == 4) {
+        if (i == 4) {
           baseDist = this._resolveBaseDist(bases);
-          if(!baseDist) { // 計測不能だった場合は再計測
-            console.error('baseDist not resolved, retry');
-            i = 0; bases = []; return;
+          if (!baseDist) {
+            // 計測不能だった場合は再計測
+            console.error("baseDist not resolved, retry");
+            i = 0;
+            bases = [];
+            return;
           }
-          console.log('base dist is:', baseDist, bases);
+          console.log("base dist is:", baseDist, bases);
         }
         i++;
         return;
       }
 
-      if(d < baseDist) {
-        console.log('alertShow', baseDist, d);
+      if (d < baseDist) {
+        console.log("alertShow", baseDist, d);
         this.ui.alertShow();
       } else {
         this.ui.alertHide();
@@ -63,25 +76,25 @@ class DistanceSensor {
   }
 
   _resolveBaseDist(bases) {
-    var baseDist = bases.reduce((sum, v)=> {
-      if(!v) return sum;
+    var baseDist = bases.reduce((sum, v) => {
+      if (!v) return sum;
       return sum + v;
-    })
-    if(!baseDist) return;
-    return Math.floor(baseDist / bases.length / 10) * 10;
+    });
+    if (!baseDist) return;
+    return (Math.floor(baseDist / bases.length) / 10) * 10;
   }
 }
 
 class UI {
   alertShow() {
-    $('#alert').show(100);
+    $("#alert").show(100);
   }
 
   alertHide() {
-    $('#alert').hide(100);
+    $("#alert").hide(100);
   }
 }
 
-// main scope
+// メインの処理
 var ui = new UI();
 new DistanceSensor(ui).init();
